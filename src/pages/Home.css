@@ -14,3 +14,12 @@
   align-items: center;
   margin-bottom: 20px;
 }
+
+@media only screen and (max-width: 1012px) {
+  h2 {
+    text-align: center;
+  }
+  .home__popularVideos {
+    justify-content: center;
+  }
+}

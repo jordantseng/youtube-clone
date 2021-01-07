@@ -1,22 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Videos from '../components/Videos';
 import './LikeList.css';
 
-const LikeList = () => {
-  const [likedVideos, setLikesVideos] = useState([]);
-  const likedVideosFromStorage = localStorage.getItem('likes');
-
-  useEffect(() => {
-    if (likedVideosFromStorage) {
-      setLikesVideos(JSON.parse(likedVideosFromStorage));
-    }
-  }, [likedVideosFromStorage]);
-
+const LikeList = ({ likedVideos, onToggleLikeButton }) => {
   return (
     <div>
       <h2 className='likelist__title'>收藏影片</h2>
       <div className='likelist__videos'>
-        <Videos videos={likedVideos} />
+        <Videos videos={likedVideos} onToggleLikeButton={onToggleLikeButton} />
       </div>
     </div>
   );

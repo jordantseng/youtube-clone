@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import './Pagination.css';
 
-const Pagination = ({ currentPage, videosPerPage, totalVideos, paginate }) => {
+const Pagination = ({ history, currentPage, videosPerPage, totalVideos }) => {
   const pageNumbers = [];
 
   for (let i = 1; i <= Math.ceil(totalVideos / videosPerPage); i++) {
@@ -19,7 +19,7 @@ const Pagination = ({ currentPage, videosPerPage, totalVideos, paginate }) => {
       return;
     }
 
-    paginate(currentPage + number);
+    history.push(`?page=${currentPage + number}`);
   };
 
   return (
@@ -31,8 +31,6 @@ const Pagination = ({ currentPage, videosPerPage, totalVideos, paginate }) => {
         <Link
           to={`?page=${number}`}
           key={number}
-          // onClick={() => paginate(number)}
-
           className={number === currentPage ? 'active' : ''}>
           {number}
         </Link>

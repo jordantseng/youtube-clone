@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { Avatar } from '@material-ui/core';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import FavoriteIcon from '@material-ui/icons/Favorite';
@@ -6,7 +7,7 @@ import moment from 'moment';
 
 import './VideoCard.css';
 
-const VideoCard = ({ video }) => {
+const VideoCard = ({ video, onToggleLikeButton }) => {
   const [isLiked, setIsLiked] = useState(false);
   const likedVideosFromStorage = localStorage.getItem('likes');
 
@@ -61,66 +62,57 @@ const VideoCard = ({ video }) => {
 
   const onLikeClick = () => {
     setIsLiked(!isLiked);
-
-    if (localStorage.getItem('likes')) {
-      const likesFromStroage = JSON.parse(localStorage.getItem('likes'));
-      const alreadyLiked = likesFromStroage.find(
-        (like) => like.id === video.id
-      );
-
-      if (alreadyLiked) {
-        const remainder = likesFromStroage.filter(
-          (like) => like.id !== video.id
-        );
-
-        localStorage.setItem('likes', JSON.stringify([...remainder]));
-      } else {
-        localStorage.setItem(
-          'likes',
-          JSON.stringify([...likesFromStroage, video])
-        );
-      }
-    } else {
-      localStorage.setItem('likes', JSON.stringify([video]));
-    }
+    onToggleLikeButton(video);
   };
 
   return (
-    <div className='videoCard'>
-      <img
-        src={video.snippet.thumbnails.standard.url}
-        className='videoCard__thumbnail'
-        alt=''
-      />
-      <div className='videoCard__info'>
-        {/* <Avatar
-          src={video.snippet.channel.thumbnails.default.url}
-          className='videoCard__avatar'
-          alt=''
-        /> */}
-        <div className='videoCard__content'>
-          <h4>{video.snippet.title}</h4>
-          <p>{video.snippet.channelTitle}</p>
-          <p>
-            觀看次數: {renderViewcount}．{renderDateDiff()}
-          </p>
+    <>
+      {video.snippet.channel ? (
+        <div className='videoCard'>
+          <div className='videoCard__thumbnail__container'>
+            <Link to={`/${video.id}`} style={{ textDecoration: 'none' }}>
+              <img
+                src={video.snippet.thumbnails.standard.url}
+                className='videoCard__thumbnail'
+                alt=''
+              />
+            </Link>
+          </div>
+          <div className='videoCard__info__container'>
+            <div className='videoCard__info'>
+              <Avatar
+                src={video.snippet.channel.thumbnails.default.url}
+                className='videoCard__avatar'
+                alt=''
+              />
+              <div className='videoCard__content'>
+                <h4>{video.snippet.title}</h4>
+                <p>{video.snippet.channelTitle}</p>
+                <p>
+                  觀看次數: {renderViewcount}．{renderDateDiff()}
+                </p>
+              </div>
+            </div>
+          </div>
+          <div className='videoCard__duration'>{renderDuration()}</div>
+          <div>
+            {isLiked ? (
+              <FavoriteIcon
+                className='videoCard__like'
+                onClick={() => onLikeClick()}
+              />
+            ) : (
+              <FavoriteBorderIcon
+                className='videoCard__like'
+                onClick={() => onLikeClick()}
+              />
+            )}
+          </div>
         </div>
-      </div>
-      <div className='videoCard__duration'>{renderDuration()}</div>
-      <div>
-        {isLiked ? (
-          <FavoriteIcon
-            className='videoCard__like'
-            onClick={() => onLikeClick()}
-          />
-        ) : (
-          <FavoriteBorderIcon
-            className='videoCard__like'
-            onClick={() => onLikeClick()}
-          />
-        )}
-      </div>
-    </div>
+      ) : (
+        'loading...'
+      )}
+    </>
   );
 };
 

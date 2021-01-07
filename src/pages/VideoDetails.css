@@ -1,0 +1,61 @@
+.videoDetails__bottom {
+  display: flex;
+}
+
+.videoDetails__content__container {
+  flex: 3;
+}
+
+.videoDetails__content {
+  padding: 18px;
+  margin-top: 12px;
+}
+
+.videoDetails__content h3 {
+  margin-bottom: 12px;
+}
+
+.videoDetails__videoList {
+  flex: 1;
+  padding: 18px;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+
+.videoDetails__channelInfo {
+  display: flex;
+  padding: 18px;
+}
+
+.videoDetails__channelInfo h4 {
+  margin-bottom: 12px;
+}
+
+.videoDetails__avatar {
+  margin-right: 12px;
+}
+
+@media only screen and (max-width: 769px) {
+  .videoDetails__bottom {
+    display: block;
+  }
+
+  .videoDetails__videoList .videoCard {
+    width: 100%;
+    display: flex;
+  }
+
+  .videoDetails__bottom .videoCard__thumbnail__container {
+    flex: 1;
+  }
+
+  .videoDetails__bottom .videoCard__info__container {
+    padding: 12px;
+    margin: auto;
+  }
+
+  .videoDetails__bottom .videoCard__duration {
+    bottom: 15px;
+    right: 310px;
+  }
+}
