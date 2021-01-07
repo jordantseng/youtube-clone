@@ -1,0 +1,16 @@
+.home__title {
+  margin-bottom: 12px;
+}
+
+.home__popularVideos {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.home__pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
