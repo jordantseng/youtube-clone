@@ -10,7 +10,7 @@ const useFetchVideos = () => {
       params: {
         part: 'contentDetails,snippet,statistics',
         chart: 'mostPopular',
-        maxResults: 10,
+        maxResults: 50,
       },
     });
 
@@ -18,7 +18,7 @@ const useFetchVideos = () => {
       params: {
         part: 'contentDetails,snippet,statistics',
         chart: 'mostPopular',
-        maxResults: 10,
+        maxResults: 50,
         pageToken: firstFiftyVideos.nextPageToken,
       },
     });
