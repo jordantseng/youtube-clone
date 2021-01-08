@@ -56,6 +56,10 @@ A: Compared to Javascript, I spent more time on CSS :(
 #### Q: Videojs and m3u8
 A: Before this project, I don't have any knowledge relevant to live streaming. It did take me some time to understand what m3u8 file is and how the Videojs library work.
 
+#### Q: styled-components
+A: To be honest, this is my first time using styled-components in my project, and I am a newbie to styled-components. In order to submit this assignment before the dateline, some css ARE NOT fully refactor to styled-components. (In fact, I decided to add styled-component after I finished all my css )
+
+
 ## Usage
 
 In the root directory, to install all the dependencies, you should run:
