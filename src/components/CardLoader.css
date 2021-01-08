@@ -1,15 +1,14 @@
-.likelist__title {
-  margin-bottom: 12px;
-  margin-left: 10px;
-}
-
-.likelist__videos {
+.cardLoader__row {
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 @media only screen and (max-width: 1012px) {
-  .likelist__videos {
+  .cardLoader {
+    text-align: center;
+  }
+  .cardLoader__row {
     justify-content: center;
   }
 }

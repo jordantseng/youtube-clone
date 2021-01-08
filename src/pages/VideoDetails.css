@@ -31,8 +31,21 @@
   margin-bottom: 12px;
 }
 
+.videoDetails__divided {
+  margin: 0 18px;
+  background-color: lightgray;
+  height: 1px;
+}
+
 .videoDetails__avatar {
   margin-right: 12px;
+}
+
+.videoDetails__loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 500px;
 }
 
 @media only screen and (max-width: 769px) {

@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 
 import Pagination from '../components/Pagination';
 import Videos from '../components/Videos';
+import CardLoader from '../components/CardLoader';
 import './Home.css';
 
 const Home = ({ history, location, videos, onToggleLikeButton }) => {
   const [videosPerPage] = useState(12);
-  
 
   const currentPage = location.search.split('=')[1]
     ? +location.search.split('=')[1]
@@ -37,7 +37,7 @@ const Home = ({ history, location, videos, onToggleLikeButton }) => {
           </div>
         </div>
       ) : (
-        'loading...'
+        <CardLoader />
       )}
     </>
   );

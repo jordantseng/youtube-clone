@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Avatar } from '@material-ui/core';
 import moment from 'moment';
 
 import VideoPlayer from '../components/VideoPlayer';
 import Videos from '../components/Videos';
+import Loader from '../components/Loader';
+import Advertisement from '../components/Advertisement';
 import './VideoDetails.css';
 
 const VideoDetails = ({ videos, onToggleLikeButton, match }) => {
+  const [adShowed, setAdShowed] = useState(false);
   const videoId = match.params.id;
 
   const video = videos.find((video) => video.id === videoId);
@@ -32,16 +35,26 @@ const VideoDetails = ({ videos, onToggleLikeButton, match }) => {
     return `${hourDiff}小時前`;
   };
 
+  const onVideoPause = () => {
+    if (adShowed) {
+      return;
+    }
+
+    setAdShowed(!adShowed);
+  };
+
+  const onCloseAd = () => {
+    setAdShowed(!adShowed);
+  };
+
   return (
     <>
-      {video && (
+      {video ? (
         <div className='videoDetails__top'>
           <div>
             <VideoPlayer
               eventON={{
-                pause: () => {
-                  alert('ad');
-                },
+                pause: onVideoPause,
               }}
             />
           </div>
@@ -55,7 +68,7 @@ const VideoDetails = ({ videos, onToggleLikeButton, match }) => {
                 </p>
               </div>
 
-              <hr />
+              <div className='videoDetails__divided'></div>
               <div className='videoDetails__channelInfo'>
                 <div>
                   <Avatar
@@ -79,6 +92,11 @@ const VideoDetails = ({ videos, onToggleLikeButton, match }) => {
               />
             </div>
           </div>
+          {adShowed && <Advertisement onCloseAd={onCloseAd} />}
+        </div>
+      ) : (
+        <div className='videoDetails__loader'>
+          <Loader />
         </div>
       )}
     </>

@@ -1,11 +1,11 @@
 .home__title {
   margin-bottom: 12px;
+  margin-left: 10px;
 }
 
 .home__popularVideos {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
 }
 
 .home__pagination {

@@ -1,69 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import { Route, Switch } from 'react-router-dom';
-import axios from 'axios';
 
 import Container from './components/Container';
 import Header from './components/Header';
 import LikeList from './pages/LikeList';
 import VideoDetails from './pages/VideoDetails';
+import Search from './pages/Search';
 import Home from './pages/Home';
+import useSearch from './hooks/useSearch';
+import useFetchVideos from './hooks/useFetchVideos';
 
 const App = () => {
-  const [popularVideos, setPopularVideos] = useState([]);
   const [likedVideos, setLikedVideos] = useState([]);
+  const [searchedVideos, search] = useSearch('');
+  const [popularVideos, fetchPopularVideos] = useFetchVideos();
   const likedVideosFromStorage = localStorage.getItem('likes');
 
-  const KEY = 'AIzaSyDRKPReqMT7ttRoIUZit8gwmtZVJmTXzMY';
-  const url = 'https://www.googleapis.com/youtube/v3';
-
   useEffect(() => {
-    const CancelToken = axios.CancelToken;
-    const source = CancelToken.source();
-
-    const fetchVideos = async () => {
-      const { data: firstFiftyVideos } = await axios.get(`${url}/videos`, {
-        params: {
-          part: 'contentDetails,snippet,statistics',
-          chart: 'mostPopular',
-          maxResults: 50,
-          key: KEY,
-        },
-        cancelToken: source.token,
-      });
-
-      const { data: lastFiftyVideos } = await axios.get(`${url}/videos`, {
-        params: {
-          part: 'contentDetails,snippet,statistics',
-          chart: 'mostPopular',
-          maxResults: 50,
-          key: KEY,
-          pageToken: firstFiftyVideos.nextPageToken,
-        },
-      });
-
-      let totalVideos = [...firstFiftyVideos.items, ...lastFiftyVideos.items];
-
-      for (let video of totalVideos) {
-        const channelImg = await axios.get(`${url}/channels`, {
-          params: {
-            part: 'snippet',
-            id: video.snippet.channelId,
-            key: KEY,
-          },
-          cancelToken: source.token,
-        });
-
-        video.snippet.channel = channelImg.data.items[0].snippet;
-      }
-
-      setPopularVideos(totalVideos);
-    };
-
-    fetchVideos();
-
-    return () => {
-      source.cancel();
-    };
+    fetchPopularVideos();
   }, []);
 
   useEffect(() => {
@@ -71,6 +25,10 @@ const App = () => {
       setLikedVideos(JSON.parse(likedVideosFromStorage));
     }
   }, [likedVideosFromStorage]);
+
+  const onSearch = (searchTerm) => {
+    search(searchTerm);
+  };
 
   const onToggleLikeButton = (video) => {
     if (likedVideosFromStorage) {
@@ -99,7 +57,7 @@ const App = () => {
 
   return (
     <Container>
-      <Header />
+      <Header onSearch={onSearch} />
       <Switch>
         <Route
           path='/likelist'
@@ -108,6 +66,15 @@ const App = () => {
               likedVideos={likedVideos}
               onToggleLikeButton={onToggleLikeButton}
               {...props}
+            />
+          )}
+        />
+        <Route
+          path='/search'
+          render={() => (
+            <Search
+              videos={searchedVideos}
+              onToggleLikeButton={onToggleLikeButton}
             />
           )}
         />
@@ -121,6 +88,7 @@ const App = () => {
             />
           )}
         />
+
         <Route
           path='/'
           render={(props) => (

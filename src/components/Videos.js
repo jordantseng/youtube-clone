@@ -6,7 +6,7 @@ const Videos = ({ videos, onToggleLikeButton }) => {
   const renderVideoCards = videos.map((video) => {
     return (
       <VideoCard
-        key={video.id}
+        key={video.id.videoId || video.id}
         video={video}
         onToggleLikeButton={onToggleLikeButton}
       />
