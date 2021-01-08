@@ -1,5 +1,8 @@
 # Youtube clone
-Youtube clone using youtube api v3 
+Youtube clone using youtube api v3.
+
+### important 
+Please aware that the times of youtube api request are limited. If you find the 403 error (unauthorized error) on your browser, the request limitation might be exceeded. 
 
 ## Table of contents
 * [Screenshot](#screenshot)
@@ -24,8 +27,8 @@ Video details page
 
 ## Features
 - Get the latest 100 popular videos while the app first initiated
+- Show 12 popular videos per page on Home page
 - Search videos and show the first 12 videos (in JSON format at this point) 
-- Show 12 videos per page
 - Pagination
 - Routing
 - Pause the video and show the advertisement
@@ -51,7 +54,7 @@ A: As the official youtube website implement infinite scroll, its api only provi
 A: Compared to Javascript, I spent more time on CSS :(
 
 #### Q: Videojs and m3u8
-A: Before this project, I don't have any knowledge relevant to live streaming. It did take me some time to understand what is the m3u8 file and how the Videojs library work.
+A: Before this project, I don't have any knowledge relevant to live streaming. It did take me some time to understand what m3u8 file is and how the Videojs library work.
 
 ## Usage
 
