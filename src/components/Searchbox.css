@@ -1,0 +1,25 @@
+.searchbox {
+  display: flex;
+  align-items: center;
+  width: 40%;
+  border: 1px solid lightgray;
+}
+
+.searchbox > input {
+  flex: 1;
+  border: none;
+  padding: 5px;
+}
+
+.searchbox > button {
+  width: 50px;
+  border: none;
+  border-left: 1px solid lightgray;
+  padding: auto;
+}
+
+@media only screen and (max-width: 490px) {
+  .searchbox {
+    display: none;
+  }
+}

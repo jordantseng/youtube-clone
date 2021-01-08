@@ -3,9 +3,11 @@ import { Avatar } from '@material-ui/core';
 import moment from 'moment';
 
 import VideoPlayer from '../components/VideoPlayer';
-import Videos from '../components/Videos';
 import Loader from '../components/Loader';
 import Advertisement from '../components/Advertisement';
+import VideoCard from '../components/VideoCard';
+
+import Line from '../components/Line';
 import './VideoDetails.css';
 
 const VideoDetails = ({ videos, onToggleLikeButton, match }) => {
@@ -47,6 +49,16 @@ const VideoDetails = ({ videos, onToggleLikeButton, match }) => {
     setAdShowed(!adShowed);
   };
 
+  const renderVideoCards = videos
+    .slice(0, 5)
+    .map((video) => (
+      <VideoCard
+        key={video.id}
+        video={video}
+        onToggleLikeButton={onToggleLikeButton}
+      />
+    ));
+
   return (
     <>
       {video ? (
@@ -68,7 +80,7 @@ const VideoDetails = ({ videos, onToggleLikeButton, match }) => {
                 </p>
               </div>
 
-              <div className='videoDetails__divided'></div>
+              <Line />
               <div className='videoDetails__channelInfo'>
                 <div>
                   <Avatar
@@ -85,12 +97,7 @@ const VideoDetails = ({ videos, onToggleLikeButton, match }) => {
                 </div>
               </div>
             </div>
-            <div className='videoDetails__videoList'>
-              <Videos
-                videos={videos.slice(0, 5)}
-                onToggleLikeButton={onToggleLikeButton}
-              />
-            </div>
+            <div className='videoDetails__videoList'>{renderVideoCards}</div>
           </div>
           {adShowed && <Advertisement onCloseAd={onCloseAd} />}
         </div>

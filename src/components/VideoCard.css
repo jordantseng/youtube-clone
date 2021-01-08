@@ -53,7 +53,7 @@
   bottom: 10px;
   right: 10px;
   color: red;
-  z-index: 1000;
+  z-index: 100;
 }
 
 .videoCard__duration {
