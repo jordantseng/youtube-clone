@@ -2,7 +2,7 @@
 Youtube clone using youtube api v3.
 
 ### important 
-Please aware that the times of youtube api request are limited. If you find the 403 error (unauthorized error) on your browser, the request limitation might be exceeded. 
+Please aware that the request times of youtube api are limited. If you find the 403 error (unauthorized error) on the browser, the request limitation might be exceeded. 
 
 ## Table of contents
 * [Screenshot](#screenshot)
@@ -35,7 +35,6 @@ Video details page
 - RWD
 
 #### WIP
-- Refactoring all the css into styled components
 - Video Search
 
 ## Technologies
@@ -57,7 +56,7 @@ A: Compared to Javascript, I spent more time on CSS :(
 A: Before this project, I don't have any knowledge relevant to live streaming. It did take me some time to understand what m3u8 file is and how the Videojs library work.
 
 #### Q: styled-components
-A: To be honest, this is my first time using styled-components in my project, and I am a newbie to styled-components. In order to submit this assignment before the dateline, some css ARE NOT fully refactor to styled-components. (In fact, I decided to add styled-component after I finished all my css )
+A: To be honest, this is my first time using styled-components in my project, and I am a newbie to styled-components. In fact, I decided to add styled-component after I finished all my css.
 
 
 ## Usage
