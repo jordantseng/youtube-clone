@@ -45,6 +45,7 @@ Client
 - react-router-dom
 - styled-components
 - Videojs
+- localstorage
 
 ## Obstacles
 #### Q: Understand how youtube api work
