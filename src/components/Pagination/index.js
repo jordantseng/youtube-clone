@@ -1,5 +1,6 @@
 import React from 'react';
 import * as Styled from './styles';
+import { Link } from 'react-router-dom';
 
 const Pagination = ({ history, currentPage, videosPerPage, totalVideos }) => {
   const pageNumbers = [];
@@ -30,13 +31,14 @@ const Pagination = ({ history, currentPage, videosPerPage, totalVideos }) => {
             &laquo;
           </Styled.Arrow>
           {pageNumbers.map((pageNumber) => (
-            <Styled.Page
-              to={`?page=${pageNumber}`}
-              key={pageNumber}
-              pagenumber={pageNumber}
-              currentpage={currentPage}>
-              {pageNumber}
-            </Styled.Page>
+            <Link to={`?page=${pageNumber}`}>
+              <Styled.Page
+                key={pageNumber}
+                pagenumber={pageNumber}
+                currentpage={currentPage}>
+                {pageNumber}
+              </Styled.Page>
+            </Link>
           ))}
           <Styled.Arrow
             onClick={() => onButtonClick(1)}

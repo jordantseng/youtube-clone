@@ -34,13 +34,13 @@ export const Arrow = styled.button`
   }
 `;
 
-export const Page = styled(Link)`
-  padding: 8px 16px;
+export const Page = styled.button`
+  padding: 9.5px 16px;
   text-decoration: none;
   border: 1px solid #ddd;
   color: #0d6efd;
   display: inline-block;
-
+  cursor: pointer;
   &:hover {
     background-color: lightgray;
   }
