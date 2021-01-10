@@ -17,7 +17,7 @@ const Header = ({ onSearch }) => {
       <Searchbox onSearch={onSearch} />
       <Styled.HeaderIcons>
         <Styled.StyledNavLink to='/likelist' activeStyle={{ color: 'red' }}>
-          <FavoriteBorderIcon  />
+          <FavoriteBorderIcon />
         </Styled.StyledNavLink>
         <Styled.StyledNavLink to='/' activeStyle={{ color: 'red' }} exact>
           <HomeIcon />

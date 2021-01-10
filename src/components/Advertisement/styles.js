@@ -8,7 +8,6 @@ export const AdContainer = styled.div`
   bottom: 10px;
   margin-left: auto;
   z-index: 999;
-  background-color: red;
   background-image: url(${AdImg});
   background-repeat: no-repeat;
   background-position: center;

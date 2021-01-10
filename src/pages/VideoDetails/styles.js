@@ -41,6 +41,7 @@ export const VideoList = styled.div`
     .videoCard__info__container {
       padding: 12px;
       margin: auto;
+      flex: 1;
     }
 
     .videoCard__duration {

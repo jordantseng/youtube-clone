@@ -25,6 +25,7 @@ export const HeaderIcons = styled.div`
 `;
 
 export const StyledNavLink = styled(NavLink)`
+  color: black;
   svg {
     margin-right: 8px;
     cursor: pointer;
