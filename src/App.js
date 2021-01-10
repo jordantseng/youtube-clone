@@ -31,7 +31,7 @@ const App = () => {
   };
 
   const onToggleLikeButton = (video) => {
-    if (likedVideosFromStorage) {
+    if (likedVideos.length) {
       const alreadyLiked = JSON.parse(likedVideosFromStorage).find(
         (like) => like.id === video.id
       );
