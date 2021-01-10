@@ -9,13 +9,13 @@ export const VideoCardContainer = styled.div`
   margin: 0 10px;
   margin-bottom: 40px;
 
-  @media only screen and (max-width: 1300px) {
-    margin-right: 20px;
-  }
-
   @media only screen and (max-width: 1012px) {
-    margin-right: 30px;
+    flex: 1;
   }
+`;
+
+export const VideoCardThumbnailContainer = styled.div`
+  position: relative;
 `;
 
 export const StyledLink = styled(Link)`
@@ -29,6 +29,7 @@ export const VideoThumbnail = styled.img`
 `;
 
 export const VideoInfo = styled.div`
+  position: relative;
   display: flex;
   margin-top: 10px;
 `;
@@ -64,7 +65,7 @@ export const VideoDuration = styled.div`
   background-color: black;
   color: #fff;
   right: 10px;
-  bottom: 85px;
+  bottom: 15px;
   padding: 2px 5px;
   opacity: 0.7;
 `;
@@ -73,7 +74,7 @@ export const LikeButton = styled(FavoriteIcon)`
   position: absolute;
   cursor: pointer;
   bottom: 10px;
-  right: 10px;
+  right: 5px;
   color: red;
   z-index: 100;
 `;
@@ -82,7 +83,7 @@ export const DisLikeButton = styled(FavoriteBorderIcon)`
   position: absolute;
   cursor: pointer;
   bottom: 10px;
-  right: 10px;
+  right: 5px;
   color: red;
   z-index: 100;
 `;

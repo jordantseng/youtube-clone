@@ -21,27 +21,31 @@ const Pagination = ({ history, currentPage, videosPerPage, totalVideos }) => {
   };
 
   return (
-    <Styled.Pagination>
-      <Styled.Arrow
-        onClick={() => onButtonClick(-1)}
-        disabled={currentPage === 1}>
-        &laquo;
-      </Styled.Arrow>
-      {pageNumbers.map((pageNumber) => (
-        <Styled.Page
-          to={`?page=${pageNumber}`}
-          key={pageNumber}
-          pagenumber={pageNumber}
-          currentpage={currentPage}>
-          {pageNumber}
-        </Styled.Page>
-      ))}
-      <Styled.Arrow
-        onClick={() => onButtonClick(1)}
-        disabled={currentPage === pageNumbers.length}>
-        &raquo;
-      </Styled.Arrow>
-    </Styled.Pagination>
+    <>
+      {pageNumbers.length > 1 && (
+        <Styled.Pagination>
+          <Styled.Arrow
+            onClick={() => onButtonClick(-1)}
+            disabled={currentPage === 1}>
+            &laquo;
+          </Styled.Arrow>
+          {pageNumbers.map((pageNumber) => (
+            <Styled.Page
+              to={`?page=${pageNumber}`}
+              key={pageNumber}
+              pagenumber={pageNumber}
+              currentpage={currentPage}>
+              {pageNumber}
+            </Styled.Page>
+          ))}
+          <Styled.Arrow
+            onClick={() => onButtonClick(1)}
+            disabled={currentPage === pageNumbers.length}>
+            &raquo;
+          </Styled.Arrow>
+        </Styled.Pagination>
+      )}
+    </>
   );
 };
 

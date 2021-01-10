@@ -37,7 +37,7 @@ const Home = ({ history, location, videos, onToggleLikeButton }) => {
             <Pagination
               currentPage={currentPage}
               videosPerPage={videosPerPage}
-              totalVideos='100'
+              totalVideos={videos.length}
               history={history}
             />
           </Styled.PaginationContainer>

@@ -71,7 +71,7 @@ const VideoCard = ({ video, onToggleLikeButton }) => {
 
   return (
     <Styled.VideoCardContainer className='videoCard__container'>
-      <div className='videoCard__thumbnail__container'>
+      <Styled.VideoCardThumbnailContainer className='videoCard__thumbnail__container'>
         <Styled.StyledLink to={`/${video.id}`}>
           <Styled.VideoThumbnail
             src={video.snippet.thumbnails.medium.url}
@@ -80,13 +80,18 @@ const VideoCard = ({ video, onToggleLikeButton }) => {
             alt='videoThumbnail'
           />
         </Styled.StyledLink>
-      </div>
+        <Styled.VideoDuration className='videoCard__duration'>
+          {renderDuration()}
+        </Styled.VideoDuration>
+      </Styled.VideoCardThumbnailContainer>
       <div className='videoCard__info__container'>
-        <Styled.VideoInfo>
+        <Styled.VideoInfo className='videoCard__info'>
           <Avatar
+            className='videoCard__channelThumbnail'
             src={video.snippet.channel.thumbnails.default.url}
             alt='channelThumbnail'
           />
+
           <Styled.VideoContent>
             <Styled.VideoTitle>{video.snippet.title}</Styled.VideoTitle>
             <Styled.ChannelTitle>
@@ -96,12 +101,9 @@ const VideoCard = ({ video, onToggleLikeButton }) => {
               觀看次數: {renderViewcount}．{renderDateDiff()}
             </p>
           </Styled.VideoContent>
+          {renderLikeButton}
         </Styled.VideoInfo>
       </div>
-      <Styled.VideoDuration className='videoCard__duration'>
-        {renderDuration()}
-      </Styled.VideoDuration>
-      <div>{renderLikeButton}</div>
     </Styled.VideoCardContainer>
   );
 };

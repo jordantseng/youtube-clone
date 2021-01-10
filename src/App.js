@@ -13,12 +13,8 @@ import useFetchVideos from './hooks/useFetchVideos';
 const App = () => {
   const [likedVideos, setLikedVideos] = useState([]);
   const [searchedVideos, search] = useSearch('');
-  const [popularVideos, fetchPopularVideos] = useFetchVideos();
+  const [popularVideos] = useFetchVideos(100);
   const likedVideosFromStorage = localStorage.getItem('likes');
-
-  useEffect(() => {
-    fetchPopularVideos();
-  }, []);
 
   useEffect(() => {
     if (likedVideosFromStorage) {

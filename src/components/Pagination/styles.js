@@ -27,6 +27,11 @@ export const Arrow = styled.button`
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
   }
+
+  @media only screen and (max-width: 480px) {
+    font-size: 5px;
+    padding: 5px 10px;
+  }
 `;
 
 export const Page = styled(Link)`
@@ -47,4 +52,9 @@ export const Page = styled(Link)`
       border: 1px solid lightgray;
       color: white;
     `}
+
+  @media only screen and (max-width: 480px) {
+    font-size: 5px;
+    padding: 5px 10px;
+  }
 `;
