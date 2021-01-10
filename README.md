@@ -1,5 +1,6 @@
 # Youtube clone
-Youtube clone using youtube api v3.
+Youtube clone using youtube api v3.  
+demo: https://jordantseng.github.io/youtube-clone
 
 ### important 
 Please aware that the request times of youtube api are limited. If you find the 403 error (unauthorized error) on the browser, the request limitation might be exceeded. 
