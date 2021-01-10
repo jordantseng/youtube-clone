@@ -72,7 +72,7 @@ const VideoCard = ({ video, onToggleLikeButton }) => {
   return (
     <Styled.VideoCardContainer className='videoCard__container'>
       <Styled.VideoCardThumbnailContainer className='videoCard__thumbnail__container'>
-        <Styled.StyledLink to={`/${video.id}`}>
+        <Styled.StyledLink to={`/videos/${video.id}`}>
           <Styled.VideoThumbnail
             src={video.snippet.thumbnails.medium.url}
             height='170'

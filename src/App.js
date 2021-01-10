@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 
 import Container from './components/Container';
 import Header from './components/Header';
@@ -75,7 +75,7 @@ const App = () => {
           )}
         />
         <Route
-          path='/:id'
+          path='/videos/:id'
           render={(props) => (
             <VideoDetails
               videos={popularVideos}
@@ -86,7 +86,7 @@ const App = () => {
         />
 
         <Route
-          path='/'
+          path='/home'
           render={(props) => (
             <Home
               videos={popularVideos}
@@ -95,6 +95,7 @@ const App = () => {
             />
           )}
         />
+        <Redirect to='/home' />
       </Switch>
     </Container>
   );

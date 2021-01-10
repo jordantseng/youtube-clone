@@ -11,7 +11,7 @@ import * as Styled from './styles';
 const Header = ({ onSearch }) => {
   return (
     <Styled.HeaderContainer>
-      <Styled.StyledLink to='/'>
+      <Styled.StyledLink to='/home'>
         <img src={youtubeLogo} alt='youtubeLogo' />
       </Styled.StyledLink>
       <Searchbox onSearch={onSearch} />
@@ -19,7 +19,7 @@ const Header = ({ onSearch }) => {
         <Styled.StyledNavLink to='/likelist' activeStyle={{ color: 'red' }}>
           <FavoriteBorderIcon />
         </Styled.StyledNavLink>
-        <Styled.StyledNavLink to='/' activeStyle={{ color: 'red' }} exact>
+        <Styled.StyledNavLink to='/home' activeStyle={{ color: 'red' }} exact>
           <HomeIcon />
         </Styled.StyledNavLink>
       </Styled.HeaderIcons>
