@@ -6,7 +6,6 @@ import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import youtubeLogo from '../../asset/1024px-YouTube_Logo_2017.png';
 import Searchbox from '../Searchbox';
 
-
 import * as Styled from './styles';
 
 const Header = ({ onSearch }) => {
@@ -18,7 +17,7 @@ const Header = ({ onSearch }) => {
       <Searchbox onSearch={onSearch} />
       <Styled.HeaderIcons>
         <Styled.StyledNavLink to='/likelist' activeStyle={{ color: 'red' }}>
-          <FavoriteBorderIcon />
+          <FavoriteBorderIcon  />
         </Styled.StyledNavLink>
         <Styled.StyledNavLink to='/' activeStyle={{ color: 'red' }} exact>
           <HomeIcon />

@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 
 export const Pagination = styled.div`
