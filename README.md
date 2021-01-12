@@ -58,7 +58,7 @@ A: Compared to Javascript, I spent more time on CSS :( To be honest, this is my 
 A: Before this project, I don't have any knowledge relevant to live streaming. It did take me some time to understand what m3u8 file is and how the Videojs library work.
 
 #### Q: Github page reload issue (not resolved)
-A: This is my first time to deploy project on github. And there is a issue that the site will crashed while the page reload. However, the project work fine if you open in localhost.
+A: This is my first time to deploy project on github. And there is a issue that the site will crashed after the page reload (It seems like is that github page doesn't support SPA, so there is a 404 error when refreshing page). However, the project work fine if you open in localhost.
 
 
 ## Usage
