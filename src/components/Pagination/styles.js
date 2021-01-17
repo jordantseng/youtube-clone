@@ -38,6 +38,7 @@ export const Page = styled.button`
   text-decoration: none;
   border: 1px solid #ddd;
   color: #0d6efd;
+  background-color: #fff;
   display: inline-block;
   cursor: pointer;
   &:hover {

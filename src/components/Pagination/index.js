@@ -9,7 +9,7 @@ const Pagination = ({ history, currentPage, videosPerPage, totalVideos }) => {
     pageNumbers.push(i);
   }
 
-  const onButtonClick = (number) => {
+  const onChangePageClick = (number) => {
     if (number === 1 && currentPage === pageNumbers.length) {
       return;
     }
@@ -26,22 +26,19 @@ const Pagination = ({ history, currentPage, videosPerPage, totalVideos }) => {
       {pageNumbers.length > 1 && (
         <Styled.Pagination>
           <Styled.Arrow
-            onClick={() => onButtonClick(-1)}
+            onClick={() => onChangePageClick(-1)}
             disabled={currentPage === 1}>
             &laquo;
           </Styled.Arrow>
           {pageNumbers.map((pageNumber) => (
-            <Link to={`?page=${pageNumber}`}>
-              <Styled.Page
-                key={pageNumber}
-                pagenumber={pageNumber}
-                currentpage={currentPage}>
+            <Link to={`?page=${pageNumber}`} key={pageNumber}>
+              <Styled.Page pagenumber={pageNumber} currentpage={currentPage}>
                 {pageNumber}
               </Styled.Page>
             </Link>
           ))}
           <Styled.Arrow
-            onClick={() => onButtonClick(1)}
+            onClick={() => onChangePageClick(1)}
             disabled={currentPage === pageNumbers.length}>
             &raquo;
           </Styled.Arrow>

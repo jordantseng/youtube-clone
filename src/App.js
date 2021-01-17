@@ -1,12 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Route, Switch, Redirect } from 'react-router-dom';
 
 import Container from './components/Container';
 import Header from './components/Header';
-import LikeList from './pages/LikeList';
-import VideoDetails from './pages/VideoDetails';
-import Search from './pages/Search';
-import Home from './pages/Home';
+import Routes from './components/Routes';
 import useSearch from './hooks/useSearch';
 import useFetchVideos from './hooks/useFetchVideos';
 
@@ -54,49 +50,12 @@ const App = () => {
   return (
     <Container>
       <Header onSearch={onSearch} />
-      <Switch>
-        <Route
-          path='/likelist'
-          render={(props) => (
-            <LikeList
-              likedVideos={likedVideos}
-              onToggleLikeButton={onToggleLikeButton}
-              {...props}
-            />
-          )}
-        />
-        <Route
-          path='/search'
-          render={() => (
-            <Search
-              videos={searchedVideos}
-              onToggleLikeButton={onToggleLikeButton}
-            />
-          )}
-        />
-        <Route
-          path='/videos/:id'
-          render={(props) => (
-            <VideoDetails
-              videos={popularVideos}
-              onToggleLikeButton={onToggleLikeButton}
-              {...props}
-            />
-          )}
-        />
-
-        <Route
-          path='/home'
-          render={(props) => (
-            <Home
-              videos={popularVideos}
-              onToggleLikeButton={onToggleLikeButton}
-              {...props}
-            />
-          )}
-        />
-        <Redirect to='/home' />
-      </Switch>
+      <Routes
+        likedVideos={likedVideos}
+        searchedVideos={searchedVideos}
+        popularVideos={popularVideos}
+        onToggleLikeButton={onToggleLikeButton}
+      />
     </Container>
   );
 };

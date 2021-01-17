@@ -16,9 +16,7 @@ const LikeList = ({ likedVideos, onToggleLikeButton }) => {
   return (
     <>
       <Title>收藏影片</Title>
-      <CardsContainer likedVideos={likedVideos}>
-        {renderVideoCards}
-      </CardsContainer>
+      <CardsContainer videos={likedVideos}>{renderVideoCards}</CardsContainer>
     </>
   );
 };
