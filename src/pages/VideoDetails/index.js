@@ -63,11 +63,7 @@ const VideoDetails = ({ videos, onToggleLikeButton, match }) => {
       {video ? (
         <div className='videoDetails__top'>
           <div>
-            <VideoPlayer
-              eventON={{
-                pause: onVideoPause,
-              }}
-            />
+            <VideoPlayer onVideoPause={onVideoPause} />
           </div>
           <Styled.VideoBottom>
             <Styled.InfoContainer>
