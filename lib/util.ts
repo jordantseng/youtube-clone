@@ -1,4 +1,26 @@
 import dayjs from 'dayjs';
+import duration from 'dayjs/plugin/duration';
+
+dayjs.extend(duration);
+
+export const transformDuration = (duration: string) => {
+  const totalSeconds = dayjs.duration(duration).asSeconds();
+  const hours = Math.floor(totalSeconds / 3600);
+  const minutes = Math.floor((totalSeconds % 3600) / 60);
+  const seconds = Math.trunc(totalSeconds % 60);
+
+  let transformedDuration = '';
+
+  if (hours > 0) {
+    transformedDuration += `${hours}:`;
+  }
+
+  transformedDuration += `${minutes.toString().padStart(2, '0')}:${seconds
+    .toString()
+    .padStart(2, '0')}`;
+
+  return transformedDuration;
+};
 
 export const transformTimeStamp = (timestamp: string) => {
   const start = dayjs(timestamp);
@@ -33,3 +55,4 @@ export const transformViews = (views: string) => {
 
   return `${viewCount} 次`;
 };
+
