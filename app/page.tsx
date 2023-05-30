@@ -1,11 +1,11 @@
 'use client';
 import { useEffect, useState } from 'react';
 
-import useFetchPopularVideos from './hooks/useFetchPopularVideos';
-import useOnScreen from './hooks/useOnScreen';
-import CardSkeleton from './components/CardSkeleton';
-import VideoCard from './components/VideoCard';
-import Loader from './components/Loader';
+import useFetchPopularVideos from '@/hooks/useFetchPopularVideos';
+import useOnScreen from '@/hooks/useOnScreen';
+import CardSkeleton from '@/components/CardSkeleton';
+import VideoCard from '@/components/VideoCard';
+import Loader from '@/components/Loader';
 
 const HomePage = () => {
   const [page, setPage] = useState(1);

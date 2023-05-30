@@ -1,30 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
-// import { getPopularVideos } from '@/services/youtubeService';
+import { getVideos, getChannels } from '@/services/youtube';
 
-import axios from 'axios';
-
-const youtubeApi = axios.create({
-  baseURL: 'https://www.googleapis.com/youtube/v3',
-  params: {
-    key: process.env.NEXT_PUBLIC_YOUTUBE_KEY,
-  },
-});
-
-const getVideos = async (params) => {
-  const { data } = await youtubeApi.get('/videos', {
-    params,
-  });
-  return data;
-};
-
-const getChannels = async (params) => {
-  const { data } = await youtubeApi.get('/channels', {
-    params,
-  });
-  return data;
-};
-
-export const getPopularVideos = async (pageToken) => {
+const getPopularVideos = async (pageToken) => {
   const videos = await getVideos({
     part: 'contentDetails,snippet,statistics',
     chart: 'mostPopular',
