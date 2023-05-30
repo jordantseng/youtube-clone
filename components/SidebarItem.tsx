@@ -17,7 +17,7 @@ const MediumSidebarItem = ({ href, title, Icon }) => {
   return (
     <Link href={href} className="flex justify-start items-center">
       <div>
-        <Icon />
+        <Icon className="w-6 h-6"/>
       </div>
       <div className="flex justify-center items-center px-4 py-3 cursor-pointer">
         <span className="flex-1 text-center">{title}</span>

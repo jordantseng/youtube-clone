@@ -1,7 +1,7 @@
 'use client';
 import { useRef } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
-import SearchIcon from './icons/SearchIcon';
+import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 
 const Searchbox = () => {
   const router = useRouter();
@@ -33,7 +33,7 @@ const Searchbox = () => {
         className="flex justify-center items-center w-16 border-l border-gray-300 p-2 cursor-pointer bg-gray-100 rounded-r-3xl"
         type="submit"
       >
-        <SearchIcon />
+        <MagnifyingGlassIcon className="w-6 h-6" />
       </button>
     </form>
   );

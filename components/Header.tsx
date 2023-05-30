@@ -1,15 +1,15 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import { Bars3Icon } from '@heroicons/react/24/outline';
 
-import Searchbox from './Searchbox';
-import MenuIcon from './icons/MenuIcon';
+import Searchbox from '@/components/Searchbox';
 
 const Header = () => {
   return (
     <header className="flex justify-between items-center p-5 sticky z-50 top-0 bg-white">
       <div className="flex items-center">
         <div>
-          <MenuIcon />
+          <Bars3Icon className="w-6 h-6" />
         </div>
         <Link href="/">
           <Image

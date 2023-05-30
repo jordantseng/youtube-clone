@@ -1,13 +1,14 @@
-import HomeIcon from './icons/HomeIcon';
-import MediaIcon from './icons/MediaIcon';
-import HistoryIcon from './icons/HistoryIcon';
-import SidebarItem from './SidebarItem';
+import { HomeIcon } from '@heroicons/react/24/outline';
+import { FilmIcon } from '@heroicons/react/24/outline';
+import { ClockIcon } from '@heroicons/react/24/outline';
+
+import SidebarItem from '@/components/SidebarItem';
 
 const topSidebarItems = [{ title: '首頁', href: '/', Icon: HomeIcon }];
 
 const bottomSidebarItems = [
-  { title: '媒體庫', href: '/', Icon: MediaIcon },
-  { title: '觀看紀錄', href: '/', Icon: HistoryIcon },
+  { title: '媒體庫', href: '/', Icon: FilmIcon },
+  { title: '觀看紀錄', href: '/', Icon: ClockIcon },
 ];
 
 const Sidebar = () => {

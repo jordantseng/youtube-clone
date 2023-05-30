@@ -1,6 +1,6 @@
 'use client';
-
 import { transformViews, transformTimeStamp } from '@/lib/util';
+import { HandThumbUpIcon } from '@heroicons/react/24/solid';
 
 const Video = ({ id, title, viewCount, videoTimeStamp, likeCount }) => {
   console.log(id);
@@ -27,7 +27,7 @@ const Video = ({ id, title, viewCount, videoTimeStamp, likeCount }) => {
           </div>
           <div className="flex">
             <div className="text-gray-700 font-medium flex items-center py-2 pr-2">
-              {/* VideoAction */}
+              <HandThumbUpIcon className="h-6 w-6 text-gray-400" />
               <p>{likeCount}</p>
             </div>
           </div>

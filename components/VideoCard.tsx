@@ -1,8 +1,8 @@
 import { useRouter } from 'next/navigation';
+import Avatar from 'react-avatar';
 
-import VideoThumbnail from './VideoThumbnail';
-import VideoInfo from './VideoInfo';
-import Avatar from './Avatar';
+import VideoThumbnail from '@/components/VideoThumbnail';
+import VideoInfo from '@/components/VideoInfo';
 
 type VideoCardProps = {
   videoId: string;
@@ -39,7 +39,7 @@ const VideoCard = ({
       <div className="flex mt-2">
         <div className="flex items-center">
           <div className="mb-auto mt-2">
-            <Avatar src={channelThumbnail} alt="Avatar" />
+            <Avatar src={channelThumbnail} alt="Avatar" size="40" round />
           </div>
           <div className="ml-4">
             <VideoInfo
