@@ -4,7 +4,7 @@ const SmallSidebarItem = ({ href, title, Icon }) => {
   return (
     <Link href={href} className="flex flex-col justify-start items-center py-2">
       <div>
-        <Icon />
+        <Icon className="w-6 h-6"/>
       </div>
       <div className="flex justify-center items-center cursor-pointer">
         <span className="flex-1 text-center text-xs">{title}</span>

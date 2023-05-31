@@ -56,3 +56,10 @@ export const transformViews = (views: string) => {
   return `${viewCount} 次`;
 };
 
+
+// TODO: https://stackoverflow.com/questions/10599933/convert-long-number-into-abbreviated-string-in-javascript-with-a-special-shortn
+export const transformSubscribers = (subscriberCount) => {
+  return +subscriberCount >= 10000
+    ? `${Math.trunc(+subscriberCount / 10000)} 萬`
+    : `${+subscriberCount}`;
+};
