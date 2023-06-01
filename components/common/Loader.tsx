@@ -1,3 +1,5 @@
+// TODO: find another loader library
+
 const Loader = () => {
   return (
     <div className="text-center">
