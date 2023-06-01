@@ -1,3 +1,4 @@
+import RecommendVideos from '@/components/RecommendVideos';
 import Video from '@/components/Video';
 import { getChannels, getVideos } from '@/services/youtube';
 
@@ -35,22 +36,24 @@ const VideoPage = async ({ params: { videoId } }) => {
   const videoDetails = await fetchVideoDetails(videoId);
 
   return (
-    <div className="flex pr-4">
-      <div className="flex-1 pr-4">
+    <main className="flex px-20 flex-wrap">
+      <div className="flex-1 mb-2">
         <Video
           id={videoDetails.id}
           title={videoDetails.title}
           viewCount={videoDetails.viewCount}
           videoTimeStamp={videoDetails.videoTimeStamp}
           likeCount={videoDetails.likeCount}
-          dislikeCount={videoDetails.dislikeCount}
           channel={videoDetails.channel}
           subscriberCount={videoDetails.subscriberCount}
           channelThumbnail={videoDetails.channelThumbnail}
           videoDescription={videoDetails.videoDescription}
         />
       </div>
-    </div>
+      <div className="w-full xl:w-4/12 xl:pl-4">
+        <RecommendVideos />
+      </div>
+    </main>
   );
 };
 

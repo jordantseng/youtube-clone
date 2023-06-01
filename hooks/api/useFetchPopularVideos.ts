@@ -10,6 +10,7 @@ const getPopularVideos = async (pageToken) => {
     pageToken,
   });
 
+
   const channelIds = videos.items
     .map(({ snippet }) => snippet.channelId)
     .join();
@@ -41,7 +42,7 @@ const getPopularVideos = async (pageToken) => {
   return { data, nextPageToken: videos.nextPageToken };
 };
 
-const useFetchPopularVideos = (pageNumber: number) => {
+const useFetchPopularVideos = (page: number) => {
   const [loading, setLoading] = useState(true);
   const [videos, setVideos] = useState([]);
   const [error, setError] = useState(null);
@@ -66,7 +67,7 @@ const useFetchPopularVideos = (pageNumber: number) => {
         }
 
         setVideos((preVideos) =>
-          pageNumber > 1 ? [...preVideos, ...data] : [...data]
+          page > 1 ? [...preVideos, ...data] : [...data]
         );
       } catch (error) {
         console.log(error.message);
@@ -77,7 +78,7 @@ const useFetchPopularVideos = (pageNumber: number) => {
     };
 
     fetchVideos();
-  }, [pageNumber]);
+  }, [page]);
 
   return {
     loading,

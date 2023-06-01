@@ -12,7 +12,7 @@ import {
   transformTimeStamp,
   transformSubscribers,
 } from '@/lib/util';
-import Button from '@/components/Button';
+import Button from '@/components/common/Button';
 
 const VideoHeader = ({
   channelThumbnail,
@@ -25,14 +25,14 @@ const VideoHeader = ({
       <Avatar src={channelThumbnail.url} alt="channel-avatar" size="40" round />
       <div className="flex ml-4 gap-3 w-48 mb-2 mr-auto">
         <div>
-          <div className="font-medium">{channel}</div>
+          <div className="font-medium overflow-hidden line-clamp-1">{channel}</div>
           {subscriberCount && (
             <p className="text-xs text-zinc-500">
               {transformSubscribers(subscriberCount)}位訂閱者
             </p>
           )}
         </div>
-        <button className="bg-black rounded-3xl text-white px-4 text-sm">
+        <button className="bg-black rounded-3xl text-white px-4 text-sm w-20">
           訂閱
         </button>
       </div>

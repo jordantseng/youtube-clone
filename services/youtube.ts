@@ -20,3 +20,10 @@ export const getChannels = async (params) => {
   });
   return data;
 };
+
+export const getSearchVideos = async (params) => {
+  const { data } = await youtubeApi.get('/search', {
+    params,
+  });
+  return data;
+};
