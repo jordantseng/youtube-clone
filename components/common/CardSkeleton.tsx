@@ -1,4 +1,4 @@
-import SkeletonElement from '@/components/SkeletonsElement';
+import SkeletonElement from '@/components/common/SkeletonsElement';
 
 const CardSkeleton = () => {
   return (

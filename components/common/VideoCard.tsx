@@ -1,8 +1,8 @@
 import { useRouter } from 'next/navigation';
 import Avatar from 'react-avatar';
 
-import VideoThumbnail from '@/components/VideoThumbnail';
-import VideoInfo from '@/components/VideoInfo';
+import VideoThumbnail from '@/components/common/VideoThumbnail';
+import VideoInfo from '@/components/common/VideoInfo';
 
 type VideoCardProps = {
   videoId: string;

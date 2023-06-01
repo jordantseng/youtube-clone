@@ -12,7 +12,7 @@ import {
   transformTimeStamp,
   transformSubscribers,
 } from '@/lib/util';
-import Button from '@/components/common/Button';
+import IconButton from '@/components/common/IconButton';
 
 const VideoHeader = ({
   channelThumbnail,
@@ -47,8 +47,8 @@ const VideoHeader = ({
             <HandThumbDownIcon className="h-6 w-6" />
           </div>
         </div>
-        <Button Icon={ShareIcon} title="分享" />
-        <Button Icon={PlusIcon} title="儲存" />
+        <IconButton Icon={ShareIcon} title="分享" />
+        <IconButton Icon={PlusIcon} title="儲存" />
       </div>
     </div>
   );

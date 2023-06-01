@@ -1,5 +1,5 @@
 import RecommendVideos from '@/components/RecommendVideos';
-import Video from '@/components/Video';
+import Video from '@/components/common/Video';
 import { getChannels, getVideos } from '@/services/youtube';
 
 async function fetchVideoDetails(videoId) {
@@ -49,6 +49,8 @@ const VideoPage = async ({ params: { videoId } }) => {
           channelThumbnail={videoDetails.channelThumbnail}
           videoDescription={videoDetails.videoDescription}
         />
+        {/* comments */}
+        
       </div>
       <div className="w-full xl:w-4/12 xl:pl-4">
         <RecommendVideos />

@@ -3,8 +3,8 @@ import { useEffect, useState } from 'react';
 
 import useFetchPopularVideos from '@/hooks/api/useFetchPopularVideos';
 import useOnScreen from '@/hooks/useOnScreen';
-import CardSkeleton from '@/components/CardSkeleton';
-import VideoCard from '@/components/VideoCard';
+import CardSkeleton from '@/components/common/CardSkeleton';
+import VideoCard from '@/components/common/VideoCard';
 import Loader from '@/components/common/Loader';
 
 const HomePage = () => {
