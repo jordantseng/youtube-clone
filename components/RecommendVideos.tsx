@@ -24,8 +24,6 @@ const RecommendVideos = () => {
     setLastVideo(element);
   };
 
-  if (loading && videos.length === 0) return null;
-
   return (
     <>
       <div className="hidden xl:block">
@@ -46,6 +44,7 @@ const RecommendVideos = () => {
             />
           );
         })}
+        {loading && <Loader />}
       </div>
       <div className="block xl:hidden">
         {videos.map(({ id, snippet, contentDetails, statistics }) => (
@@ -60,13 +59,9 @@ const RecommendVideos = () => {
             timeStamp={snippet.publishedAt}
           />
         ))}
-        {loading && videos.length !== 0 && (
-          <div className="my-2">
-            <Loader />
-          </div>
-        )}
+        {loading && <Loader />}
         <button
-          className="w-full border border-slate-300 rounded-3xl py-2 text-blue-700 font-medium text-sm hover:bg-blue-200"
+          className="w-full border border-slate-300 rounded-3xl py-2 text-blue-700 font-medium text-sm hover:bg-blue-200 my-2"
           onClick={() => setPage(page + 1)}
         >
           顯示完整資訊

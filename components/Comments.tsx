@@ -26,10 +26,6 @@ const Comments = ({ videoId }: CommentsProps) => {
     setLastComment(element);
   };
 
-  if (loading && comments.length === 0) {
-    return <Loader />;
-  }
-
   return (
     <>
       {comments.map((comment, index) => {
@@ -48,7 +44,7 @@ const Comments = ({ videoId }: CommentsProps) => {
           />
         );
       })}
-      {loading && comments.length !== 0 && <Loader />}
+      {loading && <Loader />}
     </>
   );
 };

@@ -27,8 +27,6 @@ const SeachPage = () => {
     setLastVideo(element);
   };
 
-  if (loading && videos.length === 0) return <Loader />;
-
   return (
     <main className="flex flex-col flex-1 justify-center mt-4 mx-5 lg:mx-32">
       {videos.map((video, index) => {
@@ -50,7 +48,7 @@ const SeachPage = () => {
           />
         );
       })}
-      {loading && videos.length > 0 && <Loader />}
+      {loading && <Loader />}
     </main>
   );
 };
