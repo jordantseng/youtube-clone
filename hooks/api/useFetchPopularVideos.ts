@@ -1,8 +1,19 @@
 import { useState, useEffect, useRef } from 'react';
 import { getVideos, getChannels } from '@/services/youtube';
 
-const getPopularVideos = async (pageToken) => {
-  const videos = await getVideos({
+type Video = {
+  videoId: string;
+  videoThumbnail: string;
+  videoDuration: string;
+  videoTimeStamp: string;
+  title: string;
+  viewCount: string;
+  channelThumbnail: string;
+  channel: string;
+};
+
+const getPopularVideos = async (pageToken: string) => {
+  const videosResponse = await getVideos({
     part: 'contentDetails,snippet,statistics',
     chart: 'mostPopular',
     regionCode: 'TW',
@@ -10,42 +21,41 @@ const getPopularVideos = async (pageToken) => {
     pageToken,
   });
 
+  const videos = videosResponse.items;
 
-  const channelIds = videos.items
-    .map(({ snippet }) => snippet.channelId)
-    .join();
+  const channelIds = videos.map(({ snippet }) => snippet.channelId).join();
 
-  const channels = await getChannels({
+  const channelsResponse = await getChannels({
     part: 'snippet',
     id: channelIds,
   });
 
-  const data = videos.items
-    .map((video) => {
-      const channelDetails = channels.items.find(
-        (channel) => video.snippet.channelId === channel.id
-      );
+  const channels = channelsResponse.items;
 
-      return { ...video, channelDetails };
-    })
-    .map(({ id, snippet, contentDetails, statistics, channelDetails }) => ({
-      videoId: id,
-      videoThumbnail: snippet.thumbnails.medium.url,
-      videoDuration: contentDetails.duration,
-      videoTimeStamp: snippet.publishedAt,
-      title: snippet.title,
-      viewCount: statistics.viewCount,
-      channelThumbnail: channelDetails.snippet.thumbnails.default.url,
-      channel: channelDetails.snippet.title,
-    }));
+  const data = videos.map((video) => {
+    const channelDetails = channels.find(
+      (channel) => video.snippet.channelId === channel.id
+    );
 
-  return { data, nextPageToken: videos.nextPageToken };
+    return {
+      videoId: video.id,
+      videoThumbnail: video.snippet.thumbnails.medium.url,
+      videoDuration: video.contentDetails.duration,
+      videoTimeStamp: video.snippet.publishedAt,
+      title: video.snippet.title,
+      viewCount: video.statistics.viewCount,
+      channelThumbnail: channelDetails?.snippet.thumbnails.default.url ?? '',
+      channel: channelDetails?.snippet.title ?? '',
+    };
+  });
+
+  return { data, nextPageToken: videosResponse.nextPageToken };
 };
 
 const useFetchPopularVideos = (page: number) => {
   const [loading, setLoading] = useState(true);
-  const [videos, setVideos] = useState([]);
-  const [error, setError] = useState(null);
+  const [videos, setVideos] = useState<Video[]>([]);
+  const [error, setError] = useState<Error | null>(null);
   const [hasMore, setHasMore] = useState(true);
   const nextPageTokenRef = useRef('');
 
@@ -70,8 +80,7 @@ const useFetchPopularVideos = (page: number) => {
           page > 1 ? [...preVideos, ...data] : [...data]
         );
       } catch (error) {
-        console.log(error.message);
-        setError(error.message);
+        setError(error as Error);
       }
 
       setLoading(false);

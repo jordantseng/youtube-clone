@@ -12,7 +12,7 @@ import {
   transformTimeStamp,
   transformSubscribers,
 } from '@/lib/util';
-import IconButton from '@/components/common/IconButton';
+import IconButton from '@/components/ui/IconButton';
 
 const VideoHeader = ({
   channelThumbnail,

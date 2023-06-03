@@ -2,7 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Bars3Icon } from '@heroicons/react/24/outline';
 
-import Searchbox from '@/components/common/Searchbox';
+import Searchbox from '@/components/ui/Searchbox';
 
 const Header = () => {
   return (

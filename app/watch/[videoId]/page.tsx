@@ -1,8 +1,9 @@
+import Comments from '@/components/Comments';
 import RecommendVideos from '@/components/RecommendVideos';
-import Video from '@/components/common/Video';
+import Video from '@/components/ui/Video';
 import { getChannels, getVideos } from '@/services/youtube';
 
-async function fetchVideoDetails(videoId) {
+async function fetchVideoDetails(videoId: string) {
   const videos = await getVideos({
     id: videoId,
     part: 'snippet,contentDetails,statistics',
@@ -24,9 +25,8 @@ async function fetchVideoDetails(videoId) {
     viewCount: video.statistics.viewCount,
     videoTimeStamp: video.snippet.publishedAt,
     likeCount: video.statistics.likeCount,
-    dislikeCount: video.statistics.dislikeCount,
     channel: channel.snippet.title,
-    subscriberCount: channel.statistics.subscriberCount || null,
+    subscriberCount: channel.statistics.subscriberCount,
     channelThumbnail: channel.snippet.thumbnails.default,
     videoDescription: video.snippet.description,
   };
@@ -49,11 +49,15 @@ const VideoPage = async ({ params: { videoId } }) => {
           channelThumbnail={videoDetails.channelThumbnail}
           videoDescription={videoDetails.videoDescription}
         />
-        {/* comments */}
-        
+        <div className="hidden xl:block">
+          <Comments videoId={videoDetails.id} />
+        </div>
       </div>
-      <div className="w-full xl:w-4/12 xl:pl-4">
+      <div className="w-full xl:w-1/3 xl:pl-4">
         <RecommendVideos />
+      </div>
+      <div className="block w-full xl:hidden">
+        <Comments videoId={videoDetails.id} />
       </div>
     </main>
   );

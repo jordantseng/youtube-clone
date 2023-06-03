@@ -3,8 +3,8 @@ import { useEffect, useState } from 'react';
 
 import useFetchRecommendVideos from '@/hooks/api/useFetchRecommendVideos';
 import useOnScreen from '@/hooks/useOnScreen';
-import Loader from '@/components/common/Loader';
-import VideoCardV2 from '@/components/common/VideoCardV2';
+import Loader from '@/components/ui/Loader';
+import VideoCardV2 from '@/components/ui/VideoCardV2';
 
 const RecommendVideos = () => {
   const [page, setPage] = useState(1);
@@ -57,8 +57,14 @@ const RecommendVideos = () => {
             duration={contentDetails.duration}
             channel={snippet.channelTitle}
             viewCount={statistics.viewCount}
-            timeStamp={snippet.publishedAt} />
+            timeStamp={snippet.publishedAt}
+          />
         ))}
+        {loading && videos.length !== 0 && (
+          <div className="my-2">
+            <Loader />
+          </div>
+        )}
         <button
           className="w-full border border-slate-300 rounded-3xl py-2 text-blue-700 font-medium text-sm hover:bg-blue-200"
           onClick={() => setPage(page + 1)}
@@ -66,7 +72,6 @@ const RecommendVideos = () => {
           顯示完整資訊
         </button>
       </div>
-      {loading && videos.length !== 0 && <Loader />}
     </>
   );
 };

@@ -3,9 +3,9 @@ import { useEffect, useState } from 'react';
 
 import useFetchPopularVideos from '@/hooks/api/useFetchPopularVideos';
 import useOnScreen from '@/hooks/useOnScreen';
-import CardSkeleton from '@/components/common/CardSkeleton';
-import VideoCard from '@/components/common/VideoCard';
-import Loader from '@/components/common/Loader';
+import CardSkeleton from '@/components/ui/CardSkeleton';
+import VideoCard from '@/components/ui/VideoCard';
+import Loader from '@/components/ui/Loader';
 
 const HomePage = () => {
   const [page, setPage] = useState(1);

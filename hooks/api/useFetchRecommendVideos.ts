@@ -2,6 +2,33 @@ import { useState, useEffect, useRef } from 'react';
 
 import { getSearchVideos, getVideos } from '@/services/youtube';
 
+type RecommendVideo = {
+  contentDetails: {
+    duration: string;
+  };
+  statistics: {
+    viewCount: string;
+    likeCount: string;
+  };
+  id?: {
+    kind: string;
+    videoId: string;
+  };
+  snippet?: {
+    channelId: string;
+    channelTitile: string;
+    description: string;
+    publishTime: string;
+    pulishedAt: string;
+    thumbnails: {
+      default: { url: string; widt: number; height: number };
+      high: { url: string; widt: number; height: number };
+      medium: { url: string; widt: number; height: number };
+    };
+    title: string;
+  };
+};
+
 const getRecommendVideos = async (pageToken: string) => {
   const searchVideosResponse = await getSearchVideos({
     part: 'snippet',
@@ -23,7 +50,7 @@ const getRecommendVideos = async (pageToken: string) => {
 
   const newVideos = videos.map((video) => {
     const recommendVideoData = searchVideos.find(
-      (recommendVideo) => recommendVideo.id.videoId === video.id
+      ({ id }) => id.videoId === video.id
     );
 
     return {
@@ -38,7 +65,7 @@ const getRecommendVideos = async (pageToken: string) => {
 
 const useFetchRecommendVideos = (page: number) => {
   const [loading, setLoading] = useState(true);
-  const [videos, setVideos] = useState([]);
+  const [videos, setVideos] = useState<RecommendVideo[]>([]);
   const [error, setError] = useState<Error | null>(null);
   const [hasMore, setHasMore] = useState(true);
   const nextPageTokenRef = useRef('');
