@@ -53,11 +53,14 @@ type RawChannel = {
   id: string;
   snippet: {
     title: string;
-    thumbnails: { default: { url: string; width: number; height: number } };
+    thumbnails: {
+      default: { url: string; width: number; height: number };
+      medium: { url: string; width: number; height: number };
+    };
   };
   statistics: {
     subscriberCount: string;
-  }
+  };
 };
 
 export const getChannels = async (params: { part: string; id: string }) => {
@@ -71,9 +74,12 @@ export const getChannels = async (params: { part: string; id: string }) => {
 
 type SearchParams = {
   part: string;
-  type: string;
+  q?: string;
+  type?: string;
   pageToken?: string;
   maxResults?: number;
+  eventType?: string;
+  regionCode?: string;
 };
 
 type RawSearchVideo = {
@@ -85,24 +91,26 @@ type RawSearchVideo = {
     publishTime: string;
     publishedAt: string;
     thumbnails: {
-      default: { url: string; width: number; height: number };
-      high: { url: string; width: number; height: number };
+      // default: { url: string; width: number; height: number };
+      // high: { url: string; width: number; height: number };
       medium: { url: string; width: number; height: number };
     };
     title: string;
   };
 };
 
+export type SearchVideosRes = {
+  nextPageToken: string;
+  pageInfo: {
+    totalResults: number;
+    resultsPerPage: number;
+  };
+  items: RawSearchVideo[];
+  regionCode: string;
+};
+
 export const getSearchVideos = async (params: SearchParams) => {
-  const { data } = await youtubeApi.get<{
-    nextPageToken: string;
-    pageInfo: {
-      totalResults: number;
-      resultsPerPage: number;
-    };
-    items: RawSearchVideo[];
-    regionCode: string;
-  }>('/search', {
+  const { data } = await youtubeApi.get<SearchVideosRes>('/search', {
     params,
   });
   return data;
