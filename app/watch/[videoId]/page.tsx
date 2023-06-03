@@ -3,6 +3,12 @@ import RecommendVideos from '@/components/RecommendVideos';
 import Video from '@/components/ui/Video';
 import { getChannels, getVideos } from '@/services/youtube';
 
+type VideoPageProps = {
+  params: {
+    videoId: string;
+  };
+};
+
 async function fetchVideoDetails(videoId: string) {
   const videos = await getVideos({
     id: videoId,
@@ -32,7 +38,7 @@ async function fetchVideoDetails(videoId: string) {
   };
 }
 
-const VideoPage = async ({ params: { videoId } }) => {
+const VideoPage = async ({ params: { videoId } }: VideoPageProps) => {
   const videoDetails = await fetchVideoDetails(videoId);
 
   return (

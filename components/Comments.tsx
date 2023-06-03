@@ -30,8 +30,6 @@ const Comments = ({ videoId }: CommentsProps) => {
     return <Loader />;
   }
 
-  console.log(comments);
-
   return (
     <>
       {comments.map((comment, index) => {

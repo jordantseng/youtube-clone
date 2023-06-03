@@ -1,4 +1,3 @@
-import React from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 
@@ -7,6 +6,17 @@ import {
   transformViews,
   transformTimeStamp,
 } from '@/lib/util';
+
+type VideoCardV2Props = {
+  id: string;
+  videoThumbnail: string
+  title: string;
+  duration: string;
+  channel: string;
+  viewCount: string;
+  timeStamp: string;
+  getLastVideo?: (element: HTMLDivElement) => void;
+}
 
 const VideoCardV2 = ({
   id,
@@ -17,10 +27,10 @@ const VideoCardV2 = ({
   viewCount,
   timeStamp,
   getLastVideo,
-}) => {
+}: VideoCardV2Props) => {
   const router = useRouter();
 
-  const handleImageClick = (id) => {
+  const handleImageClick = (id: string) => {
     router.push(`/watch/${id}`);
   };
 

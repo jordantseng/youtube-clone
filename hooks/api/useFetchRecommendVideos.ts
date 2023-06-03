@@ -10,20 +10,19 @@ type RecommendVideo = {
     viewCount: string;
     likeCount: string;
   };
-  id?: {
-    kind: string;
+  id: {
     videoId: string;
   };
-  snippet?: {
+  snippet: {
     channelId: string;
-    channelTitile: string;
+    channelTitle: string;
     description: string;
     publishTime: string;
-    pulishedAt: string;
+    publishedAt: string;
     thumbnails: {
-      default: { url: string; widt: number; height: number };
-      high: { url: string; widt: number; height: number };
-      medium: { url: string; widt: number; height: number };
+      default: { url: string; width: number; height: number };
+      high: { url: string; width: number; height: number };
+      medium: { url: string; width: number; height: number };
     };
     title: string;
   };
@@ -54,7 +53,7 @@ const getRecommendVideos = async (pageToken: string) => {
     );
 
     return {
-      ...recommendVideoData,
+      ...recommendVideoData!,
       contentDetails: video.contentDetails,
       statistics: video.statistics,
     };
@@ -88,8 +87,8 @@ const useFetchRecommendVideos = (page: number) => {
           setHasMore(false);
         }
 
-        setVideos((preVideos) =>
-          page > 1 ? [...preVideos, ...data] : [...data]
+        setVideos((prevVideos) =>
+          page > 1 ? [...prevVideos, ...data] : [...data]
         );
       } catch (error) {
         setError(error as Error);

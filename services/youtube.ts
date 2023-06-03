@@ -22,7 +22,7 @@ type RawVideo = {
     title: string;
     description: string;
     thumbnails: {
-      medium: { url: string; widt: number; height: number };
+      medium: { url: string; width: number; height: number };
     };
   };
 };
@@ -45,6 +45,7 @@ export const getVideos = async (params: {
   }>('/videos', {
     params,
   });
+
   return data;
 };
 
@@ -52,7 +53,7 @@ type RawChannel = {
   id: string;
   snippet: {
     title: string;
-    thumbnails: { default: { url: string; widt: number; height: number } };
+    thumbnails: { default: { url: string; width: number; height: number } };
   };
   statistics: {
     subscriberCount: string;
@@ -76,17 +77,17 @@ type SearchParams = {
 };
 
 type RawSearchVideo = {
-  id: { kind: string; videoId: string };
+  id: { videoId: string };
   snippet: {
     channelId: string;
-    channelTitile: string;
+    channelTitle: string;
     description: string;
     publishTime: string;
-    pulishedAt: string;
+    publishedAt: string;
     thumbnails: {
-      default: { url: string; widt: number; height: number };
-      high: { url: string; widt: number; height: number };
-      medium: { url: string; widt: number; height: number };
+      default: { url: string; width: number; height: number };
+      high: { url: string; width: number; height: number };
+      medium: { url: string; width: number; height: number };
     };
     title: string;
   };
