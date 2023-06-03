@@ -1,19 +1,21 @@
 'use client';
-import { useRef } from 'react';
+import { FormEvent, useRef } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 
 const Searchbox = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const searchInputRef = useRef();
-  const searchTerm = searchParams.get('q');
+  const searchInputRef = useRef<HTMLInputElement>(null);
+  const searchTerm = searchParams.get('q') || '';
 
-  const onSearchClick = (e) => {
-    if (!searchInputRef.current.value) {
+  const onSearchClick = (e: FormEvent<HTMLFormElement>) => {
+    if (!searchInputRef.current?.value) {
       return;
     }
+
     e.preventDefault();
+
     router.push(`/search?q=${searchInputRef.current.value}`);
   };
 
@@ -26,8 +28,8 @@ const Searchbox = () => {
         className="flex-1 p-2 pl-4 rounded-l-3xl"
         type="text"
         placeholder="搜尋"
-        defaultValue={searchTerm || ''}
-        // ref={searchInputRef}
+        defaultValue={searchTerm}
+        ref={searchInputRef}
       />
       <button
         className="flex justify-center items-center w-16 border-l border-gray-300 p-2 cursor-pointer bg-gray-100 rounded-r-3xl"
