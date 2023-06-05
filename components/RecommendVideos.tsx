@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import useFetchRecommendVideos from '@/hooks/api/useFetchRecommendVideos';
 import useOnScreen from '@/hooks/useOnScreen';
 import Loader from '@/components/ui/Loader';
-import VideoCardV2 from '@/components/ui/VideoCardV2';
+import RecommendVideoCard from '@/components/ui/RecommendVideoCard';
 
 const RecommendVideos = () => {
   const [page, setPage] = useState(1);
@@ -31,7 +31,7 @@ const RecommendVideos = () => {
           const lastVideo = videos.length - 1 === index;
 
           return (
-            <VideoCardV2
+            <RecommendVideoCard
               key={id.videoId}
               id={id.videoId}
               videoThumbnail={snippet.thumbnails.medium.url}
@@ -48,7 +48,7 @@ const RecommendVideos = () => {
       </div>
       <div className="block xl:hidden">
         {videos.map(({ id, snippet, contentDetails, statistics }) => (
-          <VideoCardV2
+          <RecommendVideoCard
             key={id.videoId}
             id={id.videoId}
             videoThumbnail={snippet.thumbnails.medium.url}
