@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 
-import { RawComment, getVideoComments } from '@/services/youtube';
+import { RawCommentThread, getCommentThreads } from '@/services/youtube';
 
 type Comment = {
   id: string;
@@ -12,7 +12,7 @@ type Comment = {
   canReply: boolean;
 };
 
-function transformComments(comments: RawComment[]) {
+function transformComments(comments: RawCommentThread[]) {
   return comments.map(
     ({
       id,
@@ -44,7 +44,7 @@ const useFetchComments = (videoId: string, page: number) => {
       setLoading(true);
 
       try {
-        const commentsResponse = await getVideoComments({
+        const commentsResponse = await getCommentThreads({
           part: 'snippet,replies',
           videoId,
           pageToken: nextPageTokenRef.current,

@@ -61,7 +61,7 @@ const VideoCardV3 = ({
         <div className="overflow-hidden line-clamp-1 whitespace-normal text-xs">
           觀看次數：{transformViews(viewCount)}・{transformTimeStamp(timeStamp)}
         </div>
-        <div className="flex items-center py-1">
+        <div className="flex items-center py-2">
           <Avatar src={channelThumbnail} size="25" round />
           <p className="pl-2 overflow-hidden line-clamp-1 whitespace-normal text-xs">
             {channel}

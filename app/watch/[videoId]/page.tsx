@@ -11,21 +11,20 @@ type VideoPageProps = {
 
 async function fetchVideoDetails(videoId: string) {
   const videos = await getVideos({
-    id: videoId,
     part: 'snippet,contentDetails,statistics',
+    id: videoId,
   });
 
   const video = videos.items[0];
 
   const channels = await getChannels({
-    id: video.snippet.channelId,
     part: 'snippet,statistics',
+    id: video.snippet.channelId,
   });
 
   const channel = channels.items[0];
 
   return {
-    video: video,
     id: video.id,
     title: video.snippet.title,
     viewCount: video.statistics.viewCount,
