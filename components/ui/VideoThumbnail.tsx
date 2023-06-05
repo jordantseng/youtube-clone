@@ -7,6 +7,7 @@ type VideoThumbnailProps = {
   duration: string;
 };
 
+// TODO: Image width and height
 const VideoThumbnail = ({ thumbnail, duration }: VideoThumbnailProps) => {
   return (
     <div className="relative">
@@ -17,7 +18,7 @@ const VideoThumbnail = ({ thumbnail, duration }: VideoThumbnailProps) => {
         height={180}
         alt=""
       />
-      <div className="absolute bottom-2.5 right-2.5 p-1 bg-zinc-900 opacity-80 text-white text-xs rounded-md">
+      <div className="absolute bottom-1 right-2 p-1 bg-zinc-900/90 text-white text-xs font-medium rounded-md">
         {transformDuration(duration)}
       </div>
     </div>

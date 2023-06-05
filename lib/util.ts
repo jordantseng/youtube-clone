@@ -15,7 +15,7 @@ export const transformDuration = (duration: string) => {
     transformedDuration += `${hours}:`;
   }
 
-  transformedDuration += `${minutes.toString().padStart(2, '0')}:${seconds
+  transformedDuration += `${minutes.toString().padStart(1, '0')}:${seconds
     .toString()
     .padStart(2, '0')}`;
 
@@ -23,26 +23,28 @@ export const transformDuration = (duration: string) => {
 };
 
 export const transformTimeStamp = (timestamp: string) => {
-  const start = dayjs(timestamp);
+  const startDate = dayjs(timestamp);
   const now = dayjs();
-  const hourDiff = now.diff(start, 'hour');
+  const duration = {
+    year: now.diff(startDate, 'years'),
+    month: now.diff(startDate, 'month'),
+    day: now.diff(startDate, 'day'),
+    hour: now.diff(startDate, 'hour'),
+  };
 
-  if (hourDiff > 24 * 30 * 12) {
-    const yearDiff = now.diff(start, 'year');
-    return `${yearDiff} 年前`;
+  if (duration.year > 0) {
+    return `${duration.year} 年前`;
   }
 
-  if (hourDiff > 24 * 30) {
-    const monthDiff = now.diff(start, 'month');
-    return `${monthDiff} 月前`;
+  if (duration.month > 0) {
+    return `${duration.month} 月前`;
   }
 
-  if (hourDiff > 24) {
-    const dayDiff = now.diff(start, 'day');
-    return `${dayDiff} 天前`;
+  if (duration.day > 0) {
+    return `${duration.day} 天前`;
   }
 
-  return `${hourDiff || 1} 小時前`;
+  return `${duration.hour || 1} 小時前`;
 };
 
 export const transformViews = (views: string) => {
