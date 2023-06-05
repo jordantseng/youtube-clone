@@ -4,38 +4,38 @@ import Avatar from 'react-avatar';
 import VideoThumbnail from '@/components/ui/VideoThumbnail';
 import VideoInfo from '@/components/ui/VideoInfo';
 
-type VideoCardProps = {
-  videoId: string;
+type PopularVideoCardProps = {
+  id: string;
   title: string;
   viewCount: string;
-  videoTimeStamp: string;
-  videoDuration: string;
+  timeStamp: string;
+  duration: string;
   videoThumbnail: string;
   channel: string;
   channelThumbnail: string;
   getLastVideo?: (element: HTMLDivElement) => void;
 };
 
-const VideoCard = ({
-  videoId,
+const PopularVideoCard = ({
+  id,
   title,
   viewCount,
-  videoTimeStamp,
-  videoDuration,
+  timeStamp,
+  duration,
   videoThumbnail,
   channel,
   channelThumbnail,
   getLastVideo,
-}: VideoCardProps) => {
+}: PopularVideoCardProps) => {
   const router = useRouter();
 
   const handleClick = () => {
-    router.push(`/watch/${videoId}`);
+    router.push(`/watch/${id}`);
   };
 
   return (
     <div className="cursor-pointer" ref={getLastVideo} onClick={handleClick}>
-      <VideoThumbnail thumbnail={videoThumbnail} duration={videoDuration} />
+      <VideoThumbnail thumbnail={videoThumbnail} duration={duration} />
       <div className="flex mt-2">
         <div className="flex items-center">
           <div className="mb-auto mt-2">
@@ -46,7 +46,7 @@ const VideoCard = ({
               title={title}
               channel={channel}
               count={viewCount}
-              timeStamp={videoTimeStamp}
+              timeStamp={timeStamp}
             />
           </div>
         </div>
@@ -55,4 +55,4 @@ const VideoCard = ({
   );
 };
 
-export default VideoCard;
+export default PopularVideoCard;

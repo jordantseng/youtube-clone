@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import useFetchPopularVideos from '@/hooks/api/useFetchPopularVideos';
 import useOnScreen from '@/hooks/useOnScreen';
 import CardSkeleton from '@/components/ui/CardSkeleton';
-import VideoCard from '@/components/ui/VideoCard';
+import PopularVideoCard from '@/components/ui/PopularVideoCard';
 import Loader from '@/components/ui/Loader';
 
 const HomePage = () => {
@@ -32,16 +32,16 @@ const HomePage = () => {
           const lastVideo = videos.length - 1 === index;
 
           return (
-            <VideoCard
+            <PopularVideoCard
               key={video.videoId}
-              videoId={video.videoId}
+              id={video.videoId}
               videoThumbnail={video.videoThumbnail}
               channelThumbnail={video.channelThumbnail}
               title={video.title}
-              videoDuration={video.videoDuration}
+              duration={video.videoDuration}
               channel={video.channel}
               viewCount={video.viewCount}
-              videoTimeStamp={video.videoTimeStamp}
+              timeStamp={video.videoTimeStamp}
               {...(lastVideo && { getLastVideo })}
             />
           );
