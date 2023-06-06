@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 
 import { getSearchVideos, getVideos } from '@/services/youtube';
+import { removeDuplicates } from '@/lib/util';
 
 type RecommendVideo = {
   contentDetails: {
@@ -86,7 +87,7 @@ const useFetchRecommendVideos = (page: number) => {
         }
 
         setVideos((prevVideos) =>
-          page > 1 ? [...prevVideos, ...data] : [...data]
+          removeDuplicates('id.videoId', [...prevVideos, ...data])
         );
       } catch (error) {
         setError(error as Error);

@@ -25,8 +25,8 @@ const VideoDetails = ({
           </div>
         </div>
       </div>
-      {descriptionLines.map((line) => (
-        <div className="leading-normal" key={line}>
+      {descriptionLines.map((line, index) => (
+        <div className="leading-normal" key={index}>
           {line}
         </div>
       ))}

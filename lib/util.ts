@@ -66,3 +66,18 @@ export const transformCounts = (counts: string) => {
     ? `${Math.trunc(countNumber / 10000)} 萬`
     : `${countNumber}`;
 };
+
+export const removeDuplicates = <T>(path: string, items: T[]): T[] => {
+  const map = new Map();
+
+  items.forEach((item) => {
+    const splitedPath = path.split('.');
+    let key: any = item;
+    for (const pathSegment of splitedPath) {
+      key = key[pathSegment];
+    }
+    map.set(key, item);
+  });
+
+  return [...Array.from(map.values())];
+};

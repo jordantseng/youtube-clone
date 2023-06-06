@@ -76,9 +76,7 @@ const useFetchPopularVideos = (page: number) => {
           setHasMore(false);
         }
 
-        setVideos((preVideos) =>
-          page > 1 ? [...preVideos, ...data] : [...data]
-        );
+        setVideos((preVideos) => [...preVideos, ...data]);
       } catch (error) {
         setError(error as Error);
       }

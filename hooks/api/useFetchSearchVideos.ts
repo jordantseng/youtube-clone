@@ -1,6 +1,38 @@
 import { useState, useRef, useEffect } from 'react';
 
 import { getChannels, getSearchVideos, getVideos } from '@/services/youtube';
+import { removeDuplicates } from '@/lib/util';
+
+type Video = {
+  id: { videoId: string };
+  channelDetails: {
+    title: string;
+    thumbnails: {
+      medium: {
+        url: string;
+        height: number;
+        width: number;
+      };
+    };
+  };
+  contentDetails: { duration: string };
+  snippet: {
+    title: string;
+    publishedAt: string;
+    channelId: string;
+    description: string;
+    thumbnails: {
+      medium: {
+        url: string;
+        height: number;
+        width: number;
+      };
+    };
+  };
+  statistics: {
+    viewCount: string;
+  };
+};
 
 async function getSearchVideoResults(query: string, pageToken: string) {
   const searchVideosResponse = await getSearchVideos({
@@ -51,37 +83,6 @@ async function getSearchVideoResults(query: string, pageToken: string) {
   return { data: newVideos, nextPageToken: searchVideosResponse.nextPageToken };
 }
 
-type Video = {
-  id: { videoId: string };
-  channelDetails: {
-    title: string;
-    thumbnails: {
-      medium: {
-        url: string;
-        height: number;
-        width: number;
-      };
-    };
-  };
-  contentDetails: { duration: string };
-  snippet: {
-    title: string;
-    publishedAt: string;
-    channelId: string;
-    description: string;
-    thumbnails: {
-      medium: {
-        url: string;
-        height: number;
-        width: number;
-      };
-    };
-  };
-  statistics: {
-    viewCount: string;
-  };
-};
-
 const useFetchSearchVideos = (page: number, query: string) => {
   const [loading, setLoading] = useState(true);
   const [videos, setVideos] = useState<Video[]>([]);
@@ -108,7 +109,7 @@ const useFetchSearchVideos = (page: number, query: string) => {
         }
 
         setVideos((preVideos) =>
-          page > 1 ? [...preVideos, ...data] : [...data]
+          removeDuplicates('id.videoId', [...preVideos, ...data])
         );
       } catch (error) {
         setError(error as Error);

@@ -62,11 +62,10 @@ const useFetchComments = (videoId: string, page: number) => {
           setHasMore(false);
         }
 
-        setComments((prevComments) =>
-          page > 1
-            ? [...prevComments, ...transformedComments]
-            : [...transformedComments]
-        );
+        setComments((prevComments) => [
+          ...prevComments,
+          ...transformedComments,
+        ]);
       } catch (error) {
         setError(error as Error);
       }
