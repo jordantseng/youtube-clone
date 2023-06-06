@@ -4,7 +4,7 @@ import { useSearchParams } from 'next/navigation';
 
 import useFetchSearchVideos from '@/hooks/api/useFetchSearchVideos';
 import useOnScreen from '@/hooks/useOnScreen';
-import VideoCardV3 from '@/components/ui/VideoCardV3';
+import SearchVideoCard from '@/components/ui/SearchVideoCard';
 import Loader from '@/components/ui/Loader';
 
 const SeachPage = () => {
@@ -28,12 +28,12 @@ const SeachPage = () => {
   };
 
   return (
-    <main className="flex flex-col flex-1 justify-center mt-4 mx-5 lg:mx-32">
+    <main className="mt-4 mx-5">
       {videos.map((video, index) => {
         const lastVideo = videos.length - 1 === index;
 
         return (
-          <VideoCardV3
+          <SearchVideoCard
             key={video.id.videoId}
             id={video.id.videoId}
             title={video.snippet.title}
