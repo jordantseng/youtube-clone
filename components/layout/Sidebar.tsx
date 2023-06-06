@@ -20,7 +20,6 @@ const Sidebar = () => {
           title={item.title}
           href={item.href}
           Icon={item.Icon}
-          // sidebarOpen={sidebarOpen}
         />
       ))}
       <hr className="h-px hidden md:block" />
@@ -29,8 +28,7 @@ const Sidebar = () => {
           key={item.title}
           title={item.title}
           href={item.href}
-          Icon={item.Icon}
-          // sidebarOpen={sidebarOpen}
+          Icon={item.Icon}          
         />
       ))}
     </div>
