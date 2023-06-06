@@ -17,4 +17,5 @@ demo: https://youtube-clone-f0gtdxund-jordantseng.vercel.app/
 #### TODOs
 
 - [ ] Dark / bright mode
+- [ ] i18n
 - [ ] Client fetching data using useSWR
