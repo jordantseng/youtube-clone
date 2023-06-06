@@ -2,9 +2,9 @@ import { useRouter } from 'next/navigation';
 import Avatar from 'react-avatar';
 
 import VideoThumbnail from '@/components/ui/VideoThumbnail';
-import VideoInfo from '@/components/ui/VideoInfo';
+import { transformViews, transformTimeStamp } from '@/lib/util';
 
-type PopularVideoCardProps = {
+type Props = {
   id: string;
   title: string;
   viewCount: string;
@@ -26,28 +26,37 @@ const PopularVideoCard = ({
   channel,
   channelThumbnail,
   getLastVideo,
-}: PopularVideoCardProps) => {
+}: Props) => {
   const router = useRouter();
+  const transformedViews = transformViews(viewCount);
+  const transformedTimeStamp = transformTimeStamp(timeStamp);
 
-  const handleClick = () => {
+  const handleImageClick = () => {
     router.push(`/watch/${id}`);
   };
 
   return (
-    <div className="cursor-pointer" ref={getLastVideo} onClick={handleClick}>
-      <VideoThumbnail thumbnail={videoThumbnail} duration={duration} />
+    <div ref={getLastVideo}>
+      <VideoThumbnail
+        thumbnail={videoThumbnail}
+        duration={duration}
+        onClick={handleImageClick}
+      />
       <div className="flex mt-2">
         <div className="flex items-center">
           <div className="mb-auto mt-2">
             <Avatar src={channelThumbnail} alt="Avatar" size="40" round />
           </div>
           <div className="ml-4">
-            <VideoInfo
-              title={title}
-              channel={channel}
-              count={viewCount}
-              timeStamp={timeStamp}
-            />
+            <h4 className="overflow-hidden line-clamp-2 whitespace-normal text-sm font-medium mb-1">
+              {title}
+            </h4>
+            <p className="overflow-hidden line-clamp-1 whitespace-normal text-xs text-slate-600 mb-1">
+              {channel}
+            </p>
+            <p className="overflow-hidden line-clamp-1 whitespace-normal text-xs text-slate-600">
+              觀看次數：{`${transformedViews} ・ ${transformedTimeStamp}`}
+            </p>
           </div>
         </div>
       </div>
