@@ -6,7 +6,7 @@ import {
 
 import { transformTimeStamp } from '@/lib/util';
 
-type CommentCardProps = {
+type Props = {
   authorImage: string;
   authorName: string;
   publishedAt: string;
@@ -24,7 +24,7 @@ const CommentCard = ({
   likeCount,
   canReply,
   getLastComment,
-}: CommentCardProps) => {
+}: Props) => {
   return (
     <div className="flex m-4" ref={getLastComment}>
       <Avatar src={authorImage} alt="user-avatar" size="40" round />

@@ -1,11 +1,9 @@
 import { useRouter } from 'next/navigation';
 import Avatar from 'react-avatar';
-import Image from 'next/image';
 
 import {
   transformViews,
   transformTimeStamp,
-  transformDuration,
 } from '@/lib/util';
 import VideoThumbnail from '@/components/ui/VideoThumbnail';
 

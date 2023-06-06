@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 import { transformDuration } from '@/lib/util';
 
-type VideoThumbnailProps = {
+type Props = {
   thumbnail: string;
   duration: string;
   onClick: () => void
@@ -13,7 +13,7 @@ const VideoThumbnail = ({
   thumbnail,
   duration,
   onClick,
-}: VideoThumbnailProps) => {
+}: Props) => {
   return (
     <div className="relative cursor-pointer" onClick={() => onClick()}>
       <Image

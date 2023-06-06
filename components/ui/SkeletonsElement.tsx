@@ -1,8 +1,8 @@
-type SkeletonElementProps = {
+type Props = {
   type: string;
 };
 
-const SkeletonElement = ({ type }: SkeletonElementProps) => {
+const SkeletonElement = ({ type }: Props) => {
   const className: { [key: string]: string } = {
     thumbnail: 'w-full h-64 rounded-2xl mb-4',
     avatar: 'w-10 h-10 rounded-full',

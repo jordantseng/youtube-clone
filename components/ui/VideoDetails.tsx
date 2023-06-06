@@ -1,6 +1,6 @@
 import { transformTimeStamp, transformViews } from '@/lib/util';
 
-type VideoDetailsProps = {
+type Props = {
   viewCount: string;
   videoTimeStamp: string;
   videoDescription: string;
@@ -10,7 +10,7 @@ const VideoDetails = ({
   viewCount,
   videoTimeStamp,
   videoDescription,
-}: VideoDetailsProps) => {
+}: Props) => {
   const descriptionLines = videoDescription.split(/\r\n|\r|\n/g);
 
   return (

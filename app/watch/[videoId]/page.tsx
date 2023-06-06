@@ -3,7 +3,7 @@ import RecommendVideos from '@/components/RecommendVideos';
 import Video from '@/components/ui/Video';
 import { getChannels, getVideos } from '@/services/youtube';
 
-type VideoPageProps = {
+type Props = {
   params: {
     videoId: string;
   };
@@ -37,7 +37,7 @@ async function fetchVideoDetails(videoId: string) {
   };
 }
 
-const VideoPage = async ({ params: { videoId } }: VideoPageProps) => {
+const VideoPage = async ({ params: { videoId } }: Props) => {
   const videoDetails = await fetchVideoDetails(videoId);
 
   return (

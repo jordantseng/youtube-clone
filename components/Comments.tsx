@@ -6,9 +6,9 @@ import Loader from '@/components/ui/Loader';
 import useOnScreen from '@/hooks/useOnScreen';
 import useFetchComments from '@/hooks/api/useFetchComments';
 
-type CommentsProps = { videoId: string };
+type Props = { videoId: string };
 
-const Comments = ({ videoId }: CommentsProps) => {
+const Comments = ({ videoId }: Props) => {
   const [page, setPage] = useState(1);
   const { loading, comments, hasMore } = useFetchComments(videoId, page);
   const [lastComment, setLastComment] = useState<HTMLDivElement | null>(null);

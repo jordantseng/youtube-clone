@@ -3,7 +3,7 @@
 import VideoDetails from '@/components/ui/VideoDetails';
 import VideoHeader from '@/components/ui/VideoHeader';
 
-type VideoProps = {
+type Props = {
   id: string;
   title: string;
   viewCount: string;
@@ -25,7 +25,7 @@ const Video = ({
   subscriberCount,
   channel,
   videoDescription,
-}: VideoProps) => {
+}: Props) => {
   return (
     <>
       <div className="relative aspect-video">

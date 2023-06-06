@@ -9,7 +9,7 @@ import Avatar from 'react-avatar';
 import { transformCounts } from '@/lib/util';
 import IconButton from '@/components/ui/IconButton';
 
-type VideoHeaderProps = {
+type Props = {
   channelThumbnail: { url: string; width: number; height: number };
   channel: string;
   subscriberCount: string;
@@ -21,7 +21,7 @@ const VideoHeader = ({
   channel,
   subscriberCount,
   likeCount,
-}: VideoHeaderProps) => {
+}: Props) => {
   return (
     <div className="flex mb-2 flex-wrap">
       <Avatar src={channelThumbnail.url} alt="channel-avatar" size="40" round />
