@@ -15,9 +15,10 @@ export const transformDuration = (duration: string) => {
     transformedDuration += `${hours}:`;
   }
 
-  transformedDuration += `${minutes.toString().padStart(1, '0')}:${seconds
-    .toString()
-    .padStart(2, '0')}`;
+  const transformedMinutes = minutes.toString().padStart(2, '0');
+  const transformedSeconds = seconds.toString().padStart(2, '0');
+
+  transformedDuration += `${transformedMinutes}:${transformedSeconds}`;
 
   return transformedDuration;
 };
