@@ -41,7 +41,7 @@ const VideoPage = async ({ params: { videoId } }: VideoPageProps) => {
   const videoDetails = await fetchVideoDetails(videoId);
 
   return (
-    <main className="flex px-20 flex-wrap">
+    <main className="flex px-12 flex-wrap">
       <div className="flex-1 mb-2">
         <Video
           id={videoDetails.id}

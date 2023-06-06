@@ -50,7 +50,7 @@ const SearchVideoCard = ({
         />
       </div>
       <div
-        className="cursor-pointer flex-[3] ml-2 mt-0 break-all"
+        className="flex-[3] ml-2 mt-0 break-all cursor-pointer"
         onClick={handleImageClick}
       >
         <h4 className="overflow-hidden line-clamp-1 whitespace-normal text-sm font-medium pb-1">

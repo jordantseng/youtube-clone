@@ -3,7 +3,7 @@ import { useRouter } from 'next/navigation';
 import { transformViews, transformTimeStamp } from '@/lib/util';
 import VideoThumbnail from './VideoThumbnail';
 
-type VideoCardV2Props = {
+type Props = {
   id: string;
   videoThumbnail: string;
   title: string;
@@ -23,26 +23,26 @@ const RecommendVideoCard = ({
   viewCount,
   timeStamp,
   getLastVideo,
-}: VideoCardV2Props) => {
+}: Props) => {
   const router = useRouter();
 
-  const handleClick = (id: string) => {
+  const handleImageClick = () => {
     router.push(`/watch/${id}`);
   };
 
   return (
-    <div
-      className="flex mb-2 cursor-pointer"
-      ref={getLastVideo}
-      onClick={() => handleClick(id)}
-    >
-      <VideoThumbnail thumbnail={videoThumbnail} duration={duration} />
-      <div className="flex flex-1 flex-col ml-2">
-        <h4 className="overflow-hidden line-clamp-2 text-sm font-medium mb-1">
+    <div className="flex mb-2" ref={getLastVideo}>
+      <VideoThumbnail
+        thumbnail={videoThumbnail}
+        duration={duration}
+        onClick={handleImageClick}
+      />
+      <div className="flex flex-1 flex-col ml-2 cursor-pointer">
+        <h4 className="overflow-hidden line-clamp-2 whitespace-normal text-sm font-medium mb-1">
           {title}
         </h4>
-        <p className="overflow-hidden line-clamp-1 text-xs mb-1">{channel}</p>
-        <p className="overflow-hidden line-clamp-1 text-xs">
+        <p className="overflow-hidden line-clamp-1 whitespace-normal text-xs text-slate-600 mb-1">{channel}</p>
+        <p className="overflow-hidden line-clamp-1  whitespace-normal text-xs text-slate-600">
           觀看次數：{transformViews(viewCount)}・{transformTimeStamp(timeStamp)}
         </p>
       </div>
