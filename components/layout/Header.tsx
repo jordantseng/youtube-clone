@@ -8,8 +8,6 @@ import Searchbox from '@/components/ui/Searchbox';
 import Menu from '@/components/layout/Menu';
 import IconButton from '@/components/ui/IconButton';
 
-
-
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
