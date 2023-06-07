@@ -6,6 +6,9 @@ import { Bars3Icon, EllipsisVerticalIcon } from '@heroicons/react/24/outline';
 
 import Searchbox from '@/components/ui/Searchbox';
 import Menu from '@/components/layout/Menu';
+import IconButton from '@/components/ui/IconButton';
+
+
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -29,9 +32,9 @@ const Header = () => {
       <div className="w-2/5 hidden sm:block">
         <Searchbox />
       </div>
-      <div className="cursor-pointer" onClick={() => setMenuOpen(!menuOpen)}>
+      <IconButton onClick={() => setMenuOpen(!menuOpen)}>
         <EllipsisVerticalIcon className="w-6 h-6" />
-      </div>
+      </IconButton>
       {menuOpen && <Menu />}
     </header>
   );

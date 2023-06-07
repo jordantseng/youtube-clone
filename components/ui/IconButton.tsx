@@ -1,13 +1,16 @@
 type Props = {
-  Icon: any;
-  title: string;
-}
+  children: React.ReactNode;
+  onClick: () => void;
+};
 
-const IconButton = ({ Icon, title }: Props) => (
-  <div className="bg-slate-100 flex items-center justify-center rounded-3xl px-3 cursor-pointer h-10">
-    <Icon className="h-6 w-6 mr-1" />
-    <span>{title}</span>
-  </div>
-);
+const IconButton = ({ children, onClick }: Props) => {
+  return (
+    <a className="active:bg-slate-100 p-2 rounded-full">
+      <span className="cursor-pointer rounded-full" onClick={onClick}>
+        {children}
+      </span>
+    </a>
+  );
+};
 
 export default IconButton;
