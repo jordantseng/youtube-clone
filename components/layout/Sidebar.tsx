@@ -1,6 +1,4 @@
-import { HomeIcon } from '@heroicons/react/24/outline';
-import { FilmIcon } from '@heroicons/react/24/outline';
-import { ClockIcon } from '@heroicons/react/24/outline';
+import { HomeIcon, FilmIcon, ClockIcon } from '@heroicons/react/24/outline';
 
 import SidebarItem from '@/components/layout/SidebarItem';
 
@@ -14,22 +12,16 @@ const bottomSidebarItems = [
 const Sidebar = () => {
   return (
     <div className="pl-5 h-full fixed hidden sm:block md:w-56">
-      {topSidebarItems.map((item) => (
-        <SidebarItem
-          key={item.title}
-          title={item.title}
-          href={item.href}
-          Icon={item.Icon}
-        />
+      {topSidebarItems.map(({ title, href, Icon }) => (
+        <SidebarItem key={title} title={title} href={href}>
+          <Icon className="w-6 h-6" />
+        </SidebarItem>
       ))}
       <hr className="h-px hidden md:block" />
-      {bottomSidebarItems.map((item) => (
-        <SidebarItem
-          key={item.title}
-          title={item.title}
-          href={item.href}
-          Icon={item.Icon}          
-        />
+      {bottomSidebarItems.map(({ title, href, Icon }) => (
+        <SidebarItem key={title} title={title} href={href}>
+          <Icon className="w-6 h-6" />
+        </SidebarItem>
       ))}
     </div>
   );
