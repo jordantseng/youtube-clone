@@ -1,10 +1,15 @@
+'use client';
+import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Bars3Icon } from '@heroicons/react/24/outline';
+import { Bars3Icon, EllipsisVerticalIcon } from '@heroicons/react/24/outline';
 
 import Searchbox from '@/components/ui/Searchbox';
+import Menu from '@/components/layout/Menu';
 
 const Header = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
+
   return (
     <header className="flex justify-between items-center p-5 sticky z-50 top-0 bg-white">
       <div className="flex items-center">
@@ -24,7 +29,10 @@ const Header = () => {
       <div className="w-2/5 hidden sm:block">
         <Searchbox />
       </div>
-      <div></div>
+      <div className="cursor-pointer" onClick={() => setMenuOpen(!menuOpen)}>
+        <EllipsisVerticalIcon className="w-6 h-6" />
+      </div>
+      {menuOpen && <Menu />}
     </header>
   );
 };
