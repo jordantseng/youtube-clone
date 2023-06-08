@@ -1,10 +1,7 @@
-import { Inter } from 'next/font/google';
-
 import Header from '@/components/layout/Header';
 import Sidebar from '@/components/layout/Sidebar';
+import ThemeProvider from '@/app/ThemeProvider';
 import './globals.css';
-
-const inter = Inter({ subsets: ['latin'] });
 
 export const metadata = {
   title: 'Create Next App',
@@ -18,13 +15,15 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <Header />
-        <div className="flex">
-          <Sidebar />
-          <div className="flex-1 sm:ml-20 md:ml-56">{children}</div>
-        </div>
-      </body>
+      <ThemeProvider>
+        <body>
+          <Header />
+          <div className="flex">
+            <Sidebar />
+            <div className="flex-1 sm:ml-20 md:ml-56">{children}</div>
+          </div>
+        </body>
+      </ThemeProvider>
     </html>
   );
 }

@@ -10,7 +10,7 @@ const SkeletonElement = ({ type }: Props) => {
     text: 'h-5 rounded-sm mb-3',
   };
 
-  return <div className={`bg-gray-300 ${className[type]}`} />;
+  return <div className={`${className[type]} bg-zinc-200 dark:bg-zinc-800`} />;
 };
 
 export default SkeletonElement;

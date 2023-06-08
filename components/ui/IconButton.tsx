@@ -6,7 +6,9 @@ type Props = {
 
 const IconButton = ({ children, className, onClick }: Props) => {
   return (
-    <a className={`active:bg-slate-100 p-2 rounded-full ${className}`}>
+    <a
+      className={`p-2 rounded-full active:bg-zinc-100 dark:active:bg-zinc-700 ${className}`}
+    >
       <span className="cursor-pointer rounded-full" onClick={onClick}>
         {children}
       </span>

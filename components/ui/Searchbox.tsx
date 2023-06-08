@@ -21,7 +21,7 @@ const Searchbox = () => {
 
   return (
     <form
-      className="flex items-center w-full border border-gray-300 rounded-3xl"
+      className="flex items-center w-full border rounded-3xl"
       onSubmit={onSearchClick}
     >
       <input
@@ -32,7 +32,7 @@ const Searchbox = () => {
         ref={searchInputRef}
       />
       <button
-        className="flex justify-center items-center w-16 border-l border-gray-300 p-2 cursor-pointer bg-gray-100 rounded-r-3xl"
+        className="flex justify-center items-center w-16 border-l p-2 cursor-pointer rounded-r-3xl"
         type="submit"
       >
         <MagnifyingGlassIcon className="w-6 h-6" />

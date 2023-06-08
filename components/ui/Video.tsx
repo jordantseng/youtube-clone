@@ -37,10 +37,8 @@ const Video = ({
           allowFullScreen
         />
       </div>
-      <h3 className="mb-2 p-5 pl-0 pb-2 w-full border-b border-gray-300">
-        {title}
-      </h3>
-      <div className="pt-5 px-0 pb-2 w-full">
+      <h3 className="mb-2 p-5 pl-0 pb-2 w-full">{title}</h3>
+      <div className="pb-2 w-full">
         <VideoHeader
           channelThumbnail={channelThumbnail}
           channel={channel}

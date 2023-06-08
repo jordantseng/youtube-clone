@@ -26,7 +26,7 @@ const HomePage = () => {
   };
 
   return (
-    <>
+    <> 
       <div className="grid gap-4 grid-cols-1 p-6 md:grid-cols-[repeat(auto-fill,minmax(350px,1fr))] md:p-4">
         {videos.map((video, index) => {
           const lastVideo = videos.length - 1 === index;

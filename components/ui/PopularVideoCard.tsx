@@ -51,10 +51,10 @@ const PopularVideoCard = ({
             <h4 className="overflow-hidden line-clamp-2 whitespace-normal text-sm font-medium mb-1">
               {title}
             </h4>
-            <p className="overflow-hidden line-clamp-1 whitespace-normal text-xs text-slate-600 mb-1">
+            <p className="overflow-hidden line-clamp-1 whitespace-normal text-xs mb-1">
               {channel}
             </p>
-            <p className="overflow-hidden line-clamp-1 whitespace-normal text-xs text-slate-600">
+            <p className="overflow-hidden line-clamp-1 whitespace-normal text-xs">
               觀看次數：{`${transformedViews} ・ ${transformedTimeStamp}`}
             </p>
           </div>

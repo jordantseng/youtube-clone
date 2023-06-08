@@ -14,7 +14,7 @@ const VideoDetails = ({
   const descriptionLines = videoDescription.split(/\r\n|\r|\n/g);
 
   return (
-    <div className="rounded-2xl bg-slate-100 p-4 text-sm">
+    <div className="rounded-2xl bg-zinc-200 dark:bg-zinc-800 p-4 text-sm">
       <div className="mb-2 flex flex-wrap justify-between">
         <div className="flex items-center gap-2">
           <div className="font-medium">
