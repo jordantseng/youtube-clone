@@ -1,10 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
+import { useTheme } from 'next-themes';
 import {
   MoonIcon,
   ChevronRightIcon,
   LanguageIcon,
 } from '@heroicons/react/24/outline';
-import { useTheme } from 'next-themes';
 
 import SubMenu from '@/components/layout/SubMenu';
 

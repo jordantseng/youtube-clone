@@ -11,19 +11,19 @@ const bottomSidebarItems = [
 
 const Sidebar = () => {
   return (
-    <div className="pl-5 h-full fixed hidden sm:block md:w-56">
+    <ul className="fixed hidden bg-zinc-100 pl-5 pt-4 sm:block md:w-56 dark:bg-zinc-900">
       {topSidebarItems.map(({ title, href, Icon }) => (
         <SidebarItem key={title} title={title} href={href}>
           <Icon className="w-6 h-6" />
         </SidebarItem>
       ))}
-      <hr className="h-px hidden md:block" />
+      <hr className="hidden my-3 md:block" />
       {bottomSidebarItems.map(({ title, href, Icon }) => (
         <SidebarItem key={title} title={title} href={href}>
           <Icon className="w-6 h-6" />
         </SidebarItem>
       ))}
-    </div>
+    </ul>
   );
 };
 

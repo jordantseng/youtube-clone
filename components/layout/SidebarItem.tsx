@@ -8,12 +8,12 @@ type Props = {
 
 const SidebarItem = ({ href, title, children }: Props) => {
   return (
-    <div className="p-2 hover:bg-slate-100 hover:rounded-lg">
+    <li className="p-2 list-none hover:bg-zinc-200 hover:dark:bg-zinc-700 hover:rounded-lg">
       <Link href={href} className="flex items-center flex-col md:flex-row">
         <span className="mb-2 md:mr-4 md:mb-0">{children}</span>
         <p className="text-xs">{title}</p>
       </Link>
-    </div>
+    </li>
   );
 };
 
