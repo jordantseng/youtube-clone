@@ -31,7 +31,7 @@ const PopularVideoCard = ({
   const transformedViews = transformViews(viewCount);
   const transformedTimeStamp = transformTimeStamp(timeStamp);
 
-  const handleImageClick = () => {
+  const handleNavigate = () => {
     router.push(`/watch/${id}`);
   };
 
@@ -40,9 +40,9 @@ const PopularVideoCard = ({
       <VideoThumbnail
         thumbnail={videoThumbnail}
         duration={duration}
-        onClick={handleImageClick}
+        onClick={handleNavigate}
       />
-      <div className="flex mt-2">
+      <div className="flex mt-2 cursor-pointer" onClick={handleNavigate}>
         <div className="flex items-center">
           <div className="mb-auto mt-2">
             <Avatar src={channelThumbnail} alt="Avatar" size="40" round />

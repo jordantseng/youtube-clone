@@ -26,7 +26,7 @@ const RecommendVideoCard = ({
 }: Props) => {
   const router = useRouter();
 
-  const handleImageClick = () => {
+  const handleNavigate = () => {
     router.push(`/watch/${id}`);
   };
 
@@ -35,13 +35,18 @@ const RecommendVideoCard = ({
       <VideoThumbnail
         thumbnail={videoThumbnail}
         duration={duration}
-        onClick={handleImageClick}
+        onClick={handleNavigate}
       />
-      <div className="flex flex-1 flex-col ml-2 cursor-pointer">
+      <div
+        className="flex flex-1 flex-col ml-2 cursor-pointer"
+        onClick={handleNavigate}
+      >
         <h4 className="overflow-hidden line-clamp-2 whitespace-normal text-sm font-medium mb-1">
           {title}
         </h4>
-        <p className="overflow-hidden line-clamp-1 whitespace-normal text-xs text-slate-600 mb-1">{channel}</p>
+        <p className="overflow-hidden line-clamp-1 whitespace-normal text-xs text-slate-600 mb-1">
+          {channel}
+        </p>
         <p className="overflow-hidden line-clamp-1  whitespace-normal text-xs text-slate-600">
           觀看次數：{transformViews(viewCount)}・{transformTimeStamp(timeStamp)}
         </p>
