@@ -12,10 +12,10 @@ demo: https://youtube-clone-f0gtdxund-jordantseng.vercel.app/
 
 - Infinite scrolling using intersection observer
 - Image optimization using Image component provided by Next.js
+- Dark / light mode
 - RWD
 
 #### TODOs
 
-- [ ] Dark / bright mode
 - [ ] i18n
 - [ ] Client fetching data using useSWR
