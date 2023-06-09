@@ -3,8 +3,8 @@ import { useEffect, useState } from 'react';
 
 import useFetchRecommendVideos from '@/hooks/api/useFetchRecommendVideos';
 import useOnScreen from '@/hooks/useOnScreen';
-import Loader from '@/components/ui/Loader';
-import RecommendVideoCard from '@/components/ui/RecommendVideoCard';
+import Loader from '@/components/Loader';
+import RecommendVideoCard from '@/app/watch/[videoId]/components/RecommendVideoCard';
 
 const RecommendVideos = () => {
   const [page, setPage] = useState(1);

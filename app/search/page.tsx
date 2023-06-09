@@ -4,8 +4,8 @@ import { useSearchParams } from 'next/navigation';
 
 import useFetchSearchVideos from '@/hooks/api/useFetchSearchVideos';
 import useOnScreen from '@/hooks/useOnScreen';
-import SearchVideoCard from '@/components/ui/SearchVideoCard';
-import Loader from '@/components/ui/Loader';
+import SearchVideoCard from '@/app/search/components/SearchVideoCard';
+import Loader from '@/components/Loader';
 
 const SeachPage = () => {
   const searchParams = useSearchParams();

@@ -1,7 +1,7 @@
 'use client';
 
-import VideoDetails from '@/components/ui/VideoDetails';
-import VideoHeader from '@/components/ui/VideoHeader';
+import VideoDetails from '@/components/VideoDetails';
+import VideoHeader from '@/components/VideoHeader';
 
 type Props = {
   id: string;

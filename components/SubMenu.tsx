@@ -1,6 +1,6 @@
 import { ArrowSmallLeftIcon, CheckIcon } from '@heroicons/react/24/outline';
 
-import IconButton from '@/components/ui/IconButton';
+import IconButton from '@/components/IconButton';
 
 type Props = {
   title: string;

@@ -1,6 +1,6 @@
-import Comments from '@/components/Comments';
-import RecommendVideos from '@/components/RecommendVideos';
-import Video from '@/components/ui/Video';
+import Comments from '@/app/watch/[videoId]/components/Comments';
+import RecommendVideos from '@/app/watch/[videoId]/components/RecommendVideos';
+import Video from '@/components/Video';
 import { getChannels, getVideos } from '@/services/youtube';
 
 type Props = {

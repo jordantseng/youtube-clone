@@ -1,6 +1,6 @@
 import { HomeIcon, FilmIcon, ClockIcon } from '@heroicons/react/24/outline';
 
-import SidebarItem from '@/components/layout/SidebarItem';
+import SidebarItem from '@/components/SidebarItem';
 
 const topSidebarItems = [{ title: '首頁', href: '/', Icon: HomeIcon }];
 

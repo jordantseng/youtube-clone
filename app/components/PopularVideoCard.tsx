@@ -1,7 +1,7 @@
 import { useRouter } from 'next/navigation';
 import Avatar from 'react-avatar';
 
-import VideoThumbnail from '@/components/ui/VideoThumbnail';
+import VideoThumbnail from '@/components/VideoThumbnail';
 import { transformViews, transformTimeStamp } from '@/lib/util';
 
 type Props = {

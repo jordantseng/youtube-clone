@@ -1,8 +1,8 @@
 'use client';
 import { useState, useEffect } from 'react';
 
-import CommentCard from '@/components/ui/CommentCard';
-import Loader from '@/components/ui/Loader';
+import CommentCard from '@/app/watch/[videoId]/components/CommentCard';
+import Loader from '@/components/Loader';
 import useOnScreen from '@/hooks/useOnScreen';
 import useFetchComments from '@/hooks/api/useFetchComments';
 

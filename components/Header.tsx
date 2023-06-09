@@ -2,8 +2,8 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Bars3Icon } from '@heroicons/react/24/outline';
 
-import Searchbox from '@/components/ui/Searchbox';
-import Menu from '@/components/layout/Menu';
+import Searchbox from '@/components/Searchbox';
+import Menu from '@/components/Menu';
 
 const Header = () => {
   return (

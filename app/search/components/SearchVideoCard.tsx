@@ -5,7 +5,7 @@ import {
   transformViews,
   transformTimeStamp,
 } from '@/lib/util';
-import VideoThumbnail from '@/components/ui/VideoThumbnail';
+import VideoThumbnail from '@/components/VideoThumbnail';
 
 type Props = {
   id: string;

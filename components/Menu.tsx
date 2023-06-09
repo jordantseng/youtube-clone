@@ -8,8 +8,8 @@ import {
   EllipsisVerticalIcon,
 } from '@heroicons/react/24/outline';
 
-import SubMenu from '@/components/layout/SubMenu';
-import IconButton from '../ui/IconButton';
+import SubMenu from '@/components/SubMenu';
+import IconButton from '@/components/IconButton';
 
 const Menu = () => {
   const [menuOpen, setMenuOpen] = useState(false);
