@@ -1,7 +1,7 @@
 import Comments from '@/app/watch/[videoId]/components/Comments';
 import RecommendVideos from '@/app/watch/[videoId]/components/RecommendVideos';
 import Video from '@/components/Video';
-import { getChannels, getVideos } from '@/services/youtube';
+import { getVideo } from '@/services/youtube';
 
 type Props = {
   params: {
@@ -9,36 +9,8 @@ type Props = {
   };
 };
 
-async function fetchVideoDetails(videoId: string) {
-  const videos = await getVideos({
-    part: 'snippet,contentDetails,statistics',
-    id: videoId,
-  });
-
-  const video = videos.items[0];
-
-  const channels = await getChannels({
-    part: 'snippet,statistics',
-    id: video.snippet.channelId,
-  });
-
-  const channel = channels.items[0];
-
-  return {
-    id: video.id,
-    title: video.snippet.title,
-    viewCount: video.statistics.viewCount,
-    videoTimeStamp: video.snippet.publishedAt,
-    likeCount: video.statistics.likeCount,
-    channel: channel.snippet.title,
-    subscriberCount: channel.statistics.subscriberCount,
-    channelThumbnail: channel.snippet.thumbnails.default,
-    videoDescription: video.snippet.description,
-  };
-}
-
 const VideoPage = async ({ params: { videoId } }: Props) => {
-  const videoDetails = await fetchVideoDetails(videoId);
+  const videoDetails = await getVideo(videoId);
 
   return (
     <main className="flex px-12 flex-wrap">
