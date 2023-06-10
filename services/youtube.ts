@@ -159,11 +159,9 @@ export const getPopularVideos = async (url: string) => {
 
   const channelIds = videos.map(({ snippet }) => snippet.channelId).join();
 
-  const { data: channelsResponse } = await fetchChannels(
-    `channels?part=snippet&id=${channelIds}`
-  );
-
-  const channels = channelsResponse.items;
+  const {
+    data: { items: channels },
+  } = await fetchChannels(`channels?part=snippet&id=${channelIds}`);
 
   const data = videos.map((video) => {
     const channelDetails = channels.find(
@@ -186,7 +184,6 @@ export const getPopularVideos = async (url: string) => {
 };
 
 export const getSearchVideos = async (url: string) => {
-  console.log(url);
   const {
     data: { items: searchVideos, nextPageToken },
   } = await fetchSearch(url);
