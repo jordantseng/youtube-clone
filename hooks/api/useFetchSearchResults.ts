@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 
-import { getChannels, getSearchVideos, getVideos } from '@/services/youtube';
+import { getSearchResults } from '@/services/youtube';
 import { removeDuplicates } from '@/lib/util';
 
 type Video = {
@@ -34,56 +34,7 @@ type Video = {
   };
 };
 
-async function getSearchVideoResults(query: string, pageToken: string) {
-  const searchVideosResponse = await getSearchVideos({
-    q: query,
-    part: 'snippet',
-    type: 'video',
-    eventType: 'completed',
-    regionCode: 'TW',
-    maxResults: 25,
-    pageToken,
-  });
-
-  const searchVideos = searchVideosResponse.items;
-
-  const videoIds = searchVideos.map((video) => video.id.videoId).join();
-
-  const channelIds = searchVideos
-    .map((video) => video.snippet.channelId)
-    .join();
-
-  const { items: videos } = await getVideos({
-    part: 'contentDetails,statistics',
-    id: videoIds,
-  });
-
-  const { items: channels } = await getChannels({
-    part: 'snippet',
-    id: channelIds,
-  });
-
-  const newVideos = searchVideos.map((searchedVideo) => {
-    const { contentDetails, statistics } = videos.find(
-      (video) => searchedVideo.id.videoId === video.id
-    )!;
-
-    const { snippet: channelDetails } = channels.find(
-      (channel) => searchedVideo.snippet.channelId === channel.id
-    )!;
-
-    return {
-      ...searchedVideo,
-      contentDetails,
-      statistics,
-      channelDetails,
-    };
-  });
-
-  return { data: newVideos, nextPageToken: searchVideosResponse.nextPageToken };
-}
-
-const useFetchSearchVideos = (page: number, query: string) => {
+const useFetchSearchResults = (page: number, query: string) => {
   const [loading, setLoading] = useState(true);
   const [videos, setVideos] = useState<Video[]>([]);
   const [error, setError] = useState<Error | null>(null);
@@ -95,7 +46,7 @@ const useFetchSearchVideos = (page: number, query: string) => {
       setLoading(true);
 
       try {
-        const { data, nextPageToken } = await getSearchVideoResults(
+        const { data, nextPageToken } = await getSearchResults(
           query,
           nextPageTokenRef.current
         );
@@ -129,4 +80,4 @@ const useFetchSearchVideos = (page: number, query: string) => {
   };
 };
 
-export default useFetchSearchVideos;
+export default useFetchSearchResults;

@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 
-import useFetchSearchVideos from '@/hooks/api/useFetchSearchVideos';
+import useFetchSearchResults from '@/hooks/api/useFetchSearchResults';
 import useOnScreen from '@/hooks/useOnScreen';
 import SearchVideoCard from '@/app/search/components/SearchVideoCard';
 import Loader from '@/components/Loader';
@@ -11,7 +11,7 @@ const SeachPage = () => {
   const searchParams = useSearchParams();
   const query = searchParams.get('q') || '';
   const [page, setPage] = useState(1);
-  const { loading, videos, hasMore } = useFetchSearchVideos(page, query);
+  const { loading, videos, hasMore } = useFetchSearchResults(page, query);
   const [lastVideo, setLastVideo] = useState<HTMLDivElement | null>(null);
   const visible = useOnScreen(lastVideo);
 
