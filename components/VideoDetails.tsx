@@ -1,4 +1,4 @@
-import { transformTimeStamp, transformViews } from '@/lib/util';
+import { transformTimeStamp, transformViews } from '@/lib/helpers';
 
 type Props = {
   viewCount: string;

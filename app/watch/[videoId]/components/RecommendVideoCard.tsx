@@ -1,6 +1,6 @@
 import { useRouter } from 'next/navigation';
 
-import { transformViews, transformTimeStamp } from '@/lib/util';
+import { transformViews, transformTimeStamp } from '@/lib/helpers';
 import VideoThumbnail from '../../../../components/VideoThumbnail';
 
 type Props = {

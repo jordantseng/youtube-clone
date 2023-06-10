@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-import { transformDuration } from '@/lib/util';
+import { transformDuration } from '@/lib/helpers';
 
 type Props = {
   thumbnail: string;

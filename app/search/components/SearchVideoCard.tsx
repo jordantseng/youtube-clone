@@ -4,7 +4,7 @@ import Avatar from 'react-avatar';
 import {
   transformViews,
   transformTimeStamp,
-} from '@/lib/util';
+} from '@/lib/helpers';
 import VideoThumbnail from '@/components/VideoThumbnail';
 
 type Props = {

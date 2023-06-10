@@ -4,7 +4,7 @@ import {
   HandThumbDownIcon,
 } from '@heroicons/react/24/outline';
 
-import { transformTimeStamp } from '@/lib/util';
+import { transformTimeStamp } from '@/lib/helpers';
 
 type Props = {
   authorImage: string;

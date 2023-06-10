@@ -6,7 +6,7 @@ import {
 } from '@heroicons/react/24/outline';
 import Avatar from 'react-avatar';
 
-import { transformCounts } from '@/lib/util';
+import { transformCounts } from '@/lib/helpers';
 
 type Props = {
   channelThumbnail: { url: string; width: number; height: number };
