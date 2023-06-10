@@ -43,8 +43,7 @@ const getKey = (
 ) => {
   const url = `${youtubeApiURL}/search?part=snippet&type=video&maxResults=25`;
 
-  // TODO: reached the end
-  if (previousPageData && !previousPageData.data) return null;
+  if (previousPageData && !previousPageData.nextPageToken) return null;
 
   if (pageIndex === 0) {
     return url;

@@ -77,7 +77,7 @@ type RawSearchVideo = {
   };
 };
 
-export type RawCommentThread = {
+type RawCommentThread = {
   id: string;
   snippet: {
     canReply: boolean;
@@ -150,20 +150,32 @@ const getChannels = async (params: ChannelsParams) => {
   return data;
 };
 
-const getSearchVideos = async (params: SearchParams) => {
-  const { data } = await youtubeApi.get<SearchVideosRes>('/search', {
-    params,
-  });
+export const getCommentThreads = async (url: string) => {
+  const { data: commentThreadsResponse } =
+    await youtubeApi.get<commentThreadsRes>(url);
 
-  return data;
-};
+  const commentThreads = commentThreadsResponse.items.map(
+    ({
+      id,
+      snippet: {
+        canReply,
+        topLevelComment: { snippet },
+      },
+    }) => ({
+      id,
+      authorImage: snippet.authorProfileImageUrl,
+      authorName: snippet.authorDisplayName,
+      publishedAt: snippet.publishedAt,
+      content: snippet.textDisplay,
+      likeCount: snippet.likeCount,
+      canReply,
+    })
+  );
 
-export const getCommentThreads = async (params: CommentThreadParams) => {
-  const { data } = await youtubeApi.get<commentThreadsRes>('/commentThreads', {
-    params,
-  });
-
-  return data;
+  return {
+    data: commentThreads,
+    nextPageToken: commentThreadsResponse.nextPageToken,
+  };
 };
 
 export const getPopularVideos = async (url: string) => {
@@ -203,16 +215,10 @@ export const getPopularVideos = async (url: string) => {
   };
 };
 
-export const getSearchResults = async (query: string, pageToken: string) => {
-  const searchVideosResponse = await getSearchVideos({
-    q: query,
-    part: 'snippet',
-    type: 'video',
-    eventType: 'completed',
-    regionCode: 'TW',
-    maxResults: 25,
-    pageToken,
-  });
+export const getSearchVideos = async (url: string) => {
+  const { data: searchVideosResponse } = await youtubeApi.get<SearchVideosRes>(
+    url
+  );
 
   const searchVideos = searchVideosResponse.items;
 

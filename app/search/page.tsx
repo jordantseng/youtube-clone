@@ -2,26 +2,95 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 
-import useFetchSearchResults from '@/hooks/api/useFetchSearchResults';
 import useOnScreen from '@/hooks/useOnScreen';
 import SearchVideoCard from '@/app/search/components/SearchVideoCard';
 import Loader from '@/components/Loader';
+import { getSearchVideos, youtubeApiURL } from '@/services/youtube';
+import useSWRInfinite from 'swr/infinite';
+import { removeDuplicates } from '@/lib/util';
+
+const getKey =
+  (query: string) =>
+  (
+    pageIndex: number,
+    previousPageData: {
+      data: {
+        contentDetails: {
+          duration: string;
+        };
+        statistics: {
+          viewCount: string;
+          likeCount: string;
+        };
+        channelDetails: {
+          title: string;
+          thumbnails: {
+            default: {
+              url: string;
+              width: number;
+              height: number;
+            };
+            medium: {
+              url: string;
+              width: number;
+              height: number;
+            };
+          };
+        };
+        id: {
+          videoId: string;
+        };
+        snippet: {
+          channelId: string;
+          channelTitle: string;
+          description: string;
+          publishTime: string;
+          publishedAt: string;
+          thumbnails: {
+            medium: {
+              url: string;
+              width: number;
+              height: number;
+            };
+          };
+          title: string;
+        };
+      }[];
+      nextPageToken: string;
+    }
+  ) => {
+    const url = `${youtubeApiURL}/search?q=${query}&part=snippet&type=video&regionCode=TW&maxResults=25`;
+
+    if (previousPageData && !previousPageData.nextPageToken) return null;
+
+    if (pageIndex === 0) {
+      return url;
+    }
+
+    return `${url}&pageToken=${previousPageData.nextPageToken}`;
+  };
 
 const SeachPage = () => {
   const searchParams = useSearchParams();
   const query = searchParams.get('q') || '';
-  const [page, setPage] = useState(1);
-  const { loading, videos, hasMore } = useFetchSearchResults(page, query);
+  const { data, setSize, isLoading, isValidating } = useSWRInfinite(
+    getKey(query),
+    getSearchVideos
+  );
   const [lastVideo, setLastVideo] = useState<HTMLDivElement | null>(null);
   const visible = useOnScreen(lastVideo);
+  const videos = removeDuplicates(
+    'id.videoId',
+    data?.flatMap(({ data }) => data)
+  );
 
   useEffect(() => {
-    if (!visible || !hasMore) {
+    if (!visible) {
       return;
     }
 
-    setPage((page) => page + 1);
-  }, [visible, hasMore]);
+    setSize((size) => size + 1);
+  }, [visible, setSize]);
 
   const getLastVideo = (element: HTMLDivElement) => {
     setLastVideo(element);
@@ -29,7 +98,7 @@ const SeachPage = () => {
 
   return (
     <main className="mt-4 mx-5">
-      {videos.map((video, index) => {
+      {videos?.map((video, index) => {
         const lastVideo = videos.length - 1 === index;
 
         return (
@@ -48,7 +117,7 @@ const SeachPage = () => {
           />
         );
       })}
-      {loading && <Loader />}
+      {(isLoading || isValidating) && <Loader />}
     </main>
   );
 };

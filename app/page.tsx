@@ -26,8 +26,7 @@ const getKey = (
 ) => {
   const url = `${youtubeApiURL}/videos?part=contentDetails,snippet,statistics&chart=mostPopular&regionCode=TW&maxResults=25`;
  
-  // TODO: reached the end
-  if (previousPageData && !previousPageData.data) return null;
+  if (previousPageData && !previousPageData.nextPageToken) return null;
 
   if (pageIndex === 0) {
     return url;

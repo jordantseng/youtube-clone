@@ -1,26 +1,57 @@
 'use client';
 import { useState, useEffect } from 'react';
+import useSWRInfinite from 'swr/infinite';
 
 import CommentCard from '@/app/watch/[videoId]/components/CommentCard';
 import Loader from '@/components/Loader';
 import useOnScreen from '@/hooks/useOnScreen';
-import useFetchComments from '@/hooks/api/useFetchComments';
+import { getCommentThreads, youtubeApiURL } from '@/services/youtube';
 
-type Props = { videoId: string };
+const getKey =
+  (videoId: string) =>
+  (
+    pageIndex: number,
+    previousPageData: {
+      data: {
+        id: string;
+        authorImage: string;
+        authorName: string;
+        publishedAt: string;
+        content: string;
+        likeCount: number;
+        canReply: boolean;
+      }[];
+      nextPageToken: string;
+    }
+  ) => {
+    const url = `${youtubeApiURL}/commentThreads?part=snippet,replies&videoId=${videoId}`;
 
-const Comments = ({ videoId }: Props) => {
-  const [page, setPage] = useState(1);
-  const { loading, comments, hasMore } = useFetchComments(videoId, page);
+    if (previousPageData && !previousPageData.nextPageToken) return null;
+
+    if (pageIndex === 0) {
+      return url;
+    }
+
+    return `${url}&pageToken=${previousPageData.nextPageToken}`;
+  };
+
+const Comments = ({ videoId }: { videoId: string }) => {
   const [lastComment, setLastComment] = useState<HTMLDivElement | null>(null);
   const visible = useOnScreen(lastComment);
+  const { data, setSize, isLoading, isValidating } = useSWRInfinite(
+    getKey(videoId),
+    getCommentThreads
+  );
+
+  const comments = data?.flatMap(({ data }) => data);
 
   useEffect(() => {
-    if (!visible || !hasMore) {
+    if (!visible) {
       return;
     }
 
-    setPage((page) => page + 1);
-  }, [visible, hasMore]);
+    setSize((size) => size + 1);
+  }, [visible, setSize]);
 
   const getLastComment = (element: HTMLDivElement) => {
     setLastComment(element);
@@ -28,7 +59,7 @@ const Comments = ({ videoId }: Props) => {
 
   return (
     <>
-      {comments.map((comment, index) => {
+      {comments?.map((comment, index) => {
         const lastComment = comments.length - 1 === index;
 
         return (
@@ -44,7 +75,7 @@ const Comments = ({ videoId }: Props) => {
           />
         );
       })}
-      {loading && <Loader />}
+      {(isLoading || isValidating) && <Loader />}
     </>
   );
 };
