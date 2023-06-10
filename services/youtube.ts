@@ -1,33 +1,5 @@
 import axios from 'axios';
 
-type VideosParams = {
-  part: string;
-  id?: string;
-  chart?: string;
-  regionCode?: string;
-  maxResults?: number;
-  pageToken?: string;
-};
-
-type ChannelsParams = { part: string; id?: string };
-
-type SearchParams = {
-  part: string;
-  q?: string;
-  type?: string;
-  pageToken?: string;
-  maxResults?: number;
-  eventType?: string;
-  regionCode?: string;
-};
-
-type CommentThreadParams = {
-  part: string;
-  videoId?: string;
-  pageToken?: string;
-  maxResults?: number;
-};
-
 type RawVideo = {
   id: string;
   contentDetails: {
@@ -125,36 +97,21 @@ type commentThreadsRes = {
   items: RawCommentThread[];
 };
 
-export const youtubeApiURL = 'https://www.googleapis.com/youtube/v3';
+const youtubeApiBase = 'https://www.googleapis.com/youtube/v3';
 
 const youtubeApi = axios.create({
-  baseURL: youtubeApiURL,
+  baseURL: youtubeApiBase,
   params: {
     key: process.env.NEXT_PUBLIC_YOUTUBE_KEY,
   },
 });
 
-const getVideos = async (params: VideosParams) => {
-  const { data } = await youtubeApi.get<VideosRes>('/videos', {
-    params,
-  });
-
-  return data;
-};
-
-const getChannels = async (params: ChannelsParams) => {
-  const { data } = await youtubeApi.get<ChannelsRes>('/channels', {
-    params,
-  });
-
-  return data;
-};
-
 export const getCommentThreads = async (url: string) => {
-  const { data: commentThreadsResponse } =
-    await youtubeApi.get<commentThreadsRes>(url);
+  const {
+    data: { items: commentThreads, nextPageToken },
+  } = await youtubeApi.get<commentThreadsRes>(`${youtubeApiBase}/${url}`);
 
-  const commentThreads = commentThreadsResponse.items.map(
+  const newCommentThreads = commentThreads.map(
     ({
       id,
       snippet: {
@@ -173,22 +130,21 @@ export const getCommentThreads = async (url: string) => {
   );
 
   return {
-    data: commentThreads,
-    nextPageToken: commentThreadsResponse.nextPageToken,
+    data: newCommentThreads,
+    nextPageToken,
   };
 };
 
 export const getPopularVideos = async (url: string) => {
-  const { data: videosResponse } = await youtubeApi.get<VideosRes>(url);
-
-  const videos = videosResponse.items;
+  const {
+    data: { items: videos, nextPageToken },
+  } = await youtubeApi.get<VideosRes>(`${youtubeApiBase}/${url}`);
 
   const channelIds = videos.map(({ snippet }) => snippet.channelId).join();
 
-  const channelsResponse = await getChannels({
-    part: 'snippet',
-    id: channelIds,
-  });
+  const { data: channelsResponse } = await youtubeApi.get<VideosRes>(
+    `${youtubeApiBase}/channels?part=snippet&id=${channelIds}`
+  );
 
   const channels = channelsResponse.items;
 
@@ -209,18 +165,13 @@ export const getPopularVideos = async (url: string) => {
     };
   });
 
-  return {
-    data,
-    nextPageToken: videosResponse.nextPageToken,
-  };
+  return { data, nextPageToken };
 };
 
 export const getSearchVideos = async (url: string) => {
-  const { data: searchVideosResponse } = await youtubeApi.get<SearchVideosRes>(
-    url
-  );
-
-  const searchVideos = searchVideosResponse.items;
+  const {
+    data: { items: searchVideos, nextPageToken },
+  } = await youtubeApi.get<SearchVideosRes>(`${youtubeApiBase}/${url}`);
 
   const videoIds = searchVideos.map((video) => video.id.videoId).join();
 
@@ -228,15 +179,17 @@ export const getSearchVideos = async (url: string) => {
     .map((video) => video.snippet.channelId)
     .join();
 
-  const { items: videos } = await getVideos({
-    part: 'contentDetails,statistics',
-    id: videoIds,
-  });
+  const {
+    data: { items: videos },
+  } = await youtubeApi.get<VideosRes>(
+    `${youtubeApiBase}/videos?part=contentDetails,statistics&id=${videoIds}`
+  );
 
-  const { items: channels } = await getChannels({
-    part: 'snippet',
-    id: channelIds,
-  });
+  const {
+    data: { items: channels },
+  } = await youtubeApi.get<ChannelsRes>(
+    `${youtubeApiBase}/channels?part=snippet&id=${channelIds}`
+  );
 
   const newVideos = searchVideos.map((searchedVideo) => {
     const { contentDetails, statistics } = videos.find(
@@ -255,23 +208,21 @@ export const getSearchVideos = async (url: string) => {
     };
   });
 
-  return { data: newVideos, nextPageToken: searchVideosResponse.nextPageToken };
+  return { data: newVideos, nextPageToken };
 };
 
-export const getVideo = async (videoId: string) => {
-  const videos = await getVideos({
-    part: 'snippet,contentDetails,statistics',
-    id: videoId,
-  });
+export const getVideo = async (url: string) => {
+  const { data } = await youtubeApi.get<VideosRes>(`${youtubeApiBase}/${url}`);
 
-  const video = videos.items[0];
+  const video = data.items[0];
 
-  const channels = await getChannels({
-    part: 'snippet,statistics',
-    id: video.snippet.channelId,
-  });
+  const {
+    data: { items: channels },
+  } = await youtubeApi.get<ChannelsRes>(
+    `${youtubeApiBase}/channels?part=snippet,statistics&id=${video.snippet.channelId}`
+  );
 
-  const channel = channels.items[0];
+  const channel = channels[0];
 
   return {
     id: video.id,
@@ -288,17 +239,16 @@ export const getVideo = async (videoId: string) => {
 
 export const getRecommendVideos = async (url: string) => {
   const { data: searchVideosResponse } = await youtubeApi.get<SearchVideosRes>(
-    url
+    `${youtubeApiBase}/${url}`
   );
 
   const searchVideos = searchVideosResponse.items;
 
   const videoIds = searchVideos.map(({ id: { videoId } }) => videoId).join();
 
-  const videosResponse = await getVideos({
-    part: 'contentDetails,statistics',
-    id: videoIds,
-  });
+  const { data: videosResponse } = await youtubeApi.get<VideosRes>(
+    `${youtubeApiBase}/videos?part=contentDetails,statistics&id=${videoIds}`
+  );
 
   const videos = videosResponse.items;
 

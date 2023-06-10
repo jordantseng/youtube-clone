@@ -5,28 +5,28 @@ import useSWRInfinite from 'swr/infinite';
 import CommentCard from '@/app/watch/[videoId]/components/CommentCard';
 import Loader from '@/components/Loader';
 import useOnScreen from '@/hooks/useOnScreen';
-import { getCommentThreads, youtubeApiURL } from '@/services/youtube';
+import { getCommentThreads } from '@/services/youtube';
+
+type Comment = {
+  data: {
+    id: string;
+    authorImage: string;
+    authorName: string;
+    publishedAt: string;
+    content: string;
+    likeCount: number;
+    canReply: boolean;
+  }[];
+  nextPageToken: string;
+};
 
 const getKey =
-  (videoId: string) =>
-  (
-    pageIndex: number,
-    previousPageData: {
-      data: {
-        id: string;
-        authorImage: string;
-        authorName: string;
-        publishedAt: string;
-        content: string;
-        likeCount: number;
-        canReply: boolean;
-      }[];
-      nextPageToken: string;
-    }
-  ) => {
-    const url = `${youtubeApiURL}/commentThreads?part=snippet,replies&videoId=${videoId}`;
+  (videoId: string) => (pageIndex: number, previousPageData: Comment) => {
+    const url = `commentThreads?part=snippet,replies&videoId=${videoId}`;
 
-    if (previousPageData && !previousPageData.nextPageToken) return null;
+    if (previousPageData && !previousPageData.nextPageToken) {
+      return null;
+    }
 
     if (pageIndex === 0) {
       return url;

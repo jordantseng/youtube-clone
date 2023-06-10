@@ -10,7 +10,9 @@ type Props = {
 };
 
 const VideoPage = async ({ params: { videoId } }: Props) => {
-  const videoDetails = await getVideo(videoId);
+  const videoDetails = await getVideo(
+    `videos?part=snippet,contentDetails,statistics&id=${videoId}`
+  );
 
   return (
     <main className="flex px-12 flex-wrap">

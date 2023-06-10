@@ -6,44 +6,45 @@ import useOnScreen from '@/hooks/useOnScreen';
 import Loader from '@/components/Loader';
 import RecommendVideoCard from '@/app/watch/[videoId]/components/RecommendVideoCard';
 import { removeDuplicates } from '@/lib/util';
-import { getRecommendVideos, youtubeApiURL } from '@/services/youtube';
+import { getRecommendVideos } from '@/services/youtube';
 
-const getKey = (
-  pageIndex: number,
-  previousPageData: {
-    data: {
-      contentDetails: {
-        duration: string;
-      };
-      statistics: {
-        viewCount: string;
-        likeCount: string;
-      };
-      id: {
-        videoId: string;
-      };
-      snippet: {
-        channelId: string;
-        channelTitle: string;
-        description: string;
-        publishTime: string;
-        publishedAt: string;
-        thumbnails: {
-          medium: {
-            url: string;
-            width: number;
-            height: number;
-          };
+type Video = {
+  data: {
+    contentDetails: {
+      duration: string;
+    };
+    statistics: {
+      viewCount: string;
+      likeCount: string;
+    };
+    id: {
+      videoId: string;
+    };
+    snippet: {
+      channelId: string;
+      channelTitle: string;
+      description: string;
+      publishTime: string;
+      publishedAt: string;
+      thumbnails: {
+        medium: {
+          url: string;
+          width: number;
+          height: number;
         };
-        title: string;
       };
-    }[];
-    nextPageToken: string;
-  }
-) => {
-  const url = `${youtubeApiURL}/search?part=snippet&type=video&maxResults=25`;
+      title: string;
+    };
+  }[];
+  nextPageToken: string;
+};
 
-  if (previousPageData && !previousPageData.nextPageToken) return null;
+const getKey = (pageIndex: number, previousPageData: Video) => {
+  const url = `search?part=snippet&type=video&maxResults=25`;
+
+  if (previousPageData && !previousPageData.nextPageToken) {
+    return null;
+  }
 
   if (pageIndex === 0) {
     return url;

@@ -6,27 +6,29 @@ import useOnScreen from '@/hooks/useOnScreen';
 import CardSkeleton from '@/components/CardSkeleton';
 import PopularVideoCard from '@/app/components/PopularVideoCard';
 import Loader from '@/components/Loader';
-import { getPopularVideos, youtubeApiURL } from '@/services/youtube';
+import { getPopularVideos } from '@/services/youtube';
 
-const getKey = (
-  pageIndex: number,
-  previousPageData: {
-    data: {
-      videoId: string;
-      videoThumbnail: string;
-      videoDuration: string;
-      videoTimeStamp: string;
-      title: string;
-      viewCount: string;
-      channelThumbnail: string;
-      channel: string;
-    }[];
-    nextPageToken: string;
+type Video = {
+  data: {
+    videoId: string;
+    videoThumbnail: string;
+    videoDuration: string;
+    videoTimeStamp: string;
+    title: string;
+    viewCount: string;
+    channelThumbnail: string;
+    channel: string;
+  }[];
+  nextPageToken: string;
+};
+
+const getKey = (pageIndex: number, previousPageData: Video) => {
+  const url =
+    'videos?part=contentDetails,snippet,statistics&chart=mostPopular&regionCode=TW&maxResults=25';
+
+  if (previousPageData && !previousPageData.nextPageToken) {
+    return null;
   }
-) => {
-  const url = `${youtubeApiURL}/videos?part=contentDetails,snippet,statistics&chart=mostPopular&regionCode=TW&maxResults=25`;
- 
-  if (previousPageData && !previousPageData.nextPageToken) return null;
 
   if (pageIndex === 0) {
     return url;
