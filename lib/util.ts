@@ -67,7 +67,7 @@ export const transformCounts = (counts: string) => {
     : `${countNumber}`;
 };
 
-export const removeDuplicates = <T>(path: string, items: T[]): T[] => {
+export const removeDuplicates = <T>(path: string, items: T[] = []): T[] => {
   const map = new Map();
 
   items.forEach((item) => {

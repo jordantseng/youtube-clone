@@ -280,13 +280,10 @@ export const getVideo = async (videoId: string) => {
   };
 };
 
-export const getRecommendVideos = async (pageToken: string) => {
-  const searchVideosResponse = await getSearchVideos({
-    part: 'snippet',
-    maxResults: 25,
-    type: 'video',
-    pageToken,
-  });
+export const getRecommendVideos = async (url: string) => {
+  const { data: searchVideosResponse } = await youtubeApi.get<SearchVideosRes>(
+    url
+  );
 
   const searchVideos = searchVideosResponse.items;
 

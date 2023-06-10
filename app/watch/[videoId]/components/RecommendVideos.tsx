@@ -1,24 +1,79 @@
 'use client';
 import { useEffect, useState } from 'react';
+import useSWRInfinite from 'swr/infinite';
 
-import useFetchRecommendVideos from '@/hooks/api/useFetchRecommendVideos';
 import useOnScreen from '@/hooks/useOnScreen';
 import Loader from '@/components/Loader';
 import RecommendVideoCard from '@/app/watch/[videoId]/components/RecommendVideoCard';
+import { removeDuplicates } from '@/lib/util';
+import { getRecommendVideos, youtubeApiURL } from '@/services/youtube';
+
+const getKey = (
+  pageIndex: number,
+  previousPageData: {
+    data: {
+      contentDetails: {
+        duration: string;
+      };
+      statistics: {
+        viewCount: string;
+        likeCount: string;
+      };
+      id: {
+        videoId: string;
+      };
+      snippet: {
+        channelId: string;
+        channelTitle: string;
+        description: string;
+        publishTime: string;
+        publishedAt: string;
+        thumbnails: {
+          medium: {
+            url: string;
+            width: number;
+            height: number;
+          };
+        };
+        title: string;
+      };
+    }[];
+    nextPageToken: string;
+  }
+) => {
+  const url = `${youtubeApiURL}/search?part=snippet&type=video&maxResults=25`;
+
+  // TODO: reached the end
+  if (previousPageData && !previousPageData.data) return null;
+
+  if (pageIndex === 0) {
+    return url;
+  }
+
+  return `${url}&pageToken=${previousPageData.nextPageToken}`;
+};
 
 const RecommendVideos = () => {
-  const [page, setPage] = useState(1);
-  const { loading, videos, hasMore } = useFetchRecommendVideos(page);
   const [lastVideo, setLastVideo] = useState<HTMLDivElement | null>(null);
   const visible = useOnScreen(lastVideo);
 
+  const { data, setSize, isLoading, isValidating } = useSWRInfinite(
+    getKey,
+    getRecommendVideos
+  );
+
+  const videos = removeDuplicates(
+    'id.videoId',
+    data?.flatMap(({ data }) => data)
+  );
+
   useEffect(() => {
-    if (!visible || !hasMore) {
+    if (!visible) {
       return;
     }
 
-    setPage((page) => page + 1);
-  }, [visible, hasMore]);
+    setSize((size) => size + 1);
+  }, [visible, setSize]);
 
   const getLastVideo = (element: HTMLDivElement) => {
     setLastVideo(element);
@@ -27,7 +82,7 @@ const RecommendVideos = () => {
   return (
     <>
       <div className="hidden xl:block">
-        {videos.map(({ id, snippet, contentDetails, statistics }, index) => {
+        {videos?.map(({ id, snippet, contentDetails, statistics }, index) => {
           const lastVideo = videos.length - 1 === index;
 
           return (
@@ -44,10 +99,10 @@ const RecommendVideos = () => {
             />
           );
         })}
-        {loading && <Loader />}
+        {(isLoading || isValidating) && <Loader />}
       </div>
       <div className="block xl:hidden">
-        {videos.map(({ id, snippet, contentDetails, statistics }) => (
+        {videos?.map(({ id, snippet, contentDetails, statistics }) => (
           <RecommendVideoCard
             key={id.videoId}
             id={id.videoId}
@@ -59,10 +114,10 @@ const RecommendVideos = () => {
             timeStamp={snippet.publishedAt}
           />
         ))}
-        {loading && <Loader />}
+        {(isLoading || isValidating) && <Loader />}
         <button
           className="w-full border border-slate-300 rounded-3xl py-2 text-blue-700 font-medium text-sm hover:bg-blue-200 my-2"
-          onClick={() => setPage(page + 1)}
+          onClick={() => setSize((size) => size + 1)}
         >
           顯示完整資訊
         </button>
