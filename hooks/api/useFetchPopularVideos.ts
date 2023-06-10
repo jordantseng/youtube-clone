@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { getVideos, getChannels } from '@/services/youtube';
+import { getPopularVideos } from '@/services/youtube';
 
 type Video = {
   videoId: string;
@@ -10,46 +10,6 @@ type Video = {
   viewCount: string;
   channelThumbnail: string;
   channel: string;
-};
-
-const getPopularVideos = async (pageToken: string) => {
-  const videosResponse = await getVideos({
-    part: 'contentDetails,snippet,statistics',
-    chart: 'mostPopular',
-    regionCode: 'TW',
-    maxResults: 25,
-    pageToken,
-  });
-
-  const videos = videosResponse.items;
-
-  const channelIds = videos.map(({ snippet }) => snippet.channelId).join();
-
-  const channelsResponse = await getChannels({
-    part: 'snippet',
-    id: channelIds,
-  });
-
-  const channels = channelsResponse.items;
-
-  const data = videos.map((video) => {
-    const channelDetails = channels.find(
-      (channel) => video.snippet.channelId === channel.id
-    );
-
-    return {
-      videoId: video.id,
-      videoThumbnail: video.snippet.thumbnails.medium.url,
-      videoDuration: video.contentDetails.duration,
-      videoTimeStamp: video.snippet.publishedAt,
-      title: video.snippet.title,
-      viewCount: video.statistics.viewCount,
-      channelThumbnail: channelDetails?.snippet.thumbnails.default.url ?? '',
-      channel: channelDetails?.snippet.title ?? '',
-    };
-  });
-
-  return { data, nextPageToken: videosResponse.nextPageToken };
 };
 
 const useFetchPopularVideos = (page: number) => {

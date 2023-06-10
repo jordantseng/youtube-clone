@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 
-import { getSearchVideos, getVideos } from '@/services/youtube';
+import { getRecommendVideos } from '@/services/youtube';
 import { removeDuplicates } from '@/lib/util';
 
 type RecommendVideo = {
@@ -25,40 +25,6 @@ type RecommendVideo = {
     };
     title: string;
   };
-};
-
-const getRecommendVideos = async (pageToken: string) => {
-  const searchVideosResponse = await getSearchVideos({
-    part: 'snippet',
-    maxResults: 25,
-    type: 'video',
-    pageToken,
-  });
-
-  const searchVideos = searchVideosResponse.items;
-
-  const videoIds = searchVideos.map(({ id: { videoId } }) => videoId).join();
-
-  const videosResponse = await getVideos({
-    part: 'contentDetails,statistics',
-    id: videoIds,
-  });
-
-  const videos = videosResponse.items;
-
-  const newVideos = videos.map((video) => {
-    const recommendVideoData = searchVideos.find(
-      ({ id }) => id.videoId === video.id
-    );
-
-    return {
-      ...recommendVideoData!,
-      contentDetails: video.contentDetails,
-      statistics: video.statistics,
-    };
-  });
-
-  return { data: newVideos, nextPageToken: searchVideosResponse.nextPageToken };
 };
 
 const useFetchRecommendVideos = (page: number) => {
