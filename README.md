@@ -7,15 +7,14 @@ demo: https://youtube-clone-f0gtdxund-jordantseng.vercel.app/
 - TypeScript
 - Next.js 13.4
 - Tailwind CSS
+- useSWR
 
 ## Features
 
-- Infinite scrolling using intersection observer
-- Image optimization using Image component provided by Next.js
+- Infinite scrolling
 - Dark / light mode
 - RWD
 
 #### TODOs
 
 - [ ] i18n
-- [ ] Client fetching data using useSWR
