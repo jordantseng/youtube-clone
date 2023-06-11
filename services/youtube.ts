@@ -16,6 +16,7 @@ type RawVideo = {
     description: string;
     thumbnails: {
       default: { url: string; width: number; height: number };
+      maxres: { url: string; width: number; height: number };
       medium: { url: string; width: number; height: number };
     };
   };
@@ -160,7 +161,7 @@ export const getPopularVideos = async (url: string) => {
 
     return {
       videoId: video.id,
-      videoThumbnail: video.snippet.thumbnails.medium.url,
+      videoThumbnail: video.snippet.thumbnails.maxres.url,
       videoDuration: video.contentDetails.duration,
       videoTimeStamp: video.snippet.publishedAt,
       title: video.snippet.title,
