@@ -197,20 +197,25 @@ export const getSearchVideos = async (url: string) => {
     `${youtubeApiBase}/channels?part=snippet&id=${channelIds}`
   );
 
-  const newVideos = searchVideos.map((searchedVideo) => {
+  const newVideos = searchVideos.map((searchVideo) => {
     const { contentDetails, statistics } = videos.find(
-      (video) => searchedVideo.id.videoId === video.id
+      (video) => searchVideo.id.videoId === video.id
     )!;
 
     const { snippet: channelDetails } = channels.find(
-      (channel) => searchedVideo.snippet.channelId === channel.id
+      (channel) => searchVideo.snippet.channelId === channel.id
     )!;
 
     return {
-      ...searchedVideo,
-      contentDetails,
-      statistics,
-      channelDetails,
+      videoId: searchVideo.id.videoId,
+      title: searchVideo.snippet.title,
+      viewCount: statistics.viewCount,
+      timeStamp: searchVideo.snippet.publishedAt,
+      duration: contentDetails.duration,
+      videoThumbnail: searchVideo.snippet.thumbnails.medium.url,
+      channel: channelDetails.title,
+      channelThumbnail: channelDetails.thumbnails.medium.url,
+      description: searchVideo.snippet.description,
     };
   });
 

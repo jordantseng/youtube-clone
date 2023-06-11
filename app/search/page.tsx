@@ -80,7 +80,7 @@ const SeachPage = () => {
   const [lastVideo, setLastVideo] = useState<HTMLDivElement | null>(null);
   const visible = useOnScreen(lastVideo);
   const videos = removeDuplicates(
-    'id.videoId',
+    'videoId',
     data?.flatMap(({ data }) => data)
   );
 
@@ -103,16 +103,16 @@ const SeachPage = () => {
 
         return (
           <SearchVideoCard
-            key={video.id.videoId}
-            id={video.id.videoId}
-            title={video.snippet.title}
-            viewCount={video.statistics.viewCount}
-            timeStamp={video.snippet.publishedAt}
-            duration={video.contentDetails.duration}
-            videoThumbnail={video.snippet.thumbnails.medium.url}
-            channel={video.channelDetails.title}
-            channelThumbnail={video.channelDetails.thumbnails.medium.url}
-            description={video.snippet.description}
+            key={video.videoId}
+            id={video.videoId}
+            title={video.title}
+            viewCount={video.viewCount}
+            timeStamp={video.timeStamp}
+            duration={video.duration}
+            videoThumbnail={video.videoThumbnail}
+            channel={video.channel}
+            channelThumbnail={video.channelThumbnail}
+            description={video.description}
             {...(lastVideo && { getLastVideo })}
           />
         );
