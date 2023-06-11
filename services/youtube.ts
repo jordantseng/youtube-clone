@@ -107,18 +107,6 @@ const youtubeApi = axios.create({
   },
 });
 
-const fetchCommentThreads = async (url: string) => {
-  return youtubeApi.get<CommentThreadsRes>(`${youtubeApiBase}/${url}`);
-};
-
-const fetchVideos = async (url: string) => {
-  return await youtubeApi.get<VideosRes>(`${youtubeApiBase}/${url}`);
-};
-
-const fetchChannels = async (url: string) => {
-  return youtubeApi.get<ChannelsRes>(`${youtubeApiBase}/${url}`);
-};
-
 const fetchSearch = async (url: string) => {
   return youtubeApi.get<SearchVideosRes>(`${youtubeApiBase}/${url}`);
 };
@@ -126,7 +114,7 @@ const fetchSearch = async (url: string) => {
 export const getCommentThreads = async (url: string) => {
   const {
     data: { items: commentThreads, nextPageToken },
-  } = await fetchCommentThreads(url);
+  } = await youtubeApi.get<CommentThreadsRes>(`${youtubeApiBase}/${url}`);
 
   const newCommentThreads = commentThreads.map(
     ({
@@ -155,13 +143,15 @@ export const getCommentThreads = async (url: string) => {
 export const getPopularVideos = async (url: string) => {
   const {
     data: { items: videos, nextPageToken },
-  } = await fetchVideos(url);
+  } = await youtubeApi.get<VideosRes>(`${youtubeApiBase}/${url}`);
 
   const channelIds = videos.map(({ snippet }) => snippet.channelId).join();
 
   const {
     data: { items: channels },
-  } = await fetchChannels(`channels?part=snippet&id=${channelIds}`);
+  } = await youtubeApi.get<ChannelsRes>(
+    `${youtubeApiBase}/channels?part=snippet&id=${channelIds}`
+  );
 
   const data = videos.map((video) => {
     const channelDetails = channels.find(
@@ -186,7 +176,7 @@ export const getPopularVideos = async (url: string) => {
 export const getSearchVideos = async (url: string) => {
   const {
     data: { items: searchVideos, nextPageToken },
-  } = await fetchSearch(url);
+  } = await youtubeApi.get<SearchVideosRes>(`${youtubeApiBase}/${url}`);
 
   const videoIds = searchVideos.map((video) => video.id.videoId).join();
 
@@ -196,11 +186,15 @@ export const getSearchVideos = async (url: string) => {
 
   const {
     data: { items: videos },
-  } = await fetchVideos(`videos?part=contentDetails,statistics&id=${videoIds}`);
+  } = await youtubeApi.get<VideosRes>(
+    `${youtubeApiBase}/videos?part=contentDetails,statistics&id=${videoIds}`
+  );
 
   const {
     data: { items: channels },
-  } = await fetchChannels(`channels?part=snippet&id=${channelIds}`);
+  } = await youtubeApi.get<ChannelsRes>(
+    `${youtubeApiBase}/channels?part=snippet&id=${channelIds}`
+  );
 
   const newVideos = searchVideos.map((searchedVideo) => {
     const { contentDetails, statistics } = videos.find(
@@ -223,14 +217,14 @@ export const getSearchVideos = async (url: string) => {
 };
 
 export const getVideo = async (url: string) => {
-  const { data } = await fetchVideos(url);
+  const { data } = await youtubeApi.get<VideosRes>(`${youtubeApiBase}/${url}`);
 
   const video = data.items[0];
 
   const {
     data: { items: channels },
-  } = await fetchChannels(
-    `channels?part=snippet,statistics&id=${video.snippet.channelId}`
+  } = await youtubeApi.get<ChannelsRes>(
+    `${youtubeApiBase}/channels?part=snippet,statistics&id=${video.snippet.channelId}`
   );
 
   const channel = channels[0];
@@ -251,13 +245,15 @@ export const getVideo = async (url: string) => {
 export const getRecommendVideos = async (url: string) => {
   const {
     data: { items: searchVideos, nextPageToken },
-  } = await fetchSearch(url);
+  } = await youtubeApi.get<SearchVideosRes>(`${youtubeApiBase}/${url}`);
 
   const videoIds = searchVideos.map(({ id: { videoId } }) => videoId).join();
 
   const {
     data: { items: videos },
-  } = await fetchVideos(`videos?part=contentDetails,statistics&id=${videoIds}`);
+  } = await youtubeApi.get<VideosRes>(
+    `${youtubeApiBase}/videos?part=contentDetails,statistics&id=${videoIds}`
+  );
 
   const newVideos = videos.map((video) => {
     const recommendVideoData = searchVideos.find(
