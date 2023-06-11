@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import { useState, useEffect, useRef } from 'react';
 import { useTheme } from 'next-themes';
 import {
@@ -35,16 +35,12 @@ const Menu = () => {
     setSelectedItem(selected);
   };
 
-  if (!theme) {
-    return null;
-  }
-
   return (
     <div ref={menuRef}>
       <IconButton onClick={() => setMenuOpen(!menuOpen)}>
         <EllipsisVerticalIcon className="w-6 h-6" />
       </IconButton>
-      {menuOpen && (
+      {menuOpen && theme && (
         <div className="z-50 fixed right-5 top-20 w-80">
           {selectedItem === '' && (
             <ul className="rounded-lg py-3">
@@ -53,7 +49,7 @@ const Menu = () => {
                 onClick={handleClick('appearance')}
               >
                 <MoonIcon className="w-5 h-5 mr-2" />
-                <p className="mr-auto text-sm">Appearance: Device Theme</p>
+                <p className="mr-auto text-sm">外觀</p>
                 <ChevronRightIcon className="w-5 h-5" />
               </li>
               <li
@@ -61,18 +57,18 @@ const Menu = () => {
                 onClick={handleClick('language')}
               >
                 <LanguageIcon className="w-5 h-5 mr-2" />
-                <p className="mr-auto text-sm">Language: English</p>
+                <p className="mr-auto text-sm">語言</p>
                 <ChevronRightIcon className="w-5 h-5" />
               </li>
             </ul>
           )}
           {selectedItem === 'appearance' && (
             <SubMenu
-              title="Appearance"
+              title="外觀"
               items={[
-                { title: 'Light Mode', value: 'light' },
-                { title: 'Dark Mode', value: 'dark' },
-                { title: 'Use device theme', value: 'system' },
+                { title: '淺色主題', value: 'light' },
+                { title: '深色主題', value: 'dark' },
+                { title: '使用裝置主題', value: 'system' },
               ]}
               value={theme}
               onPrevious={handleClick('')}
@@ -81,7 +77,7 @@ const Menu = () => {
           )}
           {selectedItem === 'language' && (
             <SubMenu
-              title="Choose your language"
+              title="選擇語言"
               items={[
                 { title: '中文(繁體)', value: 'chinese' },
                 { title: 'English(US)', value: 'english' },

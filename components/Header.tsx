@@ -9,9 +9,7 @@ const Header = () => {
   return (
     <header className="flex justify-between items-center p-5 sticky z-50 top-0">
       <div className="flex items-center">
-        <div>
-          <Bars3Icon className="w-6 h-6" />
-        </div>
+        <Bars3Icon className="w-6 h-6" />
         <Link href="/">
           <YoutubeIcon />
         </Link>
