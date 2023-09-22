@@ -44,7 +44,6 @@ const HomePage = () => {
     getKey,
     getPopularVideos
   );
-  const videos = data?.flatMap(({ data }) => data);
 
   useEffect(() => {
     if (!visible) {
@@ -58,9 +57,11 @@ const HomePage = () => {
     setLastVideo(element);
   };
 
+  const videos = data?.flatMap(({ data }) => data);
+
   return (
     <>
-      <div className="grid gap-4 grid-cols-1 p-6 md:grid-cols-[repeat(auto-fill,minmax(350px,1fr))] md:p-4">
+      <div className="grid grid-cols-1 gap-4 p-6 md:grid-cols-[repeat(auto-fill,minmax(350px,1fr))] md:p-4">
         {videos?.map((video, index) => {
           const lastVideo = videos.length - 1 === index;
 

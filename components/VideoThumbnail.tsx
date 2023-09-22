@@ -5,10 +5,10 @@ import { transformDuration } from '@/lib/helpers';
 type Props = {
   thumbnail: string;
   duration: string;
-  onClick: () => void
+  onClick: () => void;
 };
 
-// TODO: Image width and height
+// TODO: srcset
 const VideoThumbnail = ({
   thumbnail,
   duration,
@@ -21,9 +21,11 @@ const VideoThumbnail = ({
         src={thumbnail}
         width={320}
         height={180}
+        // loader
+        sizes=""
         alt=""
       />
-      <div className="absolute bottom-2 right-2 p-1 bg-zinc-900/90 text-white text-xs font-medium rounded-md">
+      <div className="absolute bottom-2 right-2 rounded-md bg-zinc-900/90 p-1 text-xs font-medium text-white">
         {transformDuration(duration)}
       </div>
     </div>

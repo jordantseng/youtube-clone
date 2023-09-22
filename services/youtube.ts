@@ -142,36 +142,41 @@ export const getCommentThreads = async (url: string) => {
 };
 
 export const getPopularVideos = async (url: string) => {
-  const {
-    data: { items: videos, nextPageToken },
-  } = await youtubeApi.get<VideosRes>(`${youtubeApiBase}/${url}`);
+  try {
+    const {
+      data: { items: videos, nextPageToken },
+    } = await youtubeApi.get<VideosRes>(`${youtubeApiBase}/${url}`);
 
-  const channelIds = videos.map(({ snippet }) => snippet.channelId).join();
+    const channelIds = videos.map(({ snippet }) => snippet.channelId).join();
 
-  const {
-    data: { items: channels },
-  } = await youtubeApi.get<ChannelsRes>(
-    `${youtubeApiBase}/channels?part=snippet&id=${channelIds}`
-  );
-
-  const data = videos.map((video) => {
-    const channelDetails = channels.find(
-      (channel) => video.snippet.channelId === channel.id
+    const {
+      data: { items: channels },
+    } = await youtubeApi.get<ChannelsRes>(
+      `${youtubeApiBase}/channels?part=snippet&id=${channelIds}`
     );
 
-    return {
-      videoId: video.id,
-      videoThumbnail: video.snippet.thumbnails.maxres.url,
-      videoDuration: video.contentDetails.duration,
-      videoTimeStamp: video.snippet.publishedAt,
-      title: video.snippet.title,
-      viewCount: video.statistics.viewCount,
-      channelThumbnail: channelDetails?.snippet.thumbnails.default.url ?? '',
-      channel: channelDetails?.snippet.title ?? '',
-    };
-  });
+    const data = videos.map((video) => {
+      const channelDetails = channels.find(
+        (channel) => video.snippet.channelId === channel.id
+      );
 
-  return { data, nextPageToken };
+      return {
+        videoId: video.id,
+        videoThumbnail: video.snippet.thumbnails.medium.url,
+        videoThumbnails: video.snippet.thumbnails,
+        videoDuration: video.contentDetails.duration,
+        videoTimeStamp: video.snippet.publishedAt,
+        title: video.snippet.title,
+        viewCount: video.statistics.viewCount,
+        channelThumbnail: channelDetails?.snippet.thumbnails.default.url ?? '',
+        channel: channelDetails?.snippet.title ?? '',
+      };
+    });
+
+    return { data, nextPageToken };
+  } catch (error) {
+    throw error;
+  }
 };
 
 export const getSearchVideos = async (url: string) => {
