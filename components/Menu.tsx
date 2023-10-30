@@ -6,14 +6,22 @@ import {
   ChevronRightIcon,
   LanguageIcon,
   EllipsisVerticalIcon,
+  MagnifyingGlassIcon,
 } from '@heroicons/react/24/outline';
 
 import SubMenu from '@/components/SubMenu';
-import IconButton from '@/components/IconButton';
+import Button from '@/components/Button';
 
-const Menu = () => {
+type SelectedItem = 'appearance' | 'language' | '';
+
+type MenuProps = {
+  showFullWidthSearch: boolean;
+  onSearchClick: () => void;
+};
+
+const Menu = ({ showFullWidthSearch, onSearchClick }: MenuProps) => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [selectedItem, setSelectedItem] = useState('');
+  const [selectedItem, setSelectedItem] = useState<SelectedItem>('');
   const menuRef = useRef<HTMLDivElement>(null);
   const { theme, setTheme } = useTheme();
 
@@ -31,34 +39,51 @@ const Menu = () => {
     };
   });
 
-  const handleClick = (selected: string) => () => {
+  const handleClick = (selected: SelectedItem) => () => {
     setSelectedItem(selected);
   };
 
   return (
-    <div ref={menuRef}>
-      <IconButton onClick={() => setMenuOpen(!menuOpen)}>
-        <EllipsisVerticalIcon className="w-6 h-6" />
-      </IconButton>
+    <div
+      ref={menuRef}
+      className={`flex-shrink-0 md:gap-2 ${
+        showFullWidthSearch ? 'hidden' : 'flex'
+      }`}
+    >
+      <Button
+        variant="ghost"
+        size="icon"
+        className="md:hidden"
+        onClick={onSearchClick}
+      >
+        <MagnifyingGlassIcon className="h-6 w-6" />
+      </Button>
+      <Button
+        variant="ghost"
+        size="icon"
+        onClick={() => setMenuOpen(!menuOpen)}
+      >
+        <EllipsisVerticalIcon className="h-6 w-6" />
+      </Button>
       {menuOpen && theme && (
-        <div className="z-50 fixed right-5 top-20 w-80">
+        <div className="fixed right-5 top-20 z-50 w-80">
           {selectedItem === '' && (
             <ul className="rounded-lg py-3">
               <li
-                className="flex items-center cursor-pointer px-4 py-2 hover:bg-zinc-200 dark:hover:bg-zinc-700"
+                className="flex cursor-pointer items-center px-4 py-2 hover:bg-zinc-200 dark:hover:bg-zinc-700"
                 onClick={handleClick('appearance')}
               >
-                <MoonIcon className="w-5 h-5 mr-2" />
+                <MoonIcon className="mr-2 h-5 w-5" />
                 <p className="mr-auto text-sm">外觀</p>
-                <ChevronRightIcon className="w-5 h-5" />
+                <ChevronRightIcon className="h-5 w-5" />
               </li>
               <li
-                className="flex items-center cursor-pointer px-4 py-2 hover:bg-zinc-200 dark:hover:bg-zinc-700"
+                className="flex cursor-pointer items-center px-4 py-2 hover:bg-zinc-200 dark:hover:bg-zinc-700"
                 onClick={handleClick('language')}
               >
-                <LanguageIcon className="w-5 h-5 mr-2" />
+                <LanguageIcon className="mr-2 h-5 w-5" />
                 <p className="mr-auto text-sm">語言</p>
-                <ChevronRightIcon className="w-5 h-5" />
+                <ChevronRightIcon className="h-5 w-5" />
               </li>
             </ul>
           )}

@@ -1,15 +1,25 @@
 'use client';
 import { FormEvent, useRef } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
+import {
+  MagnifyingGlassIcon,
+  ArrowLeftIcon,
+} from '@heroicons/react/24/outline';
 
-const Searchbox = () => {
+import Button from '@/components/Button';
+
+type SearchboxProps = {
+  showFullWidthSearch: boolean;
+  onSearchClick: () => void;
+};
+
+const Searchbox = ({ showFullWidthSearch, onSearchClick }: SearchboxProps) => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const searchInputRef = useRef<HTMLInputElement>(null);
   const searchTerm = searchParams.get('q') || '';
 
-  const onSearchClick = (e: FormEvent<HTMLFormElement>) => {
+  const handleSeach = (e: FormEvent<HTMLFormElement>) => {
     if (!searchInputRef.current?.value) {
       return;
     }
@@ -21,22 +31,31 @@ const Searchbox = () => {
 
   return (
     <form
-      className="flex items-center w-full border rounded-3xl"
-      onSubmit={onSearchClick}
+      className={`max-w-[600px] flex-grow items-center rounded-3xl md:flex ${
+        showFullWidthSearch ? 'flex' : 'hidden md:flex'
+      }`}
+      onSubmit={handleSeach}
     >
+      {showFullWidthSearch && (
+        <Button
+          variant="ghost"
+          size="icon"
+          type="button"
+          onClick={onSearchClick}
+        >
+          <ArrowLeftIcon className="h-6 w-6" />
+        </Button>
+      )}
       <input
-        className="flex-1 p-2 pl-4 rounded-l-3xl"
+        className="w-full rounded-l-full border border-secondary-border px-4 py-2 shadow-inner shadow-secondary outline-none focus:border-blue-500"
         type="text"
         placeholder="搜尋"
         defaultValue={searchTerm}
         ref={searchInputRef}
       />
-      <button
-        className="flex justify-center items-center w-16 border-l p-2 cursor-pointer rounded-r-3xl"
-        type="submit"
-      >
-        <MagnifyingGlassIcon className="w-6 h-6" />
-      </button>
+      <Button className="flex-shrink-0 rounded-r-full border border-l-0 border-secondary-border px-4 py-2">
+        <MagnifyingGlassIcon className="h-6 w-6" />
+      </Button>
     </form>
   );
 };
