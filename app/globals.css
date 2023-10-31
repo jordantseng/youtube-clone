@@ -6,12 +6,12 @@
   body,
   header,
   input {
-    @apply bg-zinc-100 dark:bg-zinc-900;
+    @apply dark:bg-zinc-900;
   }
 
   form,
   button {
-    @apply border-zinc-300 bg-zinc-100 dark:border-zinc-700 dark:bg-zinc-800;
+    @apply border-zinc-300 dark:border-zinc-700 dark:bg-zinc-800;
   }
 
   ul,

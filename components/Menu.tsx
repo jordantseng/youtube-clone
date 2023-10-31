@@ -66,7 +66,7 @@ const Menu = ({ showFullWidthSearch, onSearchClick }: MenuProps) => {
         <EllipsisVerticalIcon className="h-6 w-6" />
       </Button>
       {menuOpen && theme && (
-        <div className="fixed right-5 top-20 z-50 w-80">
+        <div className="fixed right-5 top-16 z-50 w-80">
           {selectedItem === '' && (
             <ul className="rounded-lg py-3">
               <li

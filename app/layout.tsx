@@ -16,11 +16,19 @@ export default function RootLayout({
   return (
     <html lang="en">
       <ThemeProvider>
-        <body>
+        <body className="flex max-h-screen flex-col">
           <Header />
-          <div className="flex">
+          {/* <div className="flex">
             <Sidebar />
             <div className="flex-1 sm:ml-20 md:ml-56">{children}</div>
+          </div> */}
+          <div className="flex-grow-1 grid grid-cols-[auto,1fr] overflow-auto">
+            <div>sidebar</div>
+            {/* <div className="overflow-x-hidden px-8 pb-4"> */}
+            <div className="sticky top-0 z-10 overflow-x-hidden bg-white px-8 pb-4">
+              {children}
+            </div>
+            {/* </div> */}
           </div>
         </body>
       </ThemeProvider>

@@ -7,6 +7,8 @@ import CardSkeleton from '@/components/CardSkeleton';
 import PopularVideoCard from '@/app/components/PopularVideoCard';
 import Loader from '@/components/Loader';
 import { getPopularVideos } from '@/services/youtube';
+import CategoryChips from '@/app/components/CategoryChips';
+import { categories } from '@/app/data/categories';
 
 type Video = {
   data: {
@@ -44,6 +46,7 @@ const HomePage = () => {
     getKey,
     getPopularVideos
   );
+  const [selectedCategory, setSelectedCategory] = useState(categories[0].id);
 
   useEffect(() => {
     if (!visible) {
@@ -61,7 +64,12 @@ const HomePage = () => {
 
   return (
     <>
-      <div className="grid grid-cols-1 gap-4 p-6 md:grid-cols-[repeat(auto-fill,minmax(350px,1fr))] md:p-4">
+      <CategoryChips
+        categories={categories}
+        selectedCategory={selectedCategory}
+        onSelect={(id) => setSelectedCategory(id)}
+      />
+      <div className="grid grid-cols-1 py-4 gap-4 md:grid-cols-[repeat(auto-fill,minmax(350px,1fr))]">
         {videos?.map((video, index) => {
           const lastVideo = videos.length - 1 === index;
 

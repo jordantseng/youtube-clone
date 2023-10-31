@@ -31,8 +31,8 @@ const Searchbox = ({ showFullWidthSearch, onSearchClick }: SearchboxProps) => {
 
   return (
     <form
-      className={`max-w-[600px] flex-grow items-center rounded-3xl md:flex ${
-        showFullWidthSearch ? 'flex' : 'hidden md:flex'
+      className={`flex-grow items-center rounded-3xl md:flex ${
+        showFullWidthSearch ? 'flex' : 'max-w-[600px] hidden md:flex'
       }`}
       onSubmit={handleSeach}
     >
