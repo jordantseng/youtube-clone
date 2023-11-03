@@ -7,7 +7,7 @@ import SearchVideoCard from '@/app/search/components/SearchVideoCard';
 import Loader from '@/components/Loader';
 import { getSearchVideos } from '@/services/youtube';
 import useSWRInfinite from 'swr/infinite';
-import { removeDuplicates } from '@/lib/helpers';
+import { removeDuplicates } from '@/utils/helpers';
 
 type Video = {
   data: {

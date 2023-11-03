@@ -2,9 +2,10 @@ import { useRouter } from 'next/navigation';
 import Avatar from 'react-avatar';
 
 import VideoThumbnail from '@/components/VideoThumbnail';
-import { transformViews, transformTimeStamp } from '@/lib/helpers';
+import { formatViews, formatTimeStamp } from '@/utils/helpers';
+import Link from 'next/link';
 
-type Props = {
+type PopularVideoCardProps = {
   id: string;
   title: string;
   viewCount: string;
@@ -26,38 +27,40 @@ const PopularVideoCard = ({
   channel,
   channelThumbnail,
   getLastVideo,
-}: Props) => {
+}: PopularVideoCardProps) => {
   const router = useRouter();
-  const transformedViews = transformViews(viewCount);
-  const transformedTimeStamp = transformTimeStamp(timeStamp);
 
   const handleNavigate = () => {
     router.push(`/watch/${id}`);
   };
 
   return (
-    <div ref={getLastVideo}>
-      <VideoThumbnail
-        thumbnail={videoThumbnail}
-        duration={duration}
-        onClick={handleNavigate}
-      />
-      <div className="flex mt-2 cursor-pointer" onClick={handleNavigate}>
-        <div className="flex items-center">
-          <div className="mb-auto mt-2">
-            <Avatar src={channelThumbnail} alt="Avatar" size="40" round />
-          </div>
-          <div className="ml-4">
-            <h4 className="overflow-hidden line-clamp-2 whitespace-normal text-sm font-medium mb-1">
-              {title}
-            </h4>
-            <p className="overflow-hidden line-clamp-1 whitespace-normal text-xs mb-1">
-              {channel}
-            </p>
-            <p className="overflow-hidden line-clamp-1 whitespace-normal text-xs">
-              觀看次數：{`${transformedViews} ・ ${transformedTimeStamp}`}
-            </p>
-          </div>
+    <div className="flex flex-col gap-2" ref={getLastVideo}>
+      <VideoThumbnail thumbnail={videoThumbnail} duration={duration} id={id} />
+      <div className="flex gap-2" onClick={handleNavigate}>
+        <Link href={`/watch/${id}`} className="mb-auto mt-2">
+          <Avatar src={channelThumbnail} alt="Avatar" size="40" round />
+        </Link>
+        <div className="flex flex-col">
+          <Link
+            className="mb-1 line-clamp-2 overflow-hidden whitespace-normal text-sm font-bold"
+            href={`/watch/${id}`}
+          >
+            {title}
+          </Link>
+          <Link
+            href={`/watch/${id}`}
+            className="mb-1 line-clamp-1 overflow-hidden whitespace-normal text-xs text-secondary-text"
+          >
+            {channel}
+          </Link>
+          <Link
+            href={`/watch/${id}`}
+            className="line-clamp-1 overflow-hidden whitespace-normal text-xs text-secondary-text"
+          >
+            觀看次數：
+            {`${formatViews(viewCount)}次 ・ ${formatTimeStamp(timeStamp)}`}
+          </Link>
         </div>
       </div>
     </div>

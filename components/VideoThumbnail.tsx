@@ -1,34 +1,31 @@
 import Image from 'next/image';
+import Link from 'next/link';
 
-import { transformDuration } from '@/lib/helpers';
+import { formatDuration } from '@/utils/helpers';
 
-type Props = {
+type VideoThumbnailProps = {
   thumbnail: string;
   duration: string;
-  onClick: () => void;
+  id: string;
 };
 
-// TODO: srcset
-const VideoThumbnail = ({
-  thumbnail,
-  duration,
-  onClick,
-}: Props) => {
+const VideoThumbnail = ({ thumbnail, duration, id }: VideoThumbnailProps) => {
   return (
-    <div className="relative cursor-pointer" onClick={() => onClick()}>
-      <Image
-        className="w-full rounded-2xl"
-        src={thumbnail}
-        width={320}
-        height={180}
-        // loader
-        sizes=""
-        alt=""
-      />
-      <div className="absolute bottom-2 right-2 rounded-md bg-zinc-900/90 p-1 text-xs font-medium text-white">
-        {transformDuration(duration)}
-      </div>
-    </div>
+    <>
+      <Link href={`/watch/${id}`} className="relative aspect-video">
+        <Image
+          className="h-full w-full rounded-2xl object-cover"
+          src={thumbnail}
+          width={320}
+          height={180}
+          sizes=""
+          alt=""
+        />
+        <div className="absolute bottom-2 right-2 rounded-md bg-secondary-dark p-1 text-xs font-medium text-secondary">
+          {formatDuration(duration)}
+        </div>
+      </Link>
+    </>
   );
 };
 

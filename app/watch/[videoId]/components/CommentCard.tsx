@@ -4,7 +4,7 @@ import {
   HandThumbDownIcon,
 } from '@heroicons/react/24/outline';
 
-import { transformTimeStamp } from '@/lib/helpers';
+import { formatTimeStamp } from '@/utils/helpers';
 
 type Props = {
   authorImage: string;
@@ -32,7 +32,7 @@ const CommentCard = ({
         <div className="flex items-center mb-2">
           <span className="mr-1 text-sm font-medium">{authorName}</span>
           <span className="text-xs text-slate-500">
-            {transformTimeStamp(publishedAt)}
+            {formatTimeStamp(publishedAt)}
           </span>
         </div>
         <div dangerouslySetInnerHTML={{ __html: content }} />

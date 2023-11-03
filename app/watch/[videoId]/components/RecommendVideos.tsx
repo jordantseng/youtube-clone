@@ -5,7 +5,7 @@ import useSWRInfinite from 'swr/infinite';
 import useOnScreen from '@/hooks/useOnScreen';
 import Loader from '@/components/Loader';
 import RecommendVideoCard from '@/app/watch/[videoId]/components/RecommendVideoCard';
-import { removeDuplicates } from '@/lib/helpers';
+import { removeDuplicates } from '@/utils/helpers';
 import { getRecommendVideos } from '@/services/youtube';
 
 type Video = {

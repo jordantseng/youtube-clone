@@ -1,4 +1,4 @@
-import { transformTimeStamp, transformViews } from '@/lib/helpers';
+import { formatTimeStamp, formatViews } from '@/utils/helpers';
 
 type Props = {
   viewCount: string;
@@ -18,10 +18,10 @@ const VideoDetails = ({
       <div className="mb-2 flex flex-wrap justify-between">
         <div className="flex items-center gap-2">
           <div className="font-medium">
-            觀看次數：{transformViews(viewCount)}
+            觀看次數：{formatViews(viewCount)}次
           </div>
           <div className="font-medium">
-            {transformTimeStamp(videoTimeStamp)}
+            {formatTimeStamp(videoTimeStamp)}
           </div>
         </div>
       </div>
