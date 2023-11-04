@@ -1,7 +1,7 @@
-import Comments from '@/app/watch/[videoId]/components/Comments';
-import RecommendVideos from '@/app/watch/[videoId]/components/RecommendVideos';
-import Video from '@/components/Video';
-import { getVideo } from '@/services/youtube';
+import Comments from '@/app/watch/[videoId]/Comments';
+import RecommendVideos from '@/app/watch/[videoId]/RecommendVideos';
+import Video from '@/app/watch/[videoId]/Video';
+import { getVideo } from '@/app/services/youtube';
 
 type Props = {
   params: {

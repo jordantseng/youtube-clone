@@ -2,12 +2,12 @@
 import { useState, useEffect } from 'react';
 import useSWRInfinite from 'swr/infinite';
 
-import useOnScreen from '@/hooks/useOnScreen';
-import CardSkeleton from '@/components/CardSkeleton';
-import PopularVideoCard from '@/app/components/PopularVideoCard';
-import Loader from '@/components/Loader';
-import { getPopularVideos } from '@/services/youtube';
-import CategoryChips from '@/app/components/CategoryChips';
+import useOnScreen from '@/app/hooks/useOnScreen';
+import CardSkeleton from '@/app/components/CardSkeleton';
+import PopularVideoCard from '@/app/PopularVideoCard';
+import Loader from '@/app/components/Loader';
+import { getPopularVideos } from '@/app/services/youtube';
+import CategoryChips from '@/app/CategoryChips';
 import { categories } from '@/app/data/categories';
 
 type Video = {
@@ -63,7 +63,7 @@ const HomePage = () => {
   const videos = data?.flatMap(({ data }) => data);
 
   return (
-    <div className="sticky top-0 z-10 bg-white pb-4">
+    <div className="sticky top-0 z-10 pb-4">
       <CategoryChips
         categories={categories}
         selectedCategory={selectedCategory}

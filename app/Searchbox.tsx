@@ -6,7 +6,7 @@ import {
   ArrowLeftIcon,
 } from '@heroicons/react/24/outline';
 
-import Button from '@/components/Button';
+import Button from '@/app/components/Button';
 
 type SearchboxProps = {
   showFullWidthSearch: boolean;
@@ -31,8 +31,8 @@ const Searchbox = ({ showFullWidthSearch, onSearchClick }: SearchboxProps) => {
 
   return (
     <form
-      className={`flex-grow items-center rounded-3xl md:flex ${
-        showFullWidthSearch ? 'flex' : 'max-w-[600px] hidden md:flex'
+      className={`flex-grow items-center rounded-3xl dark:border-dark-border md:flex ${
+        showFullWidthSearch ? 'flex' : 'hidden max-w-[600px] md:flex'
       }`}
       onSubmit={handleSeach}
     >
@@ -47,13 +47,13 @@ const Searchbox = ({ showFullWidthSearch, onSearchClick }: SearchboxProps) => {
         </Button>
       )}
       <input
-        className="w-full rounded-l-full border border-secondary-border px-4 py-2 shadow-inner shadow-secondary outline-none focus:border-blue-500"
+        className="w-full rounded-l-full border px-4 py-2 outline-none focus:border-blue-500 dark:border-dark-border dark:focus:border-blue-500"
         type="text"
         placeholder="搜尋"
         defaultValue={searchTerm}
         ref={searchInputRef}
       />
-      <Button className="flex-shrink-0 rounded-r-full border border-l-0 border-secondary-border px-4 py-2">
+      <Button className="flex-shrink-0 rounded-r-full border border-l-0 px-4 py-2 dark:border-dark-border dark:bg-dark">
         <MagnifyingGlassIcon className="h-6 w-6" />
       </Button>
     </form>

@@ -7,10 +7,53 @@ import {
   LanguageIcon,
   EllipsisVerticalIcon,
   MagnifyingGlassIcon,
+  ArrowSmallLeftIcon,
+  CheckIcon,
 } from '@heroicons/react/24/outline';
 
-import SubMenu from '@/components/SubMenu';
-import Button from '@/components/Button';
+import Button from '@/app/components/Button';
+
+type SubMenuProps = {
+  title: string;
+  items: { title: string; value: string }[];
+  value: string;
+  onPrevious: () => void;
+  onChange: (value: string) => void;
+};
+
+const SubMenu = ({
+  title,
+  value,
+  items,
+  onPrevious,
+  onChange,
+}: SubMenuProps) => {
+  return (
+    <ul className="shadow-xl rounded-lg bg-white dark:bg-dark">
+      <li className="flex items-center px-1 py-2">
+        <Button variant="ghost" size="icon" onClick={onPrevious}>
+          <ArrowSmallLeftIcon className="h-6 w-6" />
+        </Button>
+        <p className="ml-2 text-sm">{title}</p>
+      </li>
+      <hr className="bg-white dark:border-dark-border" />
+      <div className="py-3">
+        {items.map((item) => (
+          <li
+            className="flex cursor-pointer items-center px-4 py-2 hover:bg-zinc-200 dark:hover:bg-zinc-700"
+            key={item.title}
+            onClick={() => onChange(item.value)}
+          >
+            {value === item.value && <CheckIcon className="h-5 w-5" />}
+            <p className={`ml-3 text-sm ${value !== item.value && 'px-5'}`}>
+              {item.title}
+            </p>
+          </li>
+        ))}
+      </div>
+    </ul>
+  );
+};
 
 type SelectedItem = 'appearance' | 'language' | '';
 
@@ -68,7 +111,7 @@ const Menu = ({ showFullWidthSearch, onSearchClick }: MenuProps) => {
       {menuOpen && theme && (
         <div className="fixed right-5 top-16 z-50 w-80">
           {selectedItem === '' && (
-            <ul className="rounded-lg py-3">
+            <ul className="rounded-lg bg-white py-3 shadow-xl dark:bg-dark">
               <li
                 className="flex cursor-pointer items-center px-4 py-2 hover:bg-zinc-200 dark:hover:bg-zinc-700"
                 onClick={handleClick('appearance')}
@@ -93,7 +136,7 @@ const Menu = ({ showFullWidthSearch, onSearchClick }: MenuProps) => {
               items={[
                 { title: '淺色主題', value: 'light' },
                 { title: '深色主題', value: 'dark' },
-                { title: '使用裝置主題', value: 'system' },
+                // { title: '使用裝置主題', value: 'system' },
               ]}
               value={theme}
               onPrevious={handleClick('')}

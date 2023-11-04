@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { formatDuration } from '@/utils/helpers';
+import { formatDuration } from '@/app/utils/helpers';
 
 type VideoThumbnailProps = {
   thumbnail: string;

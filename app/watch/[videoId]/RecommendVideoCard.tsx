@@ -1,7 +1,7 @@
 import { useRouter } from 'next/navigation';
 
-import { formatViews, formatTimeStamp } from '@/utils/helpers';
-import VideoThumbnail from '../../../../components/VideoThumbnail';
+import { formatViews, formatTimeStamp } from '@/app/utils/helpers';
+import VideoThumbnail from '../../components/VideoThumbnail';
 
 type Props = {
   id: string;
@@ -32,7 +32,7 @@ const RecommendVideoCard = ({
 
   return (
     <div className="mb-2 flex" ref={getLastVideo}>
-      <VideoThumbnail thumbnail={videoThumbnail} duration={duration} id={id}/>
+      <VideoThumbnail thumbnail={videoThumbnail} duration={duration} id={id} />
       <div
         className="ml-2 flex flex-1 cursor-pointer flex-col"
         onClick={handleNavigate}
@@ -40,10 +40,10 @@ const RecommendVideoCard = ({
         <h4 className="mb-1 line-clamp-2 overflow-hidden whitespace-normal text-sm font-medium">
           {title}
         </h4>
-        <p className="mb-1 line-clamp-1 overflow-hidden whitespace-normal text-xs text-slate-600">
+        <p className="mb-1 line-clamp-1 overflow-hidden whitespace-normal text-xs text-secondary-text dark:text-dark-text">
           {channel}
         </p>
-        <p className="line-clamp-1 overflow-hidden  whitespace-normal text-xs text-slate-600">
+        <p className="line-clamp-1 overflow-hidden whitespace-normal text-xs text-secondary-text dark:text-dark-text">
           觀看次數：{formatViews(viewCount)}次・{formatTimeStamp(timeStamp)}
         </p>
       </div>

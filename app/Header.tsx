@@ -3,11 +3,11 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { Bars3Icon } from '@heroicons/react/24/outline';
 
-import Searchbox from '@/components/Searchbox';
-import Menu from '@/components/Menu';
-import YoutubeIcon from '@/components/YoutubeIcon';
-import Button from '@/components/Button';
-import { useSidebarContext } from '@/contexts/SidebarContext';
+import Searchbox from '@/app/Searchbox';
+import Menu from '@/app/components/Menu';
+import YoutubeIcon from '@/app/components/YoutubeIcon';
+import Button from '@/app/components/Button';
+import { useSidebarContext } from '@/app/contexts/SidebarContext';
 
 const Header = () => {
   const [showFullWidthSearch, setShowFullWidthSearch] = useState(false);

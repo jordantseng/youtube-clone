@@ -1,8 +1,8 @@
-import Header from '@/components/Header';
-import Sidebar from '@/components/Sidebar';
-import ThemeProvider from '@/providers/ThemeProvider';
+import Header from '@/app/Header';
+import Sidebar from '@/app/Sidebar';
+import ThemeProvider from '@/app/providers/ThemeProvider';
 import './globals.css';
-import { SidebarProvider } from '@/contexts/SidebarContext';
+import { SidebarProvider } from '@/app/contexts/SidebarContext';
 
 export const metadata = {
   title: 'Create Next App',

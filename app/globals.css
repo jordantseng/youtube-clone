@@ -11,24 +11,8 @@
     @apply rounded-full bg-secondary-dark;
   }
 
-  body,
-  header,
-  input {
-    @apply dark:bg-zinc-900;
-  }
-
-  form,
-  button {
-    @apply border-zinc-300 dark:border-zinc-700 dark:bg-zinc-800;
-  }
-
-  ul,
-  hr {
-    @apply bg-white dark:border-zinc-700 dark:bg-zinc-800;
-  }
-
-  p {
-    @apply text-zinc-700 dark:text-zinc-300;
+  body {
+    @apply dark:bg-black;
   }
 
   .scrollbar-hidden::-webkit-scrollbar-thumb {

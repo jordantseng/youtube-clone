@@ -2,10 +2,10 @@
 import { useState, useEffect } from 'react';
 import useSWRInfinite from 'swr/infinite';
 
-import CommentCard from '@/app/watch/[videoId]/components/CommentCard';
-import Loader from '@/components/Loader';
-import useOnScreen from '@/hooks/useOnScreen';
-import { getCommentThreads } from '@/services/youtube';
+import CommentCard from '@/app/watch/[videoId]/CommentCard';
+import Loader from '@/app/components/Loader';
+import useOnScreen from '@/app/hooks/useOnScreen';
+import { getCommentThreads } from '@/app/services/youtube';
 
 type Comment = {
   data: {

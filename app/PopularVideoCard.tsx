@@ -1,8 +1,8 @@
 import { useRouter } from 'next/navigation';
 import Avatar from 'react-avatar';
 
-import VideoThumbnail from '@/components/VideoThumbnail';
-import { formatViews, formatTimeStamp } from '@/utils/helpers';
+import VideoThumbnail from '@/app/components/VideoThumbnail';
+import { formatViews, formatTimeStamp } from '@/app/utils/helpers';
 import Link from 'next/link';
 
 type PopularVideoCardProps = {
@@ -50,13 +50,13 @@ const PopularVideoCard = ({
           </Link>
           <Link
             href={`/watch/${id}`}
-            className="mb-1 line-clamp-1 overflow-hidden whitespace-normal text-xs text-secondary-text"
+            className="mb-1 line-clamp-1 overflow-hidden whitespace-normal text-xs text-secondary-text dark:text-dark-text"
           >
             {channel}
           </Link>
           <Link
             href={`/watch/${id}`}
-            className="line-clamp-1 overflow-hidden whitespace-normal text-xs text-secondary-text"
+            className="line-clamp-1 overflow-hidden whitespace-normal text-xs text-secondary-text dark:text-dark-text"
           >
             觀看次數：
             {`${formatViews(viewCount)}次 ・ ${formatTimeStamp(timeStamp)}`}

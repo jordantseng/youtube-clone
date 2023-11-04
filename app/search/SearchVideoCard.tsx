@@ -1,8 +1,8 @@
 import { useRouter } from 'next/navigation';
 import Avatar from 'react-avatar';
 
-import { formatViews, formatTimeStamp } from '@/utils/helpers';
-import VideoThumbnail from '@/components/VideoThumbnail';
+import { formatViews, formatTimeStamp } from '@/app/utils/helpers';
+import VideoThumbnail from '@/app/components/VideoThumbnail';
 
 type Props = {
   id: string;
@@ -47,7 +47,7 @@ const SearchVideoCard = ({
         <h4 className="line-clamp-1 overflow-hidden whitespace-normal pb-1 text-sm font-medium">
           {title}
         </h4>
-        <p className="line-clamp-1 overflow-hidden whitespace-normal text-xs text-slate-600">
+        <p className="line-clamp-1 overflow-hidden whitespace-normal text-xs text-secondary-text dark:text-dark-text">
           觀看次數：{formatViews(viewCount)}次・{formatTimeStamp(timeStamp)}
         </p>
         <div className="flex items-center gap-1 py-2">
@@ -56,7 +56,7 @@ const SearchVideoCard = ({
             {channel}
           </p>
         </div>
-        <p className="line-clamp-1 overflow-hidden whitespace-normal text-xs text-slate-600">
+        <p className="line-clamp-1 overflow-hidden whitespace-normal text-xs text-secondary-text dark:text-dark-text">
           {description}
         </p>
       </div>

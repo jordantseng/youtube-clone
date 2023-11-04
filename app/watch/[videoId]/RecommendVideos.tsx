@@ -2,11 +2,11 @@
 import { useEffect, useState } from 'react';
 import useSWRInfinite from 'swr/infinite';
 
-import useOnScreen from '@/hooks/useOnScreen';
-import Loader from '@/components/Loader';
-import RecommendVideoCard from '@/app/watch/[videoId]/components/RecommendVideoCard';
-import { removeDuplicates } from '@/utils/helpers';
-import { getRecommendVideos } from '@/services/youtube';
+import useOnScreen from '@/app/hooks/useOnScreen';
+import Loader from '@/app/components/Loader';
+import RecommendVideoCard from '@/app/watch/[videoId]/RecommendVideoCard';
+import { removeDuplicates } from '@/app/utils/helpers';
+import { getRecommendVideos } from '@/app/services/youtube';
 
 type Video = {
   data: {

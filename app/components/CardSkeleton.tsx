@@ -13,4 +13,19 @@ const SkeletonElement = ({ type }: Props) => {
   return <div className={`${className[type]} bg-zinc-200 dark:bg-zinc-800`} />;
 };
 
-export default SkeletonElement;
+const CardSkeleton = () => {
+  return (
+    <div>
+      <SkeletonElement type="thumbnail" />
+      <div className="flex">
+        <SkeletonElement type="avatar" />
+        <div className="ml-2 w-full">
+          <SkeletonElement type="text" />
+          <SkeletonElement type="title" />
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default CardSkeleton;

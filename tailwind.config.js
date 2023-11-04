@@ -18,11 +18,13 @@ module.exports = {
           dark: colors.neutral[800],
           ['dark-hover']: colors.neutral[900],
         },
-      },
-      backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic':
-          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+        dark: {
+          DEFAULT: colors.zinc[800],
+          button: colors.zinc[900],
+          border: colors.zinc[700],
+          text: colors.zinc[300],
+          ['hover']: colors.zinc[700],
+        },
       },
     },
   },

@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
-import Button from '@/components/Button';
+import Button from '@/app/components/Button';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
+import { useTheme } from 'next-themes';
 
 type CategoryChipsProps = {
   categories: { id: number; title: string }[];
@@ -19,6 +20,15 @@ const CategoryChips = ({
   const [isLeftVisible, setIsLeftVisible] = useState(false);
   const [isRightVisible, setIsRightVisible] = useState(true);
   const containerRef = useRef<HTMLDivElement>(null);
+  const { theme } = useTheme();
+
+  const getButtonVariant = (id: number) => {
+    if (theme === 'light') {
+      return selectedCategory === id ? 'active' : 'default';
+    } else {
+      return selectedCategory === id ? 'darkactive' : 'dark';
+    }
+  };
 
   useEffect(() => {
     if (containerRef.current == null) {
@@ -85,7 +95,7 @@ const CategoryChips = ({
           <Button
             key={id}
             variant={selectedCategory === id ? 'dark' : 'default'}
-            className="whitespace-nowrap rounded-lg px-3 py-1"
+            className="dark:text-drak-text whitespace-nowrap rounded-lg px-3 py-1 dark:bg-dark dark:hover:bg-dark-hover"
             onClick={() => onSelect(id)}
           >
             {title}
@@ -93,7 +103,11 @@ const CategoryChips = ({
         ))}
       </div>
       {isLeftVisible && (
-        <div className="absolute left-0 top-1/2 w-24 -translate-y-1/2 bg-gradient-to-r from-white from-50% to-transparent">
+        <div
+          className={`absolute left-0 top-1/2 w-24 -translate-y-1/2 bg-gradient-to-r ${
+            theme === 'light' ? 'from-white' : 'from-black'
+          } from-50% to-transparent`}
+        >
           <Button
             variant="ghost"
             size="icon"
@@ -105,7 +119,11 @@ const CategoryChips = ({
         </div>
       )}
       {isRightVisible && (
-        <div className="absolute right-0 top-1/2 flex w-24 -translate-y-1/2 justify-end bg-gradient-to-l from-white from-50% to-transparent">
+        <div
+          className={`absolute right-0 top-1/2 flex w-24 -translate-y-1/2 justify-end bg-gradient-to-l ${
+            theme === 'light' ? 'from-white' : 'from-black'
+          } from-50% to-transparent`}
+        >
           <Button
             variant="ghost"
             size="icon"

@@ -2,12 +2,12 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 
-import useOnScreen from '@/hooks/useOnScreen';
-import SearchVideoCard from '@/app/search/components/SearchVideoCard';
-import Loader from '@/components/Loader';
-import { getSearchVideos } from '@/services/youtube';
+import useOnScreen from '@/app/hooks/useOnScreen';
+import SearchVideoCard from '@/app/search/SearchVideoCard';
+import Loader from '@/app/components/Loader';
+import { getSearchVideos } from '@/app/services/youtube';
 import useSWRInfinite from 'swr/infinite';
-import { removeDuplicates } from '@/utils/helpers';
+import { removeDuplicates } from '@/app/utils/helpers';
 
 type Video = {
   data: {
