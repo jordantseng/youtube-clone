@@ -40,10 +40,10 @@ const RecommendVideoCard = ({
         <h4 className="mb-1 line-clamp-2 overflow-hidden whitespace-normal text-sm font-medium">
           {title}
         </h4>
-        <p className="mb-1 line-clamp-1 overflow-hidden whitespace-normal text-xs text-secondary-text dark:text-dark-text">
+        <p className="mb-1 line-clamp-1 overflow-hidden whitespace-normal text-xs text-light-text dark:text-dark-text">
           {channel}
         </p>
-        <p className="line-clamp-1 overflow-hidden whitespace-normal text-xs text-secondary-text dark:text-dark-text">
+        <p className="line-clamp-1 overflow-hidden whitespace-normal text-xs text-light-text dark:text-dark-text">
           觀看次數：{formatViews(viewCount)}次・{formatTimeStamp(timeStamp)}
         </p>
       </div>

@@ -10,7 +10,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        secondary: {
+        light: {
           DEFAULT: colors.neutral[200],
           hover: colors.neutral[300],
           border: colors.neutral[400],
@@ -20,7 +20,6 @@ module.exports = {
         },
         dark: {
           DEFAULT: colors.zinc[800],
-          button: colors.zinc[900],
           border: colors.zinc[700],
           text: colors.zinc[300],
           ['hover']: colors.zinc[700],

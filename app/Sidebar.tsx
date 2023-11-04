@@ -97,7 +97,7 @@ const LargeSidebarItem = ({
       className={twMerge(
         buttonStyles({ variant: 'ghost' }),
         `flex w-full items-center gap-4 rounded-lg p-3 ${
-          isActive ? 'bg-neutral-100 font-bold hover:bg-secondary' : undefined
+          isActive ? 'bg-neutral-100 dark:bg-dark-hover font-bold hover:bg-light' : undefined
         }`
       )}
     >
@@ -132,16 +132,16 @@ const Sidebar = () => {
       </aside>
       {isSmallOpen && (
         <div
-          className="fixed inset-0 z-[999] bg-secondary-dark opacity-50 lg:hidden"
+          className="fixed inset-0 z-[999] bg-light-dark opacity-50 lg:hidden"
           onClick={handleSidebarClose}
         />
       )}
       <aside
         className={`scrollbar-hidden absolute top-0 h-full w-56 flex-col gap-2 overflow-y-auto px-2 pb-4 lg:sticky ${
           isLargeOpen ? 'lg:flex' : 'lg:hidden'
-        } ${isSmallOpen ? 'z-[999] flex max-h-screen bg-white' : 'hidden'}`}
+        } ${isSmallOpen ? 'z-[999] flex max-h-screen bg-white dark:bg-dark' : 'hidden'}`}
       >
-        <div className="sticky top-0 bg-white px-2 pb-4 pt-2 lg:hidden">
+        <div className="sticky top-0 bg-white dark:bg-dark px-2 pb-4 pt-2 lg:hidden">
           <HeaderLeftSection onToggleSidebar={handleSidebarToggle} />
         </div>
         <LargeSidebarSection>

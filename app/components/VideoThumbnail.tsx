@@ -21,7 +21,7 @@ const VideoThumbnail = ({ thumbnail, duration, id }: VideoThumbnailProps) => {
           sizes=""
           alt=""
         />
-        <div className="absolute bottom-2 right-2 rounded-md bg-secondary-dark p-1 text-xs font-medium text-secondary">
+        <div className="absolute bottom-2 right-2 rounded-md bg-light-dark p-1 text-xs font-medium text-light">
           {formatDuration(duration)}
         </div>
       </Link>

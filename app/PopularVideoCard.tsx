@@ -50,13 +50,13 @@ const PopularVideoCard = ({
           </Link>
           <Link
             href={`/watch/${id}`}
-            className="mb-1 line-clamp-1 overflow-hidden whitespace-normal text-xs text-secondary-text dark:text-dark-text"
+            className="mb-1 line-clamp-1 overflow-hidden whitespace-normal text-xs text-light-text dark:text-dark-text"
           >
             {channel}
           </Link>
           <Link
             href={`/watch/${id}`}
-            className="line-clamp-1 overflow-hidden whitespace-normal text-xs text-secondary-text dark:text-dark-text"
+            className="line-clamp-1 overflow-hidden whitespace-normal text-xs text-light-text dark:text-dark-text"
           >
             觀看次數：
             {`${formatViews(viewCount)}次 ・ ${formatTimeStamp(timeStamp)}`}

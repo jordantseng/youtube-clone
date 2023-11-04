@@ -95,7 +95,7 @@ const CategoryChips = ({
           <Button
             key={id}
             variant={selectedCategory === id ? 'dark' : 'default'}
-            className="dark:text-drak-text whitespace-nowrap rounded-lg px-3 py-1 dark:bg-dark dark:hover:bg-dark-hover"
+            className="whitespace-nowrap rounded-lg px-3 py-1"
             onClick={() => onSelect(id)}
           >
             {title}
