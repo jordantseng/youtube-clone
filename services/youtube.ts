@@ -148,7 +148,6 @@ export const getPopularVideos = async (url: string) => {
     } = await youtubeApi.get<VideosRes>(`${youtubeApiBase}/${url}`);
 
     const channelIds = videos.map(({ snippet }) => snippet.channelId).join();
-    console.log('videos', videos)
     const {
       data: { items: channels },
     } = await youtubeApi.get<ChannelsRes>(

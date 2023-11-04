@@ -97,7 +97,7 @@ const CategoryChips = ({
           <Button
             variant="ghost"
             size="icon"
-            className="aspect-square h-full w-auto p-1.5"
+            className="aspect-square h-full w-auto p-1"
             onClick={handleLeftButtonClick}
           >
             <ChevronLeftIcon className="h-6 w-6" />
@@ -109,7 +109,7 @@ const CategoryChips = ({
           <Button
             variant="ghost"
             size="icon"
-            className="aspect-square h-full w-auto p-1.5"
+            className="aspect-square h-full w-auto p-1"
             onClick={handleRightButtonClick}
           >
             <ChevronRightIcon className="h-6 w-6" />

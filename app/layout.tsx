@@ -2,6 +2,7 @@ import Header from '@/components/Header';
 import Sidebar from '@/components/Sidebar';
 import ThemeProvider from '@/providers/ThemeProvider';
 import './globals.css';
+import { SidebarProvider } from '@/contexts/SidebarContext';
 
 export const metadata = {
   title: 'Create Next App',
@@ -15,23 +16,21 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <ThemeProvider>
-        <body className="flex max-h-screen flex-col">
-          <Header />
-          {/* <div className="flex">
-            <Sidebar />
-            <div className="flex-1 sm:ml-20 md:ml-56">{children}</div>
-          </div> */}
-          <div className="flex-grow-1 grid grid-cols-[auto,1fr] overflow-auto">
-            <div>sidebar</div>
-            {/* <div className="overflow-x-hidden px-8 pb-4"> */}
-            <div className="sticky top-0 z-10 overflow-x-hidden bg-white px-8 pb-4">
-              {children}
+      <SidebarProvider>
+        <ThemeProvider>
+          <body className="flex max-h-screen flex-col">
+            <Header />
+            <div className="flex-grow-1 grid grid-cols-[auto,1fr] overflow-auto">
+              <Sidebar />
+              <div className="overflow-x-hidden px-8 pb-4">
+                {/* <div className="sticky top-0 z-10 overflow-x-hidden bg-white px-8 pb-4"> */}
+                {children}
+                {/* </div> */}
+              </div>
             </div>
-            {/* </div> */}
-          </div>
-        </body>
-      </ThemeProvider>
+          </body>
+        </ThemeProvider>
+      </SidebarProvider>
     </html>
   );
 }

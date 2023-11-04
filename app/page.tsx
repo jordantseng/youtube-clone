@@ -63,13 +63,13 @@ const HomePage = () => {
   const videos = data?.flatMap(({ data }) => data);
 
   return (
-    <>
+    <div className="sticky top-0 z-10 bg-white pb-4">
       <CategoryChips
         categories={categories}
         selectedCategory={selectedCategory}
         onSelect={(id) => setSelectedCategory(id)}
       />
-      <div className="grid grid-cols-1 py-4 gap-4 md:grid-cols-[repeat(auto-fill,minmax(300px,1fr))]">
+      <div className="grid grid-cols-1 gap-4 py-4 md:grid-cols-[repeat(auto-fill,minmax(300px,1fr))]">
         {videos?.map((video, index) => {
           const lastVideo = videos.length - 1 === index;
 
@@ -94,7 +94,7 @@ const HomePage = () => {
             .map((_, index) => <CardSkeleton key={index} />)}
       </div>
       {isValidating && videos?.length !== 0 && <Loader />}
-    </>
+    </div>
   );
 };
 

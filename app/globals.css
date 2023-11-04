@@ -3,6 +3,14 @@
 @tailwind utilities;
 
 @layer base {
+  *::-webkit-scrollbar {
+    @apply w-2 bg-transparent;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    @apply rounded-full bg-secondary-dark;
+  }
+
   body,
   header,
   input {
@@ -21,5 +29,13 @@
 
   p {
     @apply text-zinc-700 dark:text-zinc-300;
+  }
+
+  .scrollbar-hidden::-webkit-scrollbar-thumb {
+    @apply bg-transparent;
+  }
+
+  .scrollbar-hidden:hover::-webkit-scrollbar-thumb {
+    @apply bg-secondary-border;
   }
 }
